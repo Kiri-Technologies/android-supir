@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="24dp"
             android:src="@drawable/logo_login"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -146,17 +146,18 @@
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-        <Button
+        <com.kiri.ui.ButtonView
             android:id="@+id/btnRegister"
+            style="@style/ButtonView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="36dp"
             android:layout_marginTop="24dp"
-            android:background="@drawable/button_rounded_shape"
-            android:text="Login"
+            app:enabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:text="Daftar" />
 
 
         <LinearLayout

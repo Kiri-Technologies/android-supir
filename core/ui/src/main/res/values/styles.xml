@@ -8,4 +8,28 @@
         <item name="android:textSize">14sp</item>
         <item name="android:backgroundTint">@android:color/transparent</item>
     </style>
+
+    <style name="Widget.MaterialComponents.Button" parent="">
+        <item name="android:textAppearanceButton">@style/TextAppearance.ProgressButton.primary</item>
+        <item name="android:colorControlHighlight">@color/color_primary</item>
+    </style>
+
+    <!--The base text appearance for all buttons-->
+    <style name="TextAppearance.Body.White" parent="@style/TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!--Text styiling for green button, with selector-->
+    <style name="TextAppearance.ProgressButton.primary" parent="@style/TextAppearance.Body.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ButtonView" parent="">
+        <item name="android:theme">@style/Widget.MaterialComponents.Button</item>
+        <item name="android:background">@drawable/background_button</item>
+    </style>
+
 </resources>

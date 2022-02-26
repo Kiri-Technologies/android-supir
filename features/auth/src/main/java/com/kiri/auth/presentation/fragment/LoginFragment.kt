@@ -14,13 +14,20 @@ class LoginFragment : Fragment(R.layout.login_fragment), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvGoToRegister.setOnClickListener(this)
+        binding.apply {
+            tvGoToRegister.setOnClickListener(this@LoginFragment)
+            btnLogin.setOnClickListener(this@LoginFragment)
+        }
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tvGoToRegister -> {
                 findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+            }
+            R.id.btnLogin -> {
+                binding.btnLogin.isEnabled = false
+                binding.btnLogin.setLoading(true)
             }
         }
     }
