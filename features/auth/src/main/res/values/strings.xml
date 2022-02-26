@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_halo">Halo!,</string>
+    <string name="label_login_start">Login Yuk.</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="label_login">Login</string>
+    <string name="label_no_account">Tidak punya akun?</string>
+    <string name="label_register_now">Daftar Sekarang</string>
+</resources>
