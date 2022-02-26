@@ -85,4 +85,7 @@ dependencies {
     implementation navigationDependencies.ui
     implementation navigationDependencies.fragmentKtx
     implementation navigationDependencies.uiKtx
+
+    //NewSplash
+    implementation splashScreen.splash
 }

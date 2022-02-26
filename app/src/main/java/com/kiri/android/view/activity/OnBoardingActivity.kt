@@ -14,9 +14,12 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.kiri.android.R
 import com.kiri.android.databinding.ActivityOnboardingBinding
 import com.kiri.android.view.fragment.OnBoardingFragment
+import com.kiri.common.domain.PrefUseCaseImpl
+import org.koin.android.ext.android.inject
 
 class OnBoardingActivity : AppCompatActivity(R.layout.activity_onboarding), View.OnClickListener {
 
+    private val pref: PrefUseCaseImpl by inject()
     private val binding by viewBinding(ActivityOnboardingBinding::bind)
     private var mTabLayoutMediator: TabLayoutMediator? = null
     private val isLastValue = ObservableBoolean(false)
@@ -107,6 +110,7 @@ class OnBoardingActivity : AppCompatActivity(R.layout.activity_onboarding), View
             buttonNext -> viewPager.currentItem++
             buttonSkip -> viewPager.currentItem = 2
             btnLogin -> {
+                pref.firstStart = false
                 startActivity(Intent(this@OnBoardingActivity, AuthActivity::class.java))
                 finish()
             }

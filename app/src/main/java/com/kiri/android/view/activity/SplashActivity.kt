@@ -3,18 +3,22 @@ package com.kiri.android.view.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.kiri.android.R
-import com.kiri.android.databinding.ActivitySplashBinding
+import com.kiri.common.domain.PrefUseCaseImpl
+import org.koin.android.ext.android.inject
 
 class SplashActivity : AppCompatActivity(R.layout.activity_splash) {
 
-    private val binding by viewBinding(ActivitySplashBinding::bind)
+    private val pref: PrefUseCaseImpl by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        startActivity(Intent(this@SplashActivity, OnBoardingActivity::class.java))
-        finish()
+        if (pref.firstStart) {
+            startActivity(Intent(this@SplashActivity, OnBoardingActivity::class.java))
+            finish()
+        } else {
+            startActivity(Intent(this@SplashActivity, AuthActivity::class.java))
+            finish()
+        }
     }
 }
