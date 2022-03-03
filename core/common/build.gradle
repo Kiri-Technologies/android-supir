@@ -16,7 +16,9 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "\"Tulis Disini\"")
+            buildConfigField("String", "BASE_URL", "\"https://kiri.mfaiztriputra.id/api/\"")
+            minifyEnabled false
+            debuggable true
         }
         release {
             debuggable = false
@@ -41,6 +43,7 @@ dependencies {
     implementation networkDependencies.gson
     implementation networkDependencies.okHttpLogginInterceptor
     implementation networkDependencies.convertergson
+    debugImplementation networkDependencies.chuckerDebug
 
     //DependencyInjection
     implementation dependenciesInjection.koin

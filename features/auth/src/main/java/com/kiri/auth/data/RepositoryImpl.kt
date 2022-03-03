@@ -1,9 +1,12 @@
 package com.kiri.auth.data
 
-import com.kiri.auth.data.response.LoginResponse
-import com.kiri.common.Resource
+import com.kiri.auth.data.models.LoginData
+import com.kiri.auth.data.models.RegisterBody
+import com.kiri.auth.data.models.RegisterData
+import com.kiri.common.utils.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface RepositoryImpl {
-    suspend fun login(email: String, password: String): Flow<LoginResponse>
+    suspend fun login(email: String, password: String): Flow<Resource<LoginData?>>
+    suspend fun register(body: RegisterBody): Flow<Resource<RegisterData?>>
 }

@@ -9,4 +9,9 @@ class PrefUseCase(private val repository: PrefRepository) : PrefUseCaseImpl {
         set(value) {
             repository.firstStart = value
         }
+    override var token: String?
+        get() = repository.token
+        set(value) {
+            repository.token = value
+        }
 }

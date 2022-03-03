@@ -10,7 +10,7 @@ import com.kiri.auth.domain.usecase.UseCaseImpl
 import com.kiri.auth.presentation.viewmodel.AuthObserver
 import com.kiri.auth.presentation.viewmodel.AuthResource
 import com.kiri.auth.presentation.viewmodel.AuthViewModel
-import com.kiri.common.register
+import com.kiri.common.utils.register
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -20,9 +20,9 @@ val authApi = module {
 
     single { RemoteDataSource(get()) }
     single<RepositoryImpl> { Repository(get()) }
-    single<UseCaseImpl> { UseCase(get()) }
+    single<UseCaseImpl> { UseCase(Repository(get())) }
 
     viewModel { (lifecycle: Lifecycle, resource: AuthResource) ->
-        lifecycle.register(AuthViewModel(get())) { AuthObserver(resource, it) }
+        lifecycle.register(AuthViewModel(get(), get())) { AuthObserver(resource, it) }
     }
 }

@@ -72,7 +72,11 @@ dependencies {
     implementation navigationDependencies.fragmentKtx
     implementation navigationDependencies.uiKtx
 
-    // viewbBindingDelegate
+    // viewBindingDelegate
     implementation viewbinding.kirichViewBinding
     implementation viewbinding.kirichNonReflection
+
+    //intent
+    implementation supportDependencies.skydoves
+
 }

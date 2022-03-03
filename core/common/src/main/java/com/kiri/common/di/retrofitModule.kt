@@ -1,12 +1,17 @@
-package com.kiri.common.data.api
+package com.kiri.common.di
 
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.chuckerteam.chucker.api.RetentionManager
 import com.google.gson.GsonBuilder
 import com.kiri.common.BuildConfig
+import com.kiri.common.domain.PrefUseCaseImpl
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.scope.Scope
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -19,17 +24,25 @@ private const val READ_TIMEOUT = 15L
 val RetrofitModule = module {
     single { Cache(androidApplication().cacheDir, 10L * 1024 * 1024) }
     single { GsonBuilder().create() }
-    single { retrofitHttpClient() }
+    single { retrofitHttpClient(get()) }
     single { retrofitBuilder() }
     single {
-        Interceptor { chain ->
-            chain.proceed(
-                chain.request().newBuilder().apply {
-                    header("Content-Type", "application/json")
-                    header("Accept", "application/json")
-                }.build()
-            )
-        }
+        ChuckerCollector(
+            context = androidContext(),
+            showNotification = BuildConfig.DEBUG,
+            retentionPeriod = RetentionManager.Period.ONE_HOUR
+        )
+    }
+    single {
+        ChuckerInterceptor.Builder(androidContext())
+            .apply {
+                collector(get())
+                maxContentLength(250_000L)
+                alwaysReadResponseBody(false)
+//                if (BuildConfig.DEBUG)
+//                    redactHeaders("Authorization", "Bearer")
+            }
+            .build()
     }
 }
 
@@ -41,13 +54,24 @@ private fun Scope.retrofitBuilder(): Retrofit {
         .build()
 }
 
-private fun Scope.retrofitHttpClient(): OkHttpClient {
+private fun Scope.retrofitHttpClient(pref: PrefUseCaseImpl): OkHttpClient {
     return OkHttpClient.Builder().apply {
         cache(get())
         connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
         writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
         readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
         retryOnConnectionFailure(true)
+        addInterceptor(
+            Interceptor { chain ->
+                chain.proceed(
+                    chain.request().newBuilder().apply {
+                        header("Content-Type", "application/json")
+                        header("Accept", "application/json")
+                        header("Authorization", "Bearer ")
+                    }.build()
+                )
+            }
+        )
         addInterceptor(
             HttpLoggingInterceptor().apply {
                 level = if (BuildConfig.DEBUG) {
@@ -57,5 +81,6 @@ private fun Scope.retrofitHttpClient(): OkHttpClient {
                 }
             }
         )
+        addInterceptor(get<ChuckerInterceptor>())
     }.build()
 }

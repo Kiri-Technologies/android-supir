@@ -11,4 +11,12 @@ class PrefRepository(private val sharedPref: SharedPref) : PrefRepositoryImpl {
                 putBoolean(PrefKey.FIRSTTIME, value)
             }
         }
+
+    override var token: String?
+        get() = sharedPref.preferences.getString(PrefKey.TOKEN, null)
+        set(value) {
+            sharedPref.preferences.edit {
+                putString(PrefKey.TOKEN, value)
+            }
+        }
 }

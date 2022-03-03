@@ -19,7 +19,8 @@
             android:layout_marginTop="24dp"
             android:src="@drawable/logo_login"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -35,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="Halo!,"
+                android:text="@string/label_halo"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
 
@@ -43,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Daftar Dulu Yuk."
+                android:text="@string/label_register_page"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
         </LinearLayout>
@@ -62,42 +63,47 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
+                android:id="@+id/tlName"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
                 app:startIconDrawable="@drawable/ic_orang">
 
-                <EditText
-                    android:id="@+id/etNamaLengkap"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etFullName"
                     style="@style/editText"
-                    android:hint="Email"
-                    android:inputType="textEmailAddress" />
+                    android:hint="@string/hint_name"
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/tlBirthDate"
                 android:layout_marginHorizontal="24dp"
-                app:startIconDrawable="@drawable/ic_orang">
+                android:layout_marginTop="12dp"
+                app:startIconDrawable="@drawable/ic_date">
 
-                <EditText
-                    android:id="@+id/etTanggalLahir"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etBirthDate"
                     style="@style/editText"
-                    android:hint="Email"
-                    android:inputType="textEmailAddress" />
+                    android:hint="@string/hint_birthdate"
+                    android:inputType="date" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/tlEmail"
                 android:layout_marginHorizontal="24dp"
-                app:startIconDrawable="@drawable/ic_orang">
+                android:layout_marginTop="12dp"
+                app:startIconDrawable="@drawable/ic_email">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmail"
                     style="@style/editText"
-                    android:hint="Email"
+                    android:hint="@string/hint_email"
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -105,28 +111,33 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/tlPhone"
                 android:layout_marginHorizontal="24dp"
-                app:startIconDrawable="@drawable/ic_orang">
+                android:layout_marginTop="12dp"
+                app:startIconDrawable="@drawable/ic_phone">
 
-                <EditText
-                    android:id="@+id/etNoHp"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPhone"
                     style="@style/editText"
-                    android:hint="Email"
-                    android:inputType="textEmailAddress" />
+                    android:hint="@string/hint_no_hp"
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/tlPassword"
                 android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="12dp"
                 app:passwordToggleEnabled="true"
-                app:startIconDrawable="@drawable/ic_orang">
+                app:errorIconDrawable="@null"
+                app:startIconDrawable="@drawable/ic_pass">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"
                     style="@style/editText"
-                    android:hint="Password"
+                    android:hint="@string/hint_password"
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -134,14 +145,17 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/tlConfirmPassword"
                 android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="12dp"
                 app:passwordToggleEnabled="true"
-                app:startIconDrawable="@drawable/ic_orang">
+                app:errorIconDrawable="@null"
+                app:startIconDrawable="@drawable/ic_pass">
 
-                <EditText
-                    android:id="@+id/etRepeatPassword"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etConfirmPassword"
                     style="@style/editText"
-                    android:hint="Password"
+                    android:hint="@string/hint_confirm_password"
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -153,7 +167,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="36dp"
             android:layout_marginTop="24dp"
-            app:enabled="true"
+            app:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
@@ -175,14 +189,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Sudah punya akun?"
+                android:text="@string/label_have_account"
                 android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/tvGoToLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="@string/label_login"
                 android:textColor="@color/color_primary" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

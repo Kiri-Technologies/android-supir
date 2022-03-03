@@ -2,7 +2,7 @@ package com.kiri.android
 
 import android.app.Application
 import com.kiri.auth.di.authApi
-import com.kiri.common.data.api.RetrofitModule
+import com.kiri.common.di.RetrofitModule
 import com.kiri.common.di.prefModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
