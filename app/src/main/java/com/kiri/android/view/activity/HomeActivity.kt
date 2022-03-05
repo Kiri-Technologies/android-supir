@@ -1,6 +1,5 @@
 package com.kiri.android.view.activity
 
-import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -10,7 +9,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kiri.android.R
 import com.kiri.android.databinding.ActivityHomeBinding
-import com.skydoves.bundler.intentOf
 
 class HomeActivity : AppCompatActivity() {
 
@@ -24,16 +22,20 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
+        setSupportActionBar(binding.toolbar)
 
         navController = findNavController(R.id.nav_host_fragment_activity_home)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+                R.id.navigation_home,
+                R.id.navigation_dashboard,
+                R.id.navigation_notifications,
+                R.id.navigation_account
             )
         )
-//        setupActionBarWithNavController(navController, appBarConfiguration)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
@@ -42,11 +44,5 @@ class HomeActivity : AppCompatActivity() {
             finish()
         else
             super.onBackPressed()
-    }
-
-    companion object {
-        fun Context.gotoHome() = intentOf<HomeActivity> {
-            startActivity(this@gotoHome)
-        }
     }
 }

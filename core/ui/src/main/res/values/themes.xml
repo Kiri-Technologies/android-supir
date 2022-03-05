@@ -38,7 +38,7 @@
 
     <style name="Kiri.Toolbar.Theme" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
         <item name="colorOnPrimary">?attr/colorOnPrimarySurface</item>
-        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimary">@color/color_primary</item>
         <item name="colorControlNormal">?attr/colorOnPrimarySurface</item>
         <item name="elevation">0dp</item>
         <item name="tint">?attr/colorOnPrimarySurface</item>

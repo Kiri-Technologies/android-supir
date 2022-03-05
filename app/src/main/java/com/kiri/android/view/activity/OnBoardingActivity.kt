@@ -37,7 +37,7 @@ class OnBoardingActivity : AppCompatActivity(R.layout.activity_onboarding), View
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.toolbar.apply {
-            setNavigationIcon(R.drawable.back_onboarding)
+            setNavigationIcon(R.drawable.ic_back_arrow)
             navigationIcon?.setTint(resources.getColor(R.color.black))
         }
         setupStep()

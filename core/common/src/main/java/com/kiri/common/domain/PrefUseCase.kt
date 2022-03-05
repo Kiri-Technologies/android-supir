@@ -14,4 +14,8 @@ class PrefUseCase(private val repository: PrefRepository) : PrefUseCaseImpl {
         set(value) {
             repository.token = value
         }
+
+    override fun removeByKey(key: String) {
+        repository.removeByKey(key)
+    }
 }

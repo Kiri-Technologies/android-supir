@@ -21,7 +21,7 @@ class AuthActivity : AppCompatActivity(R.layout.activity_login) {
 
     override fun onBackPressed() {
         if (navController.currentDestination?.id == R.id.loginFragment) {
-            finishAffinity()
+            finish()
         } else {
             super.onBackPressed()
         }

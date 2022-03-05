@@ -67,7 +67,7 @@ private fun Scope.retrofitHttpClient(pref: PrefUseCaseImpl): OkHttpClient {
                     chain.request().newBuilder().apply {
                         header("Content-Type", "application/json")
                         header("Accept", "application/json")
-                        header("Authorization", "Bearer ")
+                        header("Authorization", "Bearer ${pref.token}")
                     }.build()
                 )
             }

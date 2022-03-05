@@ -1,6 +1,5 @@
 package com.kiri.common.utils
 
-import com.kiri.common.BuildConfig
 import org.json.JSONObject
 import retrofit2.Response
 
@@ -13,6 +12,7 @@ abstract class BaseApiResponse {
                 body?.let {
                     return Resource.success(body)
                 }
+                return Resource.success(null)
             }
             val jsonObj = JSONObject(response.errorBody()?.charStream()?.readText()!!)
             return error("${response.code()} ${jsonObj.getJSONObject("message")}")

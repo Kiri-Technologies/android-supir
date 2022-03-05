@@ -22,4 +22,10 @@
         android:name="com.kiri.android.view.activity.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="com.kiri.account.presentation.fragment.AccountFragment"
+        android:label="@string/title_account"
+        tools:layout="@layout/account_fragment" />
 </navigation>

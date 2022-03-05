@@ -19,4 +19,10 @@ class PrefRepository(private val sharedPref: SharedPref) : PrefRepositoryImpl {
                 putString(PrefKey.TOKEN, value)
             }
         }
+
+    override fun removeByKey(key: String) {
+        sharedPref.preferences.edit {
+            remove(key)
+        }
+    }
 }

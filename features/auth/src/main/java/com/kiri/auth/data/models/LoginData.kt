@@ -1,6 +1,7 @@
 package com.kiri.auth.data.models
 
 import com.google.gson.annotations.SerializedName
+import com.kiri.auth.domain.usecase.LoginDomain
 
 data class LoginData(
 
@@ -33,4 +34,17 @@ data class LoginData(
 
     @field:SerializedName("token")
     val tokenData: TokenData? = null
-)
+) {
+    fun toDomainLogin(): LoginDomain = LoginDomain(
+        image ?: "",
+        birthdate.orEmpty(),
+        role.orEmpty(),
+        noHp.orEmpty(),
+        updatedAt.orEmpty(),
+        name.orEmpty(),
+        createdAt.orEmpty(),
+        id.orEmpty(),
+        email.orEmpty(),
+        tokenData ?: TokenData(Any())
+    )
+}

@@ -23,6 +23,6 @@ val authApi = module {
     single<UseCaseImpl> { UseCase(Repository(get())) }
 
     viewModel { (lifecycle: Lifecycle, resource: AuthResource) ->
-        lifecycle.register(AuthViewModel(get(), get())) { AuthObserver(resource, it) }
+        lifecycle.register(AuthViewModel(get())) { AuthObserver(resource, it) }
     }
 }

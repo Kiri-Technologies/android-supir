@@ -1,6 +1,7 @@
 package com.kiri.android
 
 import android.app.Application
+import com.kiri.account.di.accountModule
 import com.kiri.auth.di.authApi
 import com.kiri.common.di.RetrofitModule
 import com.kiri.common.di.prefModule
@@ -26,6 +27,7 @@ class MainApplication : Application() {
                 listOf(
                     RetrofitModule,
                     prefModule,
+                    accountModule,
                     authApi
                 )
             )
