@@ -14,7 +14,7 @@ import com.kiri.auth.data.models.LoginData
 import com.kiri.auth.databinding.LoginFragmentBinding
 import com.kiri.auth.presentation.viewmodel.AuthResource
 import com.kiri.auth.presentation.viewmodel.AuthViewModel
-import com.kiri.common.domain.PrefUseCaseImpl
+import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.shortToast
 import com.kiri.ui.disableBtn
 import com.kiri.ui.enableBtn
@@ -32,7 +32,7 @@ class LoginFragment : Fragment(R.layout.login_fragment), View.OnClickListener, A
     private val viewModel by viewModel<AuthViewModel> {
         parametersOf(lifecycle, this)
     }
-    private val pref: PrefUseCaseImpl by inject()
+    private val pref: PrefUseCase by inject()
 
     private var errorMessage: String? = null
     private val email = MutableStateFlow("")

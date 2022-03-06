@@ -5,7 +5,7 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
 import com.google.gson.GsonBuilder
 import com.kiri.common.BuildConfig
-import com.kiri.common.domain.PrefUseCaseImpl
+import com.kiri.common.domain.PrefUseCase
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -54,7 +54,7 @@ private fun Scope.retrofitBuilder(): Retrofit {
         .build()
 }
 
-private fun Scope.retrofitHttpClient(pref: PrefUseCaseImpl): OkHttpClient {
+private fun Scope.retrofitHttpClient(pref: PrefUseCase): OkHttpClient {
     return OkHttpClient.Builder().apply {
         cache(get())
         connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)

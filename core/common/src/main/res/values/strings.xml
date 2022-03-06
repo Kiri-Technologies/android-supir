@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="error_message">Terjadi Kesalahan</string>
+    <string name="label_logout">Logout</string>
+    <string name="error_401">Unauthorized</string>
 </resources>

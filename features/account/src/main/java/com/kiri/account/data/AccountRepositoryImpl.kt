@@ -1,6 +1,7 @@
 package com.kiri.account.data
 
 import com.kiri.account.data.endpoint.RemoteDataSource
+import com.kiri.account.data.models.ProfileData
 import com.kiri.common.utils.BaseApiResponse
 import com.kiri.common.utils.Resource
 import kotlinx.coroutines.flow.Flow
@@ -12,6 +13,12 @@ class AccountRepositoryImpl(private val remoteDataSource: RemoteDataSource) :
     override fun doLogout(): Flow<Resource<Nothing>> {
         return flow {
             emit(safeApiCall { remoteDataSource.doLogout() })
+        }
+    }
+
+    override fun getProfile(): Flow<Resource<ProfileData>> {
+        return flow {
+            emit(safeApiCall { remoteDataSource.getProfile() })
         }
     }
 }

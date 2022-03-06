@@ -24,7 +24,7 @@
         <entry key="..\:/Kiri/app/src/main/res/font/poppins.xml" value="0.4265625" />
         <entry key="..\:/Kiri/app/src/main/res/font/poppins_bold.xml" value="0.416793893129771" />
         <entry key="..\:/Kiri/app/src/main/res/layout/activity_home.xml" value="0.264" />
-        <entry key="..\:/Kiri/app/src/main/res/layout/activity_login.xml" value="0.4" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Kiri/app/src/main/res/layout/activity_onboarding.xml" value="0.264" />
         <entry key="..\:/Kiri/app/src/main/res/layout/activity_splash.xml" value="0.2" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_dashboard.xml" value="0.38125" />
@@ -41,11 +41,13 @@
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/button_black_shape.xml" value="0.173" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/button_rounded_shape.xml" value="0.212" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/button_selector.xml" value="0.173" />
+        <entry key="..\:/Kiri/core/ui/src/main/res/drawable/button_shape.xml" value="0.1515" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_date.xml" value="0.173" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_email.xml" value="0.173" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_orang.xml" value="0.212" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_pass.xml" value="0.173" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_phone.xml" value="0.173" />
+        <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_pusat_bantuan.xml" value="0.2275" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/logo_login.xml" value="0.212" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/splash_layer.xml" value="0.173" />
         <entry key="..\:/Kiri/core/ui/src/main/res/font/poppins.xml" value="0.4265625" />
@@ -53,7 +55,7 @@
         <entry key="..\:/Kiri/core/ui/src/main/res/font/roboto.xml" value="0.4265625" />
         <entry key="..\:/Kiri/core/ui/src/main/res/layout/button_kiri.xml" value="0.38125" />
         <entry key="..\:/Kiri/core/ui/src/main/res/layout/toolbat_layout.xml" value="0.4" />
-        <entry key="..\:/Kiri/features/account/src/main/res/layout/account_fragment.xml" value="0.38125" />
+        <entry key="..\:/Kiri/features/account/src/main/res/layout/account_fragment.xml" value="0.4" />
         <entry key="..\:/Kiri/features/auth/src/main/res/drawable/ic_people_navigation.xml" value="0.1515" />
         <entry key="..\:/Kiri/features/auth/src/main/res/drawable/zxc.xml" value="0.212" />
         <entry key="..\:/Kiri/features/auth/src/main/res/layout/fragment_home.xml" value="0.38125" />

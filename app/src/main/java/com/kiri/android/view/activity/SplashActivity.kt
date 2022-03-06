@@ -7,13 +7,13 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.kiri.android.R
-import com.kiri.common.domain.PrefUseCaseImpl
+import com.kiri.common.domain.PrefUseCase
 import org.koin.android.ext.android.inject
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity(R.layout.activity_splash) {
 
-    private val pref: PrefUseCaseImpl by inject()
+    private val pref: PrefUseCase by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

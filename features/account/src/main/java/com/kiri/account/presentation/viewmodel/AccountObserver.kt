@@ -25,5 +25,19 @@ class AccountObserver(
                 }
             }
         }
+
+        viewModel.profile.observe(owner) {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    resource.onProfileLoading()
+                }
+                Resource.Status.SUCCESS -> {
+                    resource.onProfileSuccess(it.data)
+                }
+                Resource.Status.ERROR -> {
+                    resource.onProfileFailed(it.error)
+                }
+            }
+        }
     }
 }

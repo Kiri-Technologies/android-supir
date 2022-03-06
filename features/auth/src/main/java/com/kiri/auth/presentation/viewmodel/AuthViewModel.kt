@@ -1,7 +1,5 @@
 package com.kiri.auth.presentation.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,12 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.kiri.auth.data.models.LoginData
 import com.kiri.auth.data.models.RegisterBody
 import com.kiri.auth.data.models.RegisterData
-import com.kiri.auth.domain.usecase.UseCaseImpl
+import com.kiri.auth.domain.usecase.UseCase
 import com.kiri.common.utils.Resource
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class AuthViewModel(private val useCase: UseCaseImpl) : ViewModel(){
+class AuthViewModel(private val useCase: UseCase) : ViewModel() {
 
     private val _login: MutableLiveData<Resource<LoginData?>> = MutableLiveData()
     var login: LiveData<Resource<LoginData?>> = _login

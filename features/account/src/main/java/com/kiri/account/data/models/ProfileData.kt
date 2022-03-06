@@ -1,11 +1,15 @@
-package com.kiri.auth.data.models
+package com.kiri.account.data.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.RawValue
 
-data class LoginData(
+@Parcelize
+data class ProfileData(
 
     @field:SerializedName("image")
-    val image: Any? = null,
+    val image: @RawValue Any? = null,
 
     @field:SerializedName("birthdate")
     val birthdate: String? = null,
@@ -29,8 +33,5 @@ data class LoginData(
     val id: String? = null,
 
     @field:SerializedName("email")
-    val email: String? = null,
-
-    @field:SerializedName("token")
-    val tokenData: TokenData? = null
-)
+    val email: String? = null
+) : Parcelable

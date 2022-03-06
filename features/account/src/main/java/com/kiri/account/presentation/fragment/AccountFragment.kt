@@ -4,15 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.kiri.account.R
 import com.kiri.account.databinding.AccountFragmentBinding
 import com.kiri.account.presentation.viewmodel.AccountResource
 import com.kiri.account.presentation.viewmodel.AccountViewModel
+import com.kiri.account.presentation.viewmodel.SharedViewModelProfile
 import com.kiri.common.data.pref.PrefKey
-import com.kiri.common.domain.PrefUseCaseImpl
+import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.shortToast
-import com.kiri.ui.disableBtn
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -22,13 +23,14 @@ class AccountFragment : Fragment(R.layout.account_fragment), View.OnClickListene
     private val viewModel: AccountViewModel by viewModel {
         parametersOf(lifecycle, this)
     }
-    private val pref: PrefUseCaseImpl by inject()
+    private val sharedVM by activityViewModels<SharedViewModelProfile>()
+    private val pref: PrefUseCase by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnLogout.setOnClickListener(this)
-        pref.token?.let { shortToast(requireContext(), it) }
+        getData()
     }
 
     override fun onClick(v: View?) {
@@ -39,11 +41,34 @@ class AccountFragment : Fragment(R.layout.account_fragment), View.OnClickListene
         }
     }
 
+    private fun getData() {
+        sharedVM.getData().observe(viewLifecycleOwner) { data ->
+            binding.apply {
+                tvName.text = data?.name
+                tvPhone.text = data?.noHp
+                tvId.text = data?.id
+            }
+        }
+    }
+
+    private fun enableAnimLogout() {
+        binding.llLogout.visibility = View.GONE
+        binding.llAnim.visibility = View.VISIBLE
+    }
+
+    private fun disableAnimLogout() {
+        binding.llLogout.visibility = View.VISIBLE
+        binding.llAnim.visibility = View.GONE
+    }
+
     override fun onLogoutLoading() {
-        disableBtn(binding.btnLogout)
+        super.onLogoutLoading()
+        enableAnimLogout()
     }
 
     override fun onLogoutSuccess() {
+        super.onLogoutSuccess()
+        disableAnimLogout()
         val intent = Intent(
             requireContext(),
             Class.forName("com.kiri.android.view.activity.AuthActivity")
@@ -54,6 +79,8 @@ class AccountFragment : Fragment(R.layout.account_fragment), View.OnClickListene
     }
 
     override fun onLogoutFailed(error: String?) {
+        super.onLogoutFailed(error)
+        disableAnimLogout()
         if (error != null) {
             shortToast(requireContext(), error)
         }

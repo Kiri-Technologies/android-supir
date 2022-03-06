@@ -2,4 +2,20 @@ package com.kiri.common.domain
 
 import com.kiri.common.data.pref.PrefRepositoryImpl
 
-interface PrefUseCaseImpl : PrefRepositoryImpl
+class PrefUseCaseImpl(private val repositoryImpl: PrefRepositoryImpl) : PrefUseCase {
+
+    override var firstStart: Boolean
+        get() = repositoryImpl.firstStart
+        set(value) {
+            repositoryImpl.firstStart = value
+        }
+    override var token: String?
+        get() = repositoryImpl.token
+        set(value) {
+            repositoryImpl.token = value
+        }
+
+    override fun removeByKey(key: String) {
+        repositoryImpl.removeByKey(key)
+    }
+}
