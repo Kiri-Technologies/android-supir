@@ -3,4 +3,16 @@
     <string name="error_message">Terjadi Kesalahan</string>
     <string name="label_logout">Logout</string>
     <string name="error_401">Unauthorized</string>
+    <string name="hint_name">Nama</string>
+    <string name="hint_birthdate">Tanggal Lahir</string>
+    <string name="hint_no_hp">No HP</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="label_login">Login</string>
+    <string name="hint_confirm_password">Konfirmasi Password</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_account">Akun</string>
 </resources>

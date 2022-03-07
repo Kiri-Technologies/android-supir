@@ -1,17 +1,17 @@
 package com.kiri.android.view.activity
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.Gson
 import com.kiri.account.data.models.ProfileData
 import com.kiri.account.presentation.viewmodel.AccountResource
 import com.kiri.account.presentation.viewmodel.AccountViewModel
-import com.kiri.account.presentation.viewmodel.SharedViewModelProfile
 import com.kiri.android.R
 import com.kiri.android.databinding.ActivityHomeBinding
 import com.kiri.common.data.pref.PrefKey
@@ -28,7 +28,6 @@ class HomeActivity : AppCompatActivity(), AccountResource {
     private val viewModel: AccountViewModel by viewModel {
         parametersOf(lifecycle, this)
     }
-    private val sharedVM by viewModels<SharedViewModelProfile>()
     private val pref: PrefUseCase by inject()
     private lateinit var connectionCheck: ConnectionCheck
 
@@ -37,7 +36,6 @@ class HomeActivity : AppCompatActivity(), AccountResource {
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val navView: BottomNavigationView = binding.navView
         setSupportActionBar(binding.toolbar)
 
@@ -49,7 +47,7 @@ class HomeActivity : AppCompatActivity(), AccountResource {
                 R.id.navigation_home,
                 R.id.navigation_dashboard,
                 R.id.navigation_notifications,
-                R.id.navigation_account
+                R.id.accountFragment
             )
         )
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
@@ -64,14 +62,11 @@ class HomeActivity : AppCompatActivity(), AccountResource {
             super.onBackPressed()
     }
 
-    override fun onProfileLoading() {
-        super.onProfileLoading()
-    }
-
     override fun onProfileSuccess(data: ProfileData?) {
         super.onProfileSuccess(data)
         if (data != null) {
-            sharedVM.setData(data)
+            val profile = Gson().toJson(data)
+            pref.accountData = profile
         }
     }
 
@@ -79,6 +74,13 @@ class HomeActivity : AppCompatActivity(), AccountResource {
         super.onProfileFailed(error)
         if (error == getString(R.string.error_401)) {
             pref.removeByKey(PrefKey.TOKEN)
+            pref.removeByKey(PrefKey.PROFILE)
+            startActivity(
+                Intent(
+                    this,
+                    AuthActivity::class.java
+                )
+            )
             finish()
         }
     }

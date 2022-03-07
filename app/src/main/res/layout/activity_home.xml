@@ -8,6 +8,8 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
+        app:navigationIcon="@drawable/back_toolbar"
+        app:navigationIconTint="@color/white"
         android:layout_height="wrap_content"
         app:titleTextColor="@color/white"
         android:background="@color/color_primary"

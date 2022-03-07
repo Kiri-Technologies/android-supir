@@ -21,7 +21,7 @@ abstract class BaseApiResponse {
                 e.message?.contains("hostname") == true -> {
                     error("Terjadi Kesalahan")
                 }
-                e.message?.contains("401") == true -> {
+                e.message?.contains("Unauthorized") == true -> {
                     error("Unauthorized")
                 }
                 else -> error(e.message ?: e.toString())

@@ -19,6 +19,13 @@ class PrefRepositoryImpl(private val sharedPref: SharedPref) : PrefRepository {
                 putString(PrefKey.TOKEN, value)
             }
         }
+    override var accountData: String?
+        get() = sharedPref.preferences.getString(PrefKey.PROFILE, null)
+        set(value) {
+            sharedPref.preferences.edit {
+                putString(PrefKey.PROFILE, value)
+            }
+        }
 
     override fun removeByKey(key: String) {
         sharedPref.preferences.edit {

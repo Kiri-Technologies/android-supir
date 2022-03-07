@@ -3,4 +3,7 @@
     <string name="label_pusat_bantuan">Pusat Bantuan</string>
     <string name="label_feedback">Masukan dan Saran</string>
     <string name="label_policy">Kebijakan dan Privasi</string>
+    <string name="label_driver_id">Driver ID</string>
+    <string name="label_detail_kontak">Detail Kontak</string>
+    <string name="label_tanggal_lahir">Tanggal Lahir</string>
 </resources>

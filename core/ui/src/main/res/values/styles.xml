@@ -57,5 +57,4 @@
         <item name="android:theme">@style/Widget.MaterialComponents.Button</item>
         <item name="android:background">@drawable/background_button</item>
     </style>
-
 </resources>

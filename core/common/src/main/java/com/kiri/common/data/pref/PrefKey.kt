@@ -4,4 +4,5 @@ object PrefKey {
     const val PREFNAME = "SharedPref"
     const val FIRSTTIME = "first time"
     const val TOKEN = "token"
+    const val PROFILE = "profileData"
 }

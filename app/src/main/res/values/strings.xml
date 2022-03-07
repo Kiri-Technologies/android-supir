@@ -7,9 +7,4 @@
     <string name="onboarding2_title">Lihat Rute Angkot</string>
     <string name="onboarding3_title">Pembayaran Lebih Mudah</string>
     <string name="skip_onboarding">Skip</string>
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_account">Akun</string>
 </resources>

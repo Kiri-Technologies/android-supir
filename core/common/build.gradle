@@ -57,4 +57,10 @@ dependencies {
     implementation supportDependencies.lifecycleViewModel
     implementation supportDependencies.lifecycleLiveData
     implementation supportDependencies.lifecycleRuntime
+
+    //navigation
+    implementation navigationDependencies.fragment
+    implementation navigationDependencies.ui
+    implementation navigationDependencies.fragmentKtx
+    implementation navigationDependencies.uiKtx
 }

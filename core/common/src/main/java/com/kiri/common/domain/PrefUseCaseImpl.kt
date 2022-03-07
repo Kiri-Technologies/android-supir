@@ -14,6 +14,11 @@ class PrefUseCaseImpl(private val repositoryImpl: PrefRepositoryImpl) : PrefUseC
         set(value) {
             repositoryImpl.token = value
         }
+    override var accountData: String?
+        get() = repositoryImpl.accountData
+        set(value) {
+            repositoryImpl.accountData = value
+        }
 
     override fun removeByKey(key: String) {
         repositoryImpl.removeByKey(key)

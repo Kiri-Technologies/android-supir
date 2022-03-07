@@ -23,9 +23,5 @@
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 
-    <fragment
-        android:id="@+id/navigation_account"
-        android:name="com.kiri.account.presentation.fragment.AccountFragment"
-        android:label="@string/title_account"
-        tools:layout="@layout/account_fragment" />
+    <include app:graph="@navigation/account_nav" />
 </navigation>
