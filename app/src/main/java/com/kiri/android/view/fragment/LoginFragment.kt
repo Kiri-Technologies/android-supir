@@ -1,4 +1,4 @@
-package com.kiri.auth.presentation.fragment
+package com.kiri.android.view.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.kiri.android.view.activity.HomeActivity
 import com.kiri.auth.R
 import com.kiri.auth.data.models.LoginData
 import com.kiri.auth.databinding.LoginFragmentBinding
@@ -121,7 +122,7 @@ class LoginFragment : Fragment(R.layout.login_fragment), View.OnClickListener, A
 
         val intent = Intent(
             requireContext(),
-            Class.forName("com.kiri.android.view.activity.HomeActivity")
+            HomeActivity::class.java
         )
 
         pref.token = data?.tokenData?.originalData?.token

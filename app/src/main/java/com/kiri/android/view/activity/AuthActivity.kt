@@ -6,7 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.kiri.android.R
 
-class AuthActivity : AppCompatActivity(R.layout.activity_login) {
+class AuthActivity : AppCompatActivity(R.layout.activity_auth) {
 
     private lateinit var navController: NavController
 

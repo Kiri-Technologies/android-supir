@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/account_nav"
+    app:startDestination="@id/detailAccountFragment">
+
+    <fragment
+        android:id="@+id/detailAccountFragment"
+        android:name="com.kiri.android.view.fragment.DetailAccountFragment"
+        android:label="@string/title_navigation_detail"
+        tools:layout="@layout/detail_account_fragment" >
+        <action
+            android:id="@+id/action_detailAccountFragment_to_updateProfileFragment"
+            app:destination="@id/updateProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateProfileFragment"
+        android:name="com.kiri.android.view.fragment.UpdateProfileFragment"
+        android:label="Update Akun"
+        tools:layout="@layout/update_profile_fragment" />
+</navigation>

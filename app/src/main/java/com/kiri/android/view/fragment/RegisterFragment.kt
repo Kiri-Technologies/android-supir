@@ -1,4 +1,4 @@
-package com.kiri.auth.presentation.fragment
+package com.kiri.android.view.fragment
 
 import android.os.Bundle
 import android.util.Patterns
@@ -54,13 +54,13 @@ class RegisterFragment : Fragment(R.layout.register_fragment), View.OnClickListe
                 .matches()
         val phoneIsValid =
             Patterns.PHONE.matcher(args[3]).matches()
-        val passwordIsValid = args[4].length > 6
+        val passwordIsValid = args[4].length >= 6
         val passwordIsCorrect = args[4] == args[5]
         validatorForm(
-            nameIsValid,
-            birthDateIsValid,
             emailIsValid,
             phoneIsValid,
+            passwordIsValid,
+            passwordIsCorrect
         )
         nameIsValid and birthDateIsValid and emailIsValid and phoneIsValid and passwordIsValid and
             passwordIsCorrect
@@ -114,25 +114,25 @@ class RegisterFragment : Fragment(R.layout.register_fragment), View.OnClickListe
         passwordIsCorrect: Boolean
     ) {
         binding.apply {
-            if (emailIsValid.not() && !binding.etEmail.text.isNullOrEmpty()) {
+            if (emailIsValid.not() && !etEmail.text.isNullOrEmpty()) {
                 errorMessage = "email tidak valid"
                 tlEmail.error = errorMessage
             } else {
                 tlEmail.error = null
             }
-            if (phoneIsValid.not() && !binding.etPhone.text.isNullOrEmpty()) {
+            if (phoneIsValid.not() && !etPhone.text.isNullOrEmpty()) {
                 errorMessage = "nomor HP tidak valid"
                 tlPhone.error = errorMessage
             } else {
                 tlPhone.error = null
             }
-            if (passwordIsValid.not() && !binding.etPassword.text.isNullOrEmpty()) {
+            if (passwordIsValid.not() && !etPassword.text.isNullOrEmpty()) {
                 errorMessage = "password kurang dari 6 karakter"
                 tlPassword.error = errorMessage
             } else {
                 tlPassword.error = null
             }
-            if (passwordIsCorrect.not() && !binding.etConfirmPassword.text.isNullOrEmpty()) {
+            if (passwordIsCorrect.not() && !etConfirmPassword.text.isNullOrEmpty()) {
                 errorMessage = "password tidak sama"
                 tlConfirmPassword.error = errorMessage
             } else {

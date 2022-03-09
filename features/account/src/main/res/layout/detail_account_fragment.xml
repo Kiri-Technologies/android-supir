@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_fragment"
-    tools:context=".presentation.fragment.DetailAccountFragment">
+    tools:context="com.kiri.android.view.fragment.DetailAccountFragment">
 
     <ImageView
         android:id="@+id/ivAccount"
@@ -15,6 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/profile"
         tools:ignore="ContentDescription" />
 
     <TextView
@@ -168,6 +169,7 @@
     </LinearLayout>
 
     <com.kiri.ui.ButtonView
+        android:id="@+id/btnUpdate"
         style="@style/ButtonView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

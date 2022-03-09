@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_fragment"
-    tools:context="com.kiri.account.presentation.fragment.AccountFragment">
+    android:background="@color/background_fragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvAccount"
@@ -27,6 +26,7 @@
                 android:id="@+id/ivAccount"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
+                android:src="@drawable/profile"
                 android:layout_marginStart="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

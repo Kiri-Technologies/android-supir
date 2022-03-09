@@ -1,4 +1,4 @@
-package com.kiri.account.presentation.fragment
+package com.kiri.android.view.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,11 +7,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.gson.Gson
-import com.kiri.account.R
 import com.kiri.account.data.models.ProfileData
 import com.kiri.account.databinding.AccountFragmentBinding
 import com.kiri.account.presentation.viewmodel.AccountResource
 import com.kiri.account.presentation.viewmodel.AccountViewModel
+import com.kiri.android.R
+import com.kiri.android.view.activity.AuthActivity
 import com.kiri.common.data.pref.PrefKey
 import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.shortToast
@@ -39,7 +40,7 @@ class AccountFragment : Fragment(R.layout.account_fragment), View.OnClickListene
                 viewModel.doLogout()
             }
             R.id.cvAccount -> {
-                findNavController().navigate(R.id.action_accountFragment_to_detailAccountFragment)
+                findNavController().navigate(R.id.action_account_fragment_to_accountActivity)
             }
         }
     }
@@ -74,7 +75,7 @@ class AccountFragment : Fragment(R.layout.account_fragment), View.OnClickListene
         disableAnimLogout()
         val intent = Intent(
             requireContext(),
-            Class.forName("com.kiri.android.view.activity.AuthActivity")
+            AuthActivity::class.java
         )
         startActivity(intent)
         pref.removeByKey(PrefKey.TOKEN)

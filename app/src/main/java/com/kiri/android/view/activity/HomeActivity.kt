@@ -47,7 +47,7 @@ class HomeActivity : AppCompatActivity(), AccountResource {
                 R.id.navigation_home,
                 R.id.navigation_dashboard,
                 R.id.navigation_notifications,
-                R.id.accountFragment
+                R.id.account_fragment
             )
         )
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)

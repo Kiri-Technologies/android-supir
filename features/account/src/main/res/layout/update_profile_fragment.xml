@@ -4,50 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context="com.kiri.android.view.fragment.RegisterFragment">
+    android:background="@color/background_fragment"
+    android:paddingBottom="24dp"
+    tools:context="com.kiri.android.view.fragment.UpdateProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/ivLogo_Login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:id="@+id/ivAccount"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginTop="24dp"
-            android:src="@drawable/logo_login"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/profile"
             tools:ignore="ContentDescription" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
+        <ImageView
+            android:id="@+id/iconAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivLogo_Login">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text="@string/label_halo"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_bold"
-                android:text="@string/label_register_page"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-        </LinearLayout>
+            android:src="@drawable/ic_add"
+            app:layout_constraintBottom_toBottomOf="@+id/ivAccount"
+            app:layout_constraintEnd_toEndOf="@+id/ivAccount"
+            tools:ignore="ContentDescription" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -55,15 +38,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/btnRegister"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+            app:layout_constraintTop_toBottomOf="@+id/ivAccount">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tlName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:id="@+id/tlName"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
                 app:startIconDrawable="@drawable/ic_people">
@@ -76,12 +58,12 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tlBirthDate"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tlBirthDate"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="24dp"
                 app:startIconDrawable="@drawable/ic_date">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -92,12 +74,12 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tlEmail"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tlEmail"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="24dp"
                 app:startIconDrawable="@drawable/ic_email">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -108,12 +90,12 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tlPhone"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tlPhone"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="24dp"
                 app:startIconDrawable="@drawable/ic_phone">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -124,14 +106,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tlPassword"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tlPassword"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="12dp"
-                app:passwordToggleEnabled="true"
+                android:layout_marginTop="24dp"
                 app:errorIconDrawable="@null"
+                app:passwordToggleEnabled="true"
                 app:startIconDrawable="@drawable/ic_pass">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -142,14 +124,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tlConfirmPassword"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tlConfirmPassword"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="12dp"
-                app:passwordToggleEnabled="true"
+                android:layout_marginTop="24dp"
                 app:errorIconDrawable="@null"
+                app:passwordToggleEnabled="true"
                 app:startIconDrawable="@drawable/ic_pass">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -161,43 +143,16 @@
         </LinearLayout>
 
         <com.kiri.ui.ButtonView
-            android:id="@+id/btnRegister"
+            android:id="@+id/btnUpdate"
             style="@style/ButtonView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="36dp"
+            android:layout_marginHorizontal="48dp"
             android:layout_marginTop="24dp"
-            app:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:text="Daftar" />
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="24dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/btnRegister"
-            app:layout_constraintStart_toStartOf="@id/btnRegister"
-            app:layout_constraintTop_toBottomOf="@id/btnRegister">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="@string/label_have_account"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/tvGoToLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_login"
-                android:textColor="@color/color_primary" />
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@id/linearLayout"
+            app:text="Perbarui" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.core.widget.NestedScrollView>

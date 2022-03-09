@@ -22,6 +22,20 @@
         android:name="com.kiri.android.view.activity.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/account_fragment"
+        android:name="com.kiri.android.view.fragment.AccountFragment"
+        android:label="@string/title_account"
+        tools:layout="@layout/account_fragment">
+        <action
+            android:id="@+id/action_account_fragment_to_accountActivity"
+            app:destination="@id/accountActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/accountActivity"
+        android:name="com.kiri.android.view.activity.AccountActivity"
+        android:label="activity_account"
+        tools:layout="@layout/activity_account" />
 
-    <include app:graph="@navigation/account_nav" />
+
 </navigation>
