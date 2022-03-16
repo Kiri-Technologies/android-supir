@@ -39,5 +39,47 @@ class AccountObserver(
                 }
             }
         }
+
+        viewModel.update.observe(owner) {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    resource.onUpdateProfileLoading()
+                }
+                Resource.Status.SUCCESS -> {
+                    resource.onUpdateProfileSuccess(it.data)
+                }
+                Resource.Status.ERROR -> {
+                    resource.onUpdateProfileFailed(it.error)
+                }
+            }
+        }
+
+        viewModel.uploadPhoto.observe(owner) {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    resource.onUploadPhotoLoading()
+                }
+                Resource.Status.SUCCESS -> {
+                    resource.onUploadPhotoSuccess(it.data)
+                }
+                Resource.Status.ERROR -> {
+                    resource.onUploadPhotoFailed(it.error)
+                }
+            }
+        }
+
+        viewModel.updatePassword.observe(owner) {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    resource.onUpdatePasswordLoading()
+                }
+                Resource.Status.SUCCESS -> {
+                    resource.onUpdatePasswordSuccess(it.data)
+                }
+                Resource.Status.ERROR -> {
+                    resource.onUpdatePasswordFailed(it.error)
+                }
+            }
+        }
     }
 }

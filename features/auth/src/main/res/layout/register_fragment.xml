@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context="com.kiri.android.view.fragment.RegisterFragment">
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -87,8 +86,11 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etBirthDate"
                     style="@style/editText"
+                    android:clickable="true"
+                    android:focusable="false"
                     android:hint="@string/hint_birthdate"
-                    android:inputType="date" />
+                    android:inputType="date"
+                    tools:ignore="KeyboardInaccessibleWidget" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout

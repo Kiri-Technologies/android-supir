@@ -18,7 +18,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/kiri_icon"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Kiri">
+        android:theme="@style/Theme.Kiri.Light">
         <activity
             android:name=".view.activity.AccountActivity"
             android:exported="false" />

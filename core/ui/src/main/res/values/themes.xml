@@ -3,7 +3,7 @@
     <style name="Theme.Kiri" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorPrimaryVariant">@color/gray_600</item>
+        <item name="colorPrimaryVariant">@color/button_grey</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -17,7 +17,7 @@
     <style name="Theme.Kiri.Light" parent="Theme.Kiri">
         <item name="android:ambientShadowAlpha">0.05</item>
         <item name="android:spotShadowAlpha">0.05</item>
-        <item name="android:windowSoftInputMode">stateHidden</item>
+        <item name="android:windowSoftInputMode">stateHidden|adjustResize</item>
 <!--        <item name="materialTimePickerTheme">@style/MaterialTimeTheme</item>-->
 <!--        <item name="materialCalendarTheme">@style/MaterialCalendarTheme</item>-->
 <!--        <item name="searchViewStyle">@style/MySearchView</item>-->

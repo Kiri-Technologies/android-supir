@@ -1,42 +1,44 @@
 package com.kiri.android.view.fragment
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
-import coil.load
-import coil.transform.CircleCropTransformation
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.gson.Gson
 import com.kiri.account.R
 import com.kiri.account.data.models.ProfileData
+import com.kiri.account.data.models.UpdateProfileBody
 import com.kiri.account.databinding.UpdateProfileFragmentBinding
+import com.kiri.account.presentation.viewmodel.AccountResource
+import com.kiri.account.presentation.viewmodel.AccountViewModel
 import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.shortToast
+import com.kiri.ui.disableBtn
+import com.kiri.ui.enableBtn
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
+import java.text.SimpleDateFormat
+import java.util.*
 
-class UpdateProfileFragment : Fragment(R.layout.update_profile_fragment), View.OnClickListener {
+class UpdateProfileFragment :
+    Fragment(R.layout.update_profile_fragment),
+    View.OnClickListener,
+    AccountResource {
     private val binding by viewBinding<UpdateProfileFragmentBinding>()
     private val pref: PrefUseCase by inject()
-    private lateinit var permissionResult: ActivityResultLauncher<String>
-    private val pictureResult =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            picture(uri)
-        }
+    private val viewModel by viewModel<AccountViewModel> { parametersOf(lifecycle, this) }
+    private lateinit var body: UpdateProfileBody
 
     private var errorMessage: String? = null
     private val name = MutableStateFlow("")
@@ -50,9 +52,7 @@ class UpdateProfileFragment : Fragment(R.layout.update_profile_fragment), View.O
         name,
         birthDate,
         email,
-        phone,
-        password,
-        confirmPass
+        phone
     ) { args: Array<String> ->
         val nameIsValid = args[0].isNotEmpty()
         val birthDateIsValid = args[1].isNotEmpty()
@@ -61,16 +61,13 @@ class UpdateProfileFragment : Fragment(R.layout.update_profile_fragment), View.O
                 .matches()
         val phoneIsValid =
             Patterns.PHONE.matcher(args[3]).matches()
-        val passwordIsValid = args[4].length >= 6
-        val passwordIsCorrect = args[4] == args[5]
+//        val passwordIsValid = args[4].length >= 6
+//        val passwordIsCorrect = args[4] == args[5]
         validatorForm(
             emailIsValid,
-            phoneIsValid,
-            passwordIsValid,
-            passwordIsCorrect
+            phoneIsValid
         )
-        nameIsValid and birthDateIsValid and emailIsValid and phoneIsValid and passwordIsValid and
-            passwordIsCorrect
+        nameIsValid and birthDateIsValid and emailIsValid and phoneIsValid
     }
 
     override fun onCreateView(
@@ -86,9 +83,8 @@ class UpdateProfileFragment : Fragment(R.layout.update_profile_fragment), View.O
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             btnUpdate.setOnClickListener(this@UpdateProfileFragment)
-            ivAccount.setOnClickListener(this@UpdateProfileFragment)
+            etBirthDate.setOnClickListener(this@UpdateProfileFragment)
         }
-        permissionGranted()
         formEditText()
         validationButton()
         getData()
@@ -97,25 +93,18 @@ class UpdateProfileFragment : Fragment(R.layout.update_profile_fragment), View.O
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnUpdate -> {
+                bodyProfile()
+                viewModel.doUpdate(body)
             }
-            R.id.ivAccount -> {
-                permission()
-            }
-        }
-    }
-
-    private fun permission() {
-        when (PackageManager.PERMISSION_GRANTED) {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) -> {
-                pictureResult.launch("image/*")
-            }
-            else -> {
-                permissionResult.launch(
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                )
+            R.id.etBirthDate -> {
+                val builder = MaterialDatePicker.Builder.datePicker()
+                val picker = builder.setSelection(System.currentTimeMillis()).build()
+                picker.show(childFragmentManager, picker.toString())
+                picker.addOnPositiveButtonClickListener {
+                    val sdf = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
+                    val date = sdf.format(it)
+                    binding.etBirthDate.setText(date)
+                }
             }
         }
     }
@@ -128,30 +117,6 @@ class UpdateProfileFragment : Fragment(R.layout.update_profile_fragment), View.O
             etEmail.setText(data.email)
             etPhone.setText(data.noHp)
         }
-    }
-
-    private fun picture(uri: Uri?) {
-        if (uri == null) {
-            binding.ivAccount.setImageResource(R.drawable.profile)
-            binding.iconAdd.visibility = View.VISIBLE
-        } else {
-            binding.ivAccount.load(uri) {
-                placeholder(R.drawable.profile)
-                transformations(CircleCropTransformation())
-            }
-            binding.iconAdd.visibility = View.GONE
-        }
-    }
-
-    private fun permissionGranted() {
-        permissionResult =
-            registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-                if (isGranted) { // Do something if permission granted
-                    pictureResult.launch("image/*")
-                } else { // Do something as the permission is not granted
-                    shortToast(requireContext(), "Perlu Akses File")
-                }
-            }
     }
 
     private fun formEditText() = with(binding) {
@@ -167,12 +132,12 @@ class UpdateProfileFragment : Fragment(R.layout.update_profile_fragment), View.O
         etPhone.doOnTextChanged { text, _, _, _ ->
             phone.value = text.toString()
         }
-        etPassword.doOnTextChanged { text, _, _, _ ->
-            password.value = text.toString()
-        }
-        etConfirmPassword.doOnTextChanged { text, _, _, _ ->
-            confirmPass.value = text.toString()
-        }
+//        etPassword.doOnTextChanged { text, _, _, _ ->
+//            password.value = text.toString()
+//        }
+//        etConfirmPassword.doOnTextChanged { text, _, _, _ ->
+//            confirmPass.value = text.toString()
+//        }
     }
 
     private fun validationButton() {
@@ -188,9 +153,7 @@ class UpdateProfileFragment : Fragment(R.layout.update_profile_fragment), View.O
 
     private fun validatorForm(
         emailIsValid: Boolean,
-        phoneIsValid: Boolean,
-        passwordIsValid: Boolean,
-        passwordIsCorrect: Boolean
+        phoneIsValid: Boolean
     ) {
         binding.apply {
             if (emailIsValid.not() && !etEmail.text.isNullOrEmpty()) {
@@ -205,18 +168,50 @@ class UpdateProfileFragment : Fragment(R.layout.update_profile_fragment), View.O
             } else {
                 tlPhone.error = null
             }
-            if (passwordIsValid.not() && !binding.etPassword.text.isNullOrEmpty()) {
-                errorMessage = "password kurang dari 6 karakter"
-                tlPassword.error = errorMessage
-            } else {
-                tlPassword.error = null
-            }
-            if (passwordIsCorrect.not() && !binding.etConfirmPassword.text.isNullOrEmpty()) {
-                errorMessage = "password tidak sama"
-                tlConfirmPassword.error = errorMessage
-            } else {
-                tlConfirmPassword.error = null
-            }
+//            if (passwordIsValid.not() && !binding.etPassword.text.isNullOrEmpty()) {
+//                errorMessage = "password kurang dari 6 karakter"
+//                tlPassword.error = errorMessage
+//            } else {
+//                tlPassword.error = null
+//            }
+//            if (passwordIsCorrect.not() && !binding.etConfirmPassword.text.isNullOrEmpty()) {
+//                errorMessage = "password tidak sama"
+//                tlConfirmPassword.error = errorMessage
+//            } else {
+//                tlConfirmPassword.error = null
+//            }
+        }
+    }
+
+    private fun bodyProfile() = with(binding) {
+        body = UpdateProfileBody(
+            name = etFullName.text.toString(),
+            email = etEmail.text.toString(),
+            birthdate = etBirthDate.text.toString(),
+            noHp = etPhone.text.toString(),
+            role = "supir"
+        )
+    }
+
+    override fun onUpdateProfileLoading() {
+        super.onUpdateProfileLoading()
+        disableBtn(binding.btnUpdate)
+    }
+
+    override fun onUpdateProfileSuccess(data: ProfileData?) {
+        super.onUpdateProfileSuccess(data)
+        enableBtn(binding.btnUpdate)
+        val profileData = Gson().toJson(data)
+        pref.accountData = profileData
+
+        shortToast(requireContext(), getString(R.string.label_success_update))
+    }
+
+    override fun onUpdateProfileFailed(error: String?) {
+        super.onUpdateProfileFailed(error)
+        enableBtn(binding.btnUpdate)
+        if (error != null) {
+            shortToast(requireContext(), error)
         }
     }
 }

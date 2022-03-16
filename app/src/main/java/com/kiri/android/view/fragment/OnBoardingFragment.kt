@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
-import coil.load
+import com.bumptech.glide.Glide
 import com.kiri.android.R
 import com.kiri.android.databinding.FragmentOnBoardingBinding
 
@@ -33,7 +33,9 @@ class OnBoardingFragment : Fragment(R.layout.fragment_on_boarding) {
 
     private fun setupWalkthrough(drawableId: Int) {
         binding.apply {
-            imageOnboarding.load(drawableId)
+            Glide.with(requireContext())
+                .load(drawableId)
+                .into(imageOnboarding)
         }
     }
 

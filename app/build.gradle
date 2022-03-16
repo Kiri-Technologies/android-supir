@@ -58,8 +58,8 @@ dependencies {
     implementation layoutDependencies.constraint
     implementation layoutDependencies.legacy
     implementation networkDependencies.gson
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    implementation supportDependencies.lifecycleLiveData
+    implementation supportDependencies.lifecycleViewModel
 
     testImplementation testDependencies.junit
     androidTestImplementation testDependencies.androidxJunit
@@ -73,7 +73,8 @@ dependencies {
     implementation viewbinding.kirichNonReflection
 
     //image
-    implementation 'io.coil-kt:coil:1.3.2'
+    implementation networkDependencies.glide
+    implementation networkDependencies.glideCompiler
 
     //Log
     implementation networkDependencies.timber
@@ -93,4 +94,7 @@ dependencies {
 
     //NewSplash
     implementation splashScreen.splash
+
+    //OKHTTP
+    implementation networkDependencies.okHttp
 }

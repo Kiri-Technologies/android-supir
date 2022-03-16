@@ -1,36 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/background_fragment"
-    android:paddingBottom="24dp"
-    tools:context="com.kiri.android.view.fragment.UpdateProfileFragment">
+    android:paddingBottom="24dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/ivAccount"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/profile"
-            tools:ignore="ContentDescription" />
-
-        <ImageView
-            android:id="@+id/iconAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add"
-            app:layout_constraintBottom_toBottomOf="@+id/ivAccount"
-            app:layout_constraintEnd_toEndOf="@+id/ivAccount"
-            tools:ignore="ContentDescription" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -40,7 +19,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivAccount">
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tlName"
@@ -69,8 +48,11 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etBirthDate"
                     style="@style/editText"
+                    android:clickable="true"
+                    android:focusable="false"
                     android:hint="@string/hint_birthdate"
-                    android:inputType="date" />
+                    android:inputType="date"
+                    tools:ignore="KeyboardInaccessibleWidget"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -111,6 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
+                android:visibility="gone"
                 android:layout_marginTop="24dp"
                 app:errorIconDrawable="@null"
                 app:passwordToggleEnabled="true"
@@ -129,6 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
+                android:visibility="gone"
                 android:layout_marginTop="24dp"
                 app:errorIconDrawable="@null"
                 app:passwordToggleEnabled="true"

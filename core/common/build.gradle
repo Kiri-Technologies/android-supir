@@ -16,7 +16,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "\"https://kiri.mfaiztriputra.id/api/\"")
+            buildConfigField("String", "BASE_URL", "\"https://kiri.mfaiztriputra.id/\"")
             minifyEnabled false
             debuggable true
         }

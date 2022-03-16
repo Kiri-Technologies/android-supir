@@ -57,4 +57,18 @@
         <item name="android:theme">@style/Widget.MaterialComponents.Button</item>
         <item name="android:background">@drawable/background_button</item>
     </style>
+
+    <style name="Password.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textAppearanceButton">@style/TextAppearance.ProgressButton.password</item>
+        <item name="android:colorControlHighlight">@color/color_primary</item>
+    </style>
+
+    <style name="TextAppearance.ProgressButton.password" parent="@style/TextAppearance.Body.White">
+        <item name="android:textColor">@color/color_primary</item>
+    </style>
+
+    <style name="ButtonViewPassword" parent="">
+        <item name="android:theme">@style/Password.Button</item>
+        <item name="android:background">@drawable/button_update_password</item>
+    </style>
 </resources>

@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_detailAccountFragment_to_updateProfileFragment"
             app:destination="@id/updateProfileFragment" />
+        <action
+            android:id="@+id/action_detailAccountFragment_to_updatePasswordFragment"
+            app:destination="@id/updatePasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/updateProfileFragment"
         android:name="com.kiri.android.view.fragment.UpdateProfileFragment"
         android:label="Update Akun"
         tools:layout="@layout/update_profile_fragment" />
+    <fragment
+        android:id="@+id/updatePasswordFragment"
+        android:name="com.kiri.android.view.fragment.UpdatePasswordFragment"
+        android:label="Update Password"
+        tools:layout="@layout/update_password_fragment"/>
 </navigation>

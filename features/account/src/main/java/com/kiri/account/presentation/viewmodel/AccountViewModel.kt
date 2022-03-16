@@ -5,10 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kiri.account.data.models.ProfileData
+import com.kiri.account.data.models.UpdateProfileBody
 import com.kiri.account.domain.usecase.AccountUseCase
 import com.kiri.common.utils.Resource
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 
 class AccountViewModel(private val useCase: AccountUseCase) : ViewModel() {
 
@@ -29,6 +31,36 @@ class AccountViewModel(private val useCase: AccountUseCase) : ViewModel() {
         _profile.value = Resource.loading()
         useCase.getProfile().collect {
             _profile.value = it
+        }
+    }
+
+    private var _update: MutableLiveData<Resource<ProfileData>> = MutableLiveData()
+    val update: LiveData<Resource<ProfileData>> = _update
+
+    fun doUpdate(body: UpdateProfileBody) = viewModelScope.launch {
+        _update.value = Resource.loading()
+        useCase.doUpdate(body).collect {
+            _update.value = it
+        }
+    }
+
+    private var _uploadPhoto: MutableLiveData<Resource<ProfileData>> = MutableLiveData()
+    val uploadPhoto: LiveData<Resource<ProfileData>> = _uploadPhoto
+
+    fun doUploadPhoto(image: MultipartBody.Part) = viewModelScope.launch {
+        _uploadPhoto.value = Resource.loading()
+        useCase.doUploadPhoto(image).collect {
+            _uploadPhoto.value = it
+        }
+    }
+
+    private var _updatePassword: MutableLiveData<Resource<ProfileData>> = MutableLiveData()
+    val updatePassword: LiveData<Resource<ProfileData>> = _updatePassword
+
+    fun doUpdatePassword(password: String) = viewModelScope.launch {
+        _updatePassword.value = Resource.loading()
+        useCase.doUpdatePassword(password).collect {
+            _updatePassword.value = it
         }
     }
 }

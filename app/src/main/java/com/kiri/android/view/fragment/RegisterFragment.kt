@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.kiri.auth.R
 import com.kiri.auth.data.models.RegisterBody
 import com.kiri.auth.data.models.RegisterData
@@ -23,6 +24,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RegisterFragment : Fragment(R.layout.register_fragment), View.OnClickListener, AuthResource {
 
@@ -68,9 +71,9 @@ class RegisterFragment : Fragment(R.layout.register_fragment), View.OnClickListe
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.tvGoToLogin.setOnClickListener(this)
         binding.btnRegister.setOnClickListener(this)
+        binding.etBirthDate.setOnClickListener(this)
         formEditText()
         validationButton()
     }
@@ -149,6 +152,16 @@ class RegisterFragment : Fragment(R.layout.register_fragment), View.OnClickListe
             R.id.btnRegister -> {
                 submit()
             }
+            R.id.etBirthDate -> {
+                val builder = MaterialDatePicker.Builder.datePicker()
+                val picker = builder.setSelection(System.currentTimeMillis()).build()
+                picker.show(childFragmentManager, picker.toString())
+                picker.addOnPositiveButtonClickListener {
+                    val sdf = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
+                    val date = sdf.format(it)
+                    binding.etBirthDate.setText(date)
+                }
+            }
         }
     }
 
@@ -178,7 +191,7 @@ class RegisterFragment : Fragment(R.layout.register_fragment), View.OnClickListe
 
     override fun onRegisterSuccess(data: RegisterData?) {
         super.onRegisterSuccess(data)
-        disableBtn(binding.btnRegister)
+        enableBtn(binding.btnRegister)
         shortToast(requireContext(), "Register Sukses, Silahkan login")
     }
 

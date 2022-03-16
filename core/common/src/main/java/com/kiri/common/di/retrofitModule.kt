@@ -48,7 +48,7 @@ val RetrofitModule = module {
 
 private fun Scope.retrofitBuilder(): Retrofit {
     return Retrofit.Builder()
-        .baseUrl(BuildConfig.BASE_URL)
+        .baseUrl("${BuildConfig.BASE_URL}api/")
         .addConverterFactory(GsonConverterFactory.create(get()))
         .client(get())
         .build()

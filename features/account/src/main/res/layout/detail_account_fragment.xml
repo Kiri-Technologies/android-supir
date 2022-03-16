@@ -1,183 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_fragment"
-    tools:context="com.kiri.android.view.fragment.DetailAccountFragment">
+    android:paddingBottom="24dp"
+    android:scrollbars="none">
 
-    <ImageView
-        android:id="@+id/ivAccount"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/profile"
-        tools:ignore="ContentDescription" />
-
-    <TextView
-        android:id="@+id/tvName"
-        style="@style/textViewTitle"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="48dp"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivAccount"
-        tools:text="Asep Suparman" />
+        android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginHorizontal="62dp"
-        android:layout_marginTop="24dp"
-        app:cardCornerRadius="14dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvName">
+        <ImageView
+            android:id="@+id/ivAccount"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/iconAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            app:layout_constraintBottom_toBottomOf="@+id/ivAccount"
+            app:layout_constraintEnd_toEndOf="@+id/ivAccount"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/textViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="48dp"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivAccount"
+            tools:text="Asep Suparman" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_marginHorizontal="62dp"
+            android:layout_marginTop="24dp"
+            app:cardCornerRadius="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvName">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="8dp">
+
+                <TextView
+                    style="@style/textViewBody2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:gravity="center"
+                    android:text="@string/label_driver_id" />
+
+                <TextView
+                    android:id="@+id/tvId"
+                    style="@style/textViewBody1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="12dp"
+                    android:gravity="center"
+                    tools:text="1234090010" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tvDetailKontak"
+            style="@style/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/label_detail_kontak"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardView" />
 
         <LinearLayout
+            android:id="@+id/llData"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
             android:orientation="vertical"
-            android:paddingTop="8dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDetailKontak">
 
-            <TextView
-                style="@style/textViewBody2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
-                android:gravity="center"
-                android:text="@string/label_driver_id" />
-
-            <TextView
-                android:id="@+id/tvId"
-                style="@style/textViewBody1"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="12dp"
-                android:gravity="center"
-                tools:text="1234090010" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tvDetailKontak"
-        style="@style/textViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/label_detail_kontak"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardView" />
+                <TextView
+                    style="@style/textViewBody2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/label_tanggal_lahir" />
 
-    <LinearLayout
-        android:id="@+id/llData"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="24dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvDetailKontak">
+                <TextView
+                    android:id="@+id/tvBirthdate"
+                    style="@style/textViewBody1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    tools:text="21 Desember 1970" />
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/custom_line" />
 
-            <TextView
-                style="@style/textViewBody2"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/label_tanggal_lahir" />
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvBirthdate"
-                style="@style/textViewBody1"
+                <TextView
+                    style="@style/textViewBody2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/hint_email" />
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    style="@style/textViewBody1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    tools:text="asep1123@mail.com" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/custom_line" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                tools:text="21 Desember 1970" />
-        </LinearLayout>
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/custom_line" />
+                <TextView
+                    style="@style/textViewBody2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/hint_no_hp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/textViewBody2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/hint_email" />
-
-            <TextView
-                android:id="@+id/tvEmail"
-                style="@style/textViewBody1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                tools:text="asep1123@mail.com" />
+                <TextView
+                    android:id="@+id/tvPhone"
+                    style="@style/textViewBody1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    tools:text="082387922222" />
+            </LinearLayout>
         </LinearLayout>
 
-        <View
+        <com.kiri.ui.ButtonView
+            android:id="@+id/btnUpdate"
+            style="@style/ButtonView"
             android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/custom_line" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="48dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llData"
+            app:text="Perbarui" />
 
-        <LinearLayout
+        <com.kiri.ui.ButtonView
+            android:id="@+id/btnUpdatePassword"
+            style="@style/ButtonViewPassword"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="48dp"
             android:layout_marginTop="12dp"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/textViewBody2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/hint_no_hp" />
-
-            <TextView
-                android:id="@+id/tvPhone"
-                style="@style/textViewBody1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                tools:text="082387922222" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <com.kiri.ui.ButtonView
-        android:id="@+id/btnUpdate"
-        style="@style/ButtonView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="48dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llData"
-        app:text="Perbarui" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+            app:text="@string/label_perbarui_password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnUpdate" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

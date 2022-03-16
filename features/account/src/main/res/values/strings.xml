@@ -7,4 +7,7 @@
     <string name="label_detail_kontak">Detail Kontak</string>
     <string name="label_tanggal_lahir">Tanggal Lahir</string>
     <string name="title_navigation_detail">Detail Akun</string>
+    <string name="label_success_update">Berhasil Update Data</string>
+    <string name="label_perbarui_password">Perbarui Password</string>
+    <string name="label_success_update_password">Sukses Ganti Password, Silakan Login</string>
 </resources>
