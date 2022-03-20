@@ -119,10 +119,7 @@ class DetailAccountFragment :
     }
 
     private fun picture(uri: Uri?) {
-        if (uri == null) {
-            binding.ivAccount.setImageResource(com.kiri.account.R.drawable.profile)
-            binding.iconAdd.visibility = View.VISIBLE
-        } else {
+        if (uri != null) {
             Glide.with(requireContext())
                 .load(uri)
                 .circleCrop()
