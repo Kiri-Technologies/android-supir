@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Kami butuh tanggapanmu"
+                    android:text="@string/title_feedback"
                     android:textAppearance="@style/textViewTitle"
                     android:textSize="18sp" />
 
@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="8dp"
-                    android:text="Berikan tanggapan mu mengenai aplikasi Kiri agar menjadi lebih baik lagi "
+                    android:text="@string/label_feedback_app"
                     android:gravity="center"
                     android:textAppearance="@style/textViewBody2"
                     android:textSize="14sp" />
@@ -75,7 +75,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="top|start"
-                        android:hint="masukkan tanggapan kamu disini..."
+                        android:hint="@string/hint_comment"
                         android:inputType="textMultiLine"
                         android:lines="6"
                         android:overScrollMode="always"

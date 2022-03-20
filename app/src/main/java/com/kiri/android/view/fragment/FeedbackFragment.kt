@@ -42,6 +42,7 @@ class FeedbackFragment :
         parametersOf(lifecycle, this)
     }
     private val pref by inject<PrefUseCase>()
+    private lateinit var profileData: ProfileData
     private var review = MutableStateFlow("")
     private var comment = MutableStateFlow("")
     private val isValid = combine(
@@ -70,7 +71,9 @@ class FeedbackFragment :
         initAction()
     }
 
-    private fun initData() {}
+    private fun initData() {
+        profileData = Gson().fromJson(pref.accountData, ProfileData::class.java)
+    }
 
     private fun initUI() {
         val rating = listOf(
@@ -128,7 +131,6 @@ class FeedbackFragment :
     }
 
     private fun submit() {
-        val profileData = Gson().fromJson(pref.accountData, ProfileData::class.java)
         profileData.id?.let {
             viewModel.feedbackApp(
                 it,
@@ -151,6 +153,10 @@ class FeedbackFragment :
         binding.etComment.setText("")
         binding.rbFeedback.resetSmiley()
         binding.btnSubmit.gone()
+
+        binding.layoutSuccess.apply {
+            tvName.text = profileData.name
+        }
     }
 
     override fun onFeedbackAppFailed(error: String?) {
