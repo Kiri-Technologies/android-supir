@@ -65,8 +65,8 @@ dependencies {
     androidTestImplementation testDependencies.androidxJunit
     androidTestImplementation testDependencies.androidxEspresso
 
-    def multidex_version = "2.0.1"
-    implementation "androidx.multidex:multidex:$multidex_version"
+//    def multidex_version = "2.0.1"
+//    implementation "androidx.multidex:multidex:$multidex_version"
 
     // viewbBindingDelegate
     implementation viewbinding.kirichViewBinding
@@ -97,4 +97,7 @@ dependencies {
 
     //OKHTTP
     implementation networkDependencies.okHttp
+
+    //RatingBar
+    implementation libraries.smileyRatingBar
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kiri.account.data.models.FeedbackAppData
 import com.kiri.account.data.models.ProfileData
 import com.kiri.account.data.models.UpdateProfileBody
 import com.kiri.account.domain.usecase.AccountUseCase
@@ -61,6 +62,20 @@ class AccountViewModel(private val useCase: AccountUseCase) : ViewModel() {
         _updatePassword.value = Resource.loading()
         useCase.doUpdatePassword(password).collect {
             _updatePassword.value = it
+        }
+    }
+
+    private var _feedbackApp: MutableLiveData<Resource<FeedbackAppData>> = MutableLiveData()
+    val feedbackApp: LiveData<Resource<FeedbackAppData>> = _feedbackApp
+
+    fun feedbackApp(
+        userId: String,
+        review: String,
+        comment: String
+    ) = viewModelScope.launch {
+        _feedbackApp.value = Resource.loading()
+        useCase.feedbackApp(userId, review, comment).collect {
+            _feedbackApp.value = it
         }
     }
 }

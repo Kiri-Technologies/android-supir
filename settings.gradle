@@ -3,6 +3,11 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
+        //noinspection JcenterRepositoryObsolete
+        jcenter() {
+            content { includeModule("com.github.sujithkanna", "smileyrating") }
+        }
     }
 }
 rootProject.name = "Kiri"

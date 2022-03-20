@@ -30,6 +30,7 @@
         <entry key="..\:/Kiri/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Kiri/app/src/main/res/layout/activity_onboarding.xml" value="0.264" />
         <entry key="..\:/Kiri/app/src/main/res/layout/activity_splash.xml" value="0.2" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/feedback_fragment.xml" value="0.264" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_dashboard.xml" value="0.38125" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_home.xml" value="0.38125" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_on_boarding.xml" value="0.264" />
@@ -49,6 +50,7 @@
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/button_shape.xml" value="0.1515" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/custom_line.xml" value="0.218" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_add.xml" value="0.1925" />
+        <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_check_circle.xml" value="0.1505" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_date.xml" value="0.173" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_email.xml" value="0.173" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_orang.xml" value="0.212" />
@@ -64,6 +66,8 @@
         <entry key="..\:/Kiri/core/ui/src/main/res/layout/toolbat_layout.xml" value="0.4" />
         <entry key="..\:/Kiri/features/account/src/main/res/layout/account_fragment.xml" value="0.4" />
         <entry key="..\:/Kiri/features/account/src/main/res/layout/detail_account_fragment.xml" value="0.4" />
+        <entry key="..\:/Kiri/features/account/src/main/res/layout/feedback_fragment.xml" value="0.4" />
+        <entry key="..\:/Kiri/features/account/src/main/res/layout/success_feedback_layout.xml" value="0.264" />
         <entry key="..\:/Kiri/features/account/src/main/res/layout/update_password_fragment.xml" value="0.1" />
         <entry key="..\:/Kiri/features/account/src/main/res/layout/update_profile_fragment.xml" value="0.4" />
         <entry key="..\:/Kiri/features/auth/src/main/res/drawable/ic_people_navigation.xml" value="0.1515" />

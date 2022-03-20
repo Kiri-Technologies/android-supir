@@ -1,5 +1,6 @@
 package com.kiri.account.presentation.viewmodel
 
+import com.kiri.account.data.models.FeedbackAppData
 import com.kiri.account.data.models.ProfileData
 
 interface AccountResource {
@@ -28,4 +29,9 @@ interface AccountResource {
     fun onUpdatePasswordLoading() {}
     fun onUpdatePasswordSuccess(data: ProfileData?) {}
     fun onUpdatePasswordFailed(error: String?) {}
+
+    // FEEDBACK_APP
+    fun onFeedbackAppLoading() {}
+    fun onFeedbackAppSuccess(data: FeedbackAppData?) {}
+    fun onFeedbackAppFailed(error: String?) {}
 }

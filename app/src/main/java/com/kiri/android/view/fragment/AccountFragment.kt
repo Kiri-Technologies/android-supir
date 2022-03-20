@@ -31,8 +31,13 @@ class AccountFragment : Fragment(R.layout.account_fragment), View.OnClickListene
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnLogout.setOnClickListener(this)
-        binding.cvAccount.setOnClickListener(this)
+
+        // ONCLICK
+        binding.apply {
+            btnLogout.setOnClickListener(this@AccountFragment)
+            cvAccount.setOnClickListener(this@AccountFragment)
+            cvFeedback.setOnClickListener(this@AccountFragment)
+        }
     }
 
     override fun onClick(v: View?) {
@@ -42,6 +47,9 @@ class AccountFragment : Fragment(R.layout.account_fragment), View.OnClickListene
             }
             R.id.cvAccount -> {
                 findNavController().navigate(R.id.action_account_fragment_to_accountActivity)
+            }
+            R.id.cvFeedback -> {
+                findNavController().navigate(R.id.action_account_fragment_to_feedbackFragment)
             }
         }
     }

@@ -81,5 +81,19 @@ class AccountObserver(
                 }
             }
         }
+
+        viewModel.feedbackApp.observe(owner) {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    resource.onFeedbackAppLoading()
+                }
+                Resource.Status.SUCCESS -> {
+                    resource.onFeedbackAppSuccess(it.data)
+                }
+                Resource.Status.ERROR -> {
+                    resource.onFeedbackAppFailed(it.error)
+                }
+            }
+        }
     }
 }

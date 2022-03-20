@@ -1,6 +1,7 @@
 package com.kiri.account.data
 
 import com.kiri.account.data.endpoint.RemoteDataSource
+import com.kiri.account.data.models.FeedbackAppData
 import com.kiri.account.data.models.ProfileData
 import com.kiri.account.data.models.UpdateProfileBody
 import com.kiri.common.utils.BaseApiResponse
@@ -8,9 +9,6 @@ import com.kiri.common.utils.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import java.io.InputStream
 
 class AccountRepositoryImpl(private val remoteDataSource: RemoteDataSource) :
     AccountRepository,
@@ -42,6 +40,16 @@ class AccountRepositoryImpl(private val remoteDataSource: RemoteDataSource) :
     override fun doUpdatePassword(password: String): Flow<Resource<ProfileData>> {
         return flow {
             emit(safeApiCall { remoteDataSource.doUpdatePassword(password) })
+        }
+    }
+
+    override fun feedbackApp(
+        userId: String,
+        review: String,
+        comment: String
+    ): Flow<Resource<FeedbackAppData>> {
+        return flow {
+            emit(safeApiCall { remoteDataSource.feedbackApp(userId, review, comment) })
         }
     }
 }

@@ -152,6 +152,9 @@ class DetailAccountFragment :
 
     override fun onUploadPhotoSuccess(data: ProfileData?) {
         super.onUploadPhotoSuccess(data)
+        val profile = Gson().toJson(data)
+        pref.accountData = profile
+
         shortToast(requireContext(), "Sukses Upload Photo")
     }
 

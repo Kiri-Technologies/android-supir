@@ -1,5 +1,6 @@
 package com.kiri.account.data.endpoint
 
+import com.kiri.account.data.models.FeedbackAppData
 import com.kiri.account.data.models.ProfileData
 import com.kiri.account.data.models.UpdateProfileBody
 import com.kiri.common.utils.ApiResponse
@@ -25,5 +26,13 @@ class RemoteDataSource(private val accountEndpoint: AccountEndpoint) : AccountEn
 
     override suspend fun doUpdatePassword(password: String): Response<ApiResponse<ProfileData>> {
         return accountEndpoint.doUpdatePassword(password)
+    }
+
+    override suspend fun feedbackApp(
+        userId: String,
+        review: String,
+        comment: String
+    ): Response<ApiResponse<FeedbackAppData>> {
+        return accountEndpoint.feedbackApp(userId, review, comment)
     }
 }
