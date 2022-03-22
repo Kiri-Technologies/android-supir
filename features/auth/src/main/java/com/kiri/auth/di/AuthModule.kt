@@ -1,12 +1,12 @@
 package com.kiri.auth.di
 
 import androidx.lifecycle.Lifecycle
-import com.kiri.auth.data.RepositoryImpl
 import com.kiri.auth.data.Repository
+import com.kiri.auth.data.RepositoryImpl
 import com.kiri.auth.data.endpoint.AuthEndpoint
 import com.kiri.auth.data.endpoint.RemoteDataSource
-import com.kiri.auth.domain.usecase.UseCaseImpl
 import com.kiri.auth.domain.usecase.UseCase
+import com.kiri.auth.domain.usecase.UseCaseImpl
 import com.kiri.auth.presentation.viewmodel.AuthObserver
 import com.kiri.auth.presentation.viewmodel.AuthResource
 import com.kiri.auth.presentation.viewmodel.AuthViewModel

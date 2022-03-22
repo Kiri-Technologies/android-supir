@@ -32,9 +32,13 @@
         <entry key="..\:/Kiri/app/src/main/res/layout/activity_splash.xml" value="0.2" />
         <entry key="..\:/Kiri/app/src/main/res/layout/feedback_fragment.xml" value="0.264" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_dashboard.xml" value="0.38125" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/fragment_history.xml" value="0.6" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_home.xml" value="0.38125" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/fragment_notifications.xml" value="0.38125" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_on_boarding.xml" value="0.264" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_register.xml" value="0.4" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/history_trip_layout.xml" value="0.8800000000000001" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/load_layout.xml" value="0.38125" />
         <entry key="..\:/Kiri/app/src/main/res/layout/sample_form.xml" value="0.24010416666666667" />
         <entry key="..\:/Kiri/app/src/main/res/menu/auth_nav.xml" value="0.38125" />
         <entry key="..\:/Kiri/app/src/main/res/menu/bottom_nav_menu.xml" value="0.38125" />
@@ -48,6 +52,8 @@
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/button_rounded_shape.xml" value="0.212" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/button_selector.xml" value="0.173" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/button_shape.xml" value="0.1515" />
+        <entry key="..\:/Kiri/core/ui/src/main/res/drawable/custom_dash_line.xml" value="0.188" />
+        <entry key="..\:/Kiri/core/ui/src/main/res/drawable/custom_dash_vertical.xml" value="0.188" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/custom_line.xml" value="0.218" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_add.xml" value="0.1925" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_check_circle.xml" value="0.1505" />
@@ -65,7 +71,7 @@
         <entry key="..\:/Kiri/core/ui/src/main/res/layout/button_kiri.xml" value="0.38125" />
         <entry key="..\:/Kiri/core/ui/src/main/res/layout/toolbat_layout.xml" value="0.4" />
         <entry key="..\:/Kiri/features/account/src/main/res/layout/account_fragment.xml" value="0.4" />
-        <entry key="..\:/Kiri/features/account/src/main/res/layout/detail_account_fragment.xml" value="0.4" />
+        <entry key="..\:/Kiri/features/account/src/main/res/layout/detail_account_fragment.xml" value="0.72" />
         <entry key="..\:/Kiri/features/account/src/main/res/layout/feedback_fragment.xml" value="0.4" />
         <entry key="..\:/Kiri/features/account/src/main/res/layout/success_feedback_layout.xml" value="0.6" />
         <entry key="..\:/Kiri/features/account/src/main/res/layout/update_password_fragment.xml" value="0.1" />

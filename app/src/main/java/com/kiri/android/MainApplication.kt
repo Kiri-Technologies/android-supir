@@ -5,6 +5,7 @@ import com.kiri.account.di.accountModule
 import com.kiri.auth.di.authApi
 import com.kiri.common.di.RetrofitModule
 import com.kiri.common.di.prefModule
+import com.kiri.trip.di.tripModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
@@ -28,7 +29,8 @@ class MainApplication : Application() {
                     RetrofitModule,
                     prefModule,
                     accountModule,
-                    authApi
+                    authApi,
+                    tripModule
                 )
             )
         }

@@ -51,6 +51,7 @@ dependencies {
     implementation project(path: ':core:ui')
     implementation project(path: ':features:auth')
     implementation project(path: ':features:account')
+    implementation project(path: ':features:trip')
 
     implementation supportDependencies.coreKtx
     implementation supportDependencies.appcompat
@@ -100,4 +101,7 @@ dependencies {
 
     //RatingBar
     implementation libraries.smileyRatingBar
+
+    // RV
+    implementation libraries.chadRv
 }

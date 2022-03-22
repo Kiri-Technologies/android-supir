@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/account" />
             <option value="$PROJECT_DIR$/features/auth" />
+            <option value="$PROJECT_DIR$/features/trip" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
