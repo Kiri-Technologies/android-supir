@@ -13,6 +13,7 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_history">Riwayat Perjalanan</string>
+    <string name="title_history">Riwayat</string>
+    <string name="title_history_bottom_nav">Riwayat Perjalanan</string>
     <string name="title_account">Akun</string>
 </resources>

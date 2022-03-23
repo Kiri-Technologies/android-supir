@@ -17,8 +17,8 @@ data class ProfileData(
     @field:SerializedName("role")
     val role: String? = null,
 
-    @field:SerializedName("no_hp")
-    val noHp: String? = null,
+    @field:SerializedName("phone_number")
+    val phone: String? = null,
 
     @field:SerializedName("updated_at")
     val updatedAt: String? = null,

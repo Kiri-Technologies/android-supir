@@ -25,11 +25,11 @@
         <activity
             android:name=".view.activity.HomeActivity"
             android:exported="false"
-            android:label="@string/title_activity_home" />
+            android:label="@string/title_activity_home"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".view.activity.AuthActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustResize" />
+            android:exported="true" />
         <activity
             android:name=".view.activity.SplashActivity"
             android:exported="true"

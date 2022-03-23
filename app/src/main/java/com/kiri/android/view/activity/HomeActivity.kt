@@ -53,6 +53,9 @@ class HomeActivity : AppCompatActivity(), AccountResource {
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         connectionCheck()
+
+        // if reselected do nothing
+        binding.navView.setOnItemReselectedListener {}
     }
 
     override fun onBackPressed() {

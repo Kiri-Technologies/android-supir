@@ -18,7 +18,7 @@ class AuthObserver(
                     resource.onLoginLoading()
                 }
                 Resource.Status.SUCCESS -> {
-                    resource.onLoginSuccess(it.data)
+                    resource.onLoginSuccess(it.data?.dataData)
                 }
                 Resource.Status.ERROR -> {
                     resource.onLoginFailed(it.error)
@@ -32,7 +32,7 @@ class AuthObserver(
                     resource.onRegisterLoading()
                 }
                 Resource.Status.SUCCESS -> {
-                    resource.onRegisterSuccess(it.data)
+                    resource.onRegisterSuccess(it.data?.dataData)
                 }
                 Resource.Status.ERROR -> {
                     resource.onRegisterFailed(it.error)

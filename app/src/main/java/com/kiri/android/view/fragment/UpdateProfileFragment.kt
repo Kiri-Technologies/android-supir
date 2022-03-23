@@ -45,8 +45,6 @@ class UpdateProfileFragment :
     private val birthDate = MutableStateFlow("")
     private val email = MutableStateFlow("")
     private val phone = MutableStateFlow("")
-    private val password = MutableStateFlow("")
-    private val confirmPass = MutableStateFlow("")
 
     private val formIsValid = combine(
         name,
@@ -61,8 +59,6 @@ class UpdateProfileFragment :
                 .matches()
         val phoneIsValid =
             Patterns.PHONE.matcher(args[3]).matches()
-//        val passwordIsValid = args[4].length >= 6
-//        val passwordIsCorrect = args[4] == args[5]
         validatorForm(
             emailIsValid,
             phoneIsValid
@@ -115,7 +111,7 @@ class UpdateProfileFragment :
             etFullName.setText(data.name)
             etBirthDate.setText(data.birthdate)
             etEmail.setText(data.email)
-            etPhone.setText(data.noHp)
+            etPhone.setText(data.phone)
         }
     }
 
@@ -132,12 +128,6 @@ class UpdateProfileFragment :
         etPhone.doOnTextChanged { text, _, _, _ ->
             phone.value = text.toString()
         }
-//        etPassword.doOnTextChanged { text, _, _, _ ->
-//            password.value = text.toString()
-//        }
-//        etConfirmPassword.doOnTextChanged { text, _, _, _ ->
-//            confirmPass.value = text.toString()
-//        }
     }
 
     private fun validationButton() {
@@ -168,18 +158,6 @@ class UpdateProfileFragment :
             } else {
                 tlPhone.error = null
             }
-//            if (passwordIsValid.not() && !binding.etPassword.text.isNullOrEmpty()) {
-//                errorMessage = "password kurang dari 6 karakter"
-//                tlPassword.error = errorMessage
-//            } else {
-//                tlPassword.error = null
-//            }
-//            if (passwordIsCorrect.not() && !binding.etConfirmPassword.text.isNullOrEmpty()) {
-//                errorMessage = "password tidak sama"
-//                tlConfirmPassword.error = errorMessage
-//            } else {
-//                tlConfirmPassword.error = null
-//            }
         }
     }
 

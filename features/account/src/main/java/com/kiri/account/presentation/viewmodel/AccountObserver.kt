@@ -32,7 +32,7 @@ class AccountObserver(
                     resource.onProfileLoading()
                 }
                 Resource.Status.SUCCESS -> {
-                    resource.onProfileSuccess(it.data)
+                    resource.onProfileSuccess(it.data?.dataData)
                 }
                 Resource.Status.ERROR -> {
                     resource.onProfileFailed(it.error)
@@ -46,7 +46,7 @@ class AccountObserver(
                     resource.onUpdateProfileLoading()
                 }
                 Resource.Status.SUCCESS -> {
-                    resource.onUpdateProfileSuccess(it.data)
+                    resource.onUpdateProfileSuccess(it.data?.dataData)
                 }
                 Resource.Status.ERROR -> {
                     resource.onUpdateProfileFailed(it.error)
@@ -60,7 +60,7 @@ class AccountObserver(
                     resource.onUploadPhotoLoading()
                 }
                 Resource.Status.SUCCESS -> {
-                    resource.onUploadPhotoSuccess(it.data)
+                    resource.onUploadPhotoSuccess(it.data?.dataData)
                 }
                 Resource.Status.ERROR -> {
                     resource.onUploadPhotoFailed(it.error)
@@ -74,7 +74,7 @@ class AccountObserver(
                     resource.onUpdatePasswordLoading()
                 }
                 Resource.Status.SUCCESS -> {
-                    resource.onUpdatePasswordSuccess(it.data)
+                    resource.onUpdatePasswordSuccess(it.data?.dataData)
                 }
                 Resource.Status.ERROR -> {
                     resource.onUpdatePasswordFailed(it.error)
@@ -88,7 +88,7 @@ class AccountObserver(
                     resource.onFeedbackAppLoading()
                 }
                 Resource.Status.SUCCESS -> {
-                    resource.onFeedbackAppSuccess(it.data)
+                    resource.onFeedbackAppSuccess(it.data?.dataData)
                 }
                 Resource.Status.ERROR -> {
                     resource.onFeedbackAppFailed(it.error)

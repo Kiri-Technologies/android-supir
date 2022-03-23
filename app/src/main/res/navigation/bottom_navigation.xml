@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/navigation_history"
         android:name="com.kiri.android.view.fragment.HistoryFragment"
-        android:label="@string/title_history"
+        android:label="@string/title_history_bottom_nav"
         tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/account_fragment"

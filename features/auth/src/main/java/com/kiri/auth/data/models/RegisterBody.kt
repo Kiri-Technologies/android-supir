@@ -13,7 +13,7 @@ data class RegisterBody(
     @field:SerializedName("role")
     val role: String? = null,
 
-    @field:SerializedName("no_hp")
+    @field:SerializedName("phone_number")
     val phone: String? = null,
 
     @field:SerializedName("name")

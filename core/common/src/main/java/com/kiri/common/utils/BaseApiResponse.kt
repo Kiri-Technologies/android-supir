@@ -8,7 +8,7 @@ abstract class BaseApiResponse {
         try {
             val response = apiCall()
             if (response.isSuccessful) {
-                val body = response.body()?.dataData
+                val body = response.body()
                 body?.let {
                     return Resource.success(body)
                 }
@@ -18,9 +18,6 @@ abstract class BaseApiResponse {
             return error("${response.code()} ${jsonObj.getJSONObject("message")}")
         } catch (e: Exception) {
             return when {
-                e.message?.contains("hostname") == true -> {
-                    error("Terjadi Kesalahan")
-                }
                 e.message?.contains("Unauthorized") == true -> {
                     error("Unauthorized")
                 }

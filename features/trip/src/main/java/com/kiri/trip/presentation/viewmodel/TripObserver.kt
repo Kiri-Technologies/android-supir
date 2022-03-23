@@ -15,7 +15,7 @@ class TripObserver(
         vm.history.observe(owner) {
             when (it.status) {
                 Resource.Status.LOADING -> resource.onTripHistoryLoading()
-                Resource.Status.SUCCESS -> resource.onTripHistorySuccess()
+                Resource.Status.SUCCESS -> resource.onTripHistorySuccess(it.data)
                 Resource.Status.ERROR -> resource.onTripHistoryFailed(it.error)
             }
         }

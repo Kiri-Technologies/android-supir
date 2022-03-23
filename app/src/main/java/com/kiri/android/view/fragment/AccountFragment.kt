@@ -64,7 +64,7 @@ class AccountFragment : Fragment(R.layout.account_fragment), View.OnClickListene
         val data = Gson().fromJson(getPref, ProfileData::class.java)
         binding.apply {
             tvName.text = data?.name
-            tvPhone.text = data?.noHp
+            tvPhone.text = data?.phone
             tvId.text = data?.id
             Glide.with(requireContext())
                 .load("${BuildConfig.BASE_URL}${data.image}")

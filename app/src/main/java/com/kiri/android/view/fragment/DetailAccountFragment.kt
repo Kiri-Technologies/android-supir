@@ -74,7 +74,7 @@ class DetailAccountFragment :
             tvName.text = data.name
             tvBirthdate.text = data.birthdate
             tvEmail.text = data.email
-            tvPhone.text = data.noHp
+            tvPhone.text = data.phone
             Glide.with(requireContext())
                 .load("${BuildConfig.BASE_URL}${data.image}")
                 .placeholder(R.drawable.profile)

@@ -8,6 +8,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
         android:layout_marginHorizontal="32dp"
         android:layout_marginBottom="12dp"
         app:cardCornerRadius="12dp">
@@ -39,12 +40,20 @@
                 tools:ignore="ContentDescription" />
 
             <TextView
+                android:id="@+id/tvTripRoute"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="4dp"
                 android:textAppearance="@style/textViewTitle"
                 android:textSize="18sp"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
                 app:layout_constraintBottom_toBottomOf="@id/icRoute"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/icRoute"
                 app:layout_constraintTop_toTopOf="@id/icRoute"
                 tools:text="Cipagalo - Sederhana" />
@@ -78,6 +87,7 @@
                 tools:ignore="ContentDescription" />
 
             <TextView
+                android:id="@+id/tvBoard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -89,6 +99,7 @@
                 tools:text="Cipagalo" />
 
             <TextView
+                android:id="@+id/tvDrop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
