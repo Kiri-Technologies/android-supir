@@ -12,7 +12,8 @@
     <string name="hint_confirm_password">Konfirmasi Password</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_angkot">List Angkot</string>
+    <string name="label_angkot">Angkot</string>
     <string name="title_history">Riwayat</string>
     <string name="title_history_bottom_nav">Riwayat Perjalanan</string>
     <string name="title_account">Akun</string>

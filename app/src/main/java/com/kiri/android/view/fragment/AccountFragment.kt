@@ -46,7 +46,7 @@ class AccountFragment : Fragment(R.layout.account_fragment), View.OnClickListene
                 viewModel.doLogout()
             }
             R.id.cvAccount -> {
-                findNavController().navigate(R.id.action_account_fragment_to_accountActivity)
+                findNavController().navigate(AccountFragmentDirections.actionAccountFragmentToAccountActivity())
             }
             R.id.cvFeedback -> {
                 findNavController().navigate(R.id.action_account_fragment_to_feedbackFragment)

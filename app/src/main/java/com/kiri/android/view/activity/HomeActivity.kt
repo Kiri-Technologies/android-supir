@@ -45,7 +45,7 @@ class HomeActivity : AppCompatActivity(), AccountResource {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home,
-                R.id.navigation_dashboard,
+                R.id.navigation_angkot,
                 R.id.navigation_history,
                 R.id.account_fragment
             )
@@ -53,9 +53,6 @@ class HomeActivity : AppCompatActivity(), AccountResource {
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         connectionCheck()
-
-        // if reselected do nothing
-        binding.navView.setOnItemReselectedListener {}
     }
 
     override fun onBackPressed() {

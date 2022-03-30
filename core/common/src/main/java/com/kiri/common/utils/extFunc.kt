@@ -9,6 +9,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.LocalDateTime
@@ -80,3 +81,11 @@ fun String.toIndonesiaTime(parserPattern: String, targetFormat: String): String 
     val formatter = SimpleDateFormat(targetFormat, getLocaleIndonesia())
     return formatter.format(parser.parse(this))
 }
+
+// Currency
+fun String.formatRupiah(): String {
+    val localeID = Locale("in", "ID")
+    val formatRupiah = NumberFormat.getCurrencyInstance(localeID)
+    return formatRupiah.format(this)
+}
+

@@ -13,16 +13,16 @@ import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.ApiResponse
 import com.kiri.common.utils.shortToast
 import com.kiri.trip.data.models.TripHistoryData
-import com.kiri.trip.presentation.viewmodel.TripResource
-import com.kiri.trip.presentation.viewmodel.TripViewModel
+import com.kiri.trip.presentation.viewmodel.AngkotResource
+import com.kiri.trip.presentation.viewmodel.AngkotViewModel
 import com.kiri.ui.gone
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class HistoryFragment : Fragment(R.layout.fragment_history), TripResource {
+class HistoryFragment : Fragment(R.layout.fragment_history), AngkotResource {
     private val binding by viewBinding<FragmentHistoryBinding>()
-    private val viewModel by viewModel<TripViewModel> {
+    private val viewModel by viewModel<AngkotViewModel> {
         parametersOf(lifecycle, this)
     }
     private val pref by inject<PrefUseCase>()
@@ -51,9 +51,6 @@ class HistoryFragment : Fragment(R.layout.fragment_history), TripResource {
     }
 
     private fun initAction() {
-        rvAdapter.setOnItemClickListener { _, _, _ ->
-            shortToast(requireContext(), "Clicked")
-        }
     }
 
     override fun onTripHistorySuccess(data: ApiResponse<List<TripHistoryData>>?) {

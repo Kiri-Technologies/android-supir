@@ -10,7 +10,7 @@ data class UpdateProfileBody(
     @field:SerializedName("role")
     val role: String? = null,
 
-    @field:SerializedName("no_hp")
+    @field:SerializedName("phone_number")
     val noHp: String? = null,
 
     @field:SerializedName("name")

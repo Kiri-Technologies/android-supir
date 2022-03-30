@@ -91,13 +91,13 @@ class DetailAccountFragment :
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnUpdate -> {
-                findNavController().navigate(R.id.action_detailAccountFragment_to_updateProfileFragment)
+                findNavController().navigate(DetailAccountFragmentDirections.actionDetailAccountFragmentToUpdateProfileFragment())
             }
             R.id.ivAccount -> {
                 permission()
             }
             R.id.btnUpdatePassword -> {
-                findNavController().navigate(R.id.action_detailAccountFragment_to_updatePasswordFragment)
+                findNavController().navigate(DetailAccountFragmentDirections.actionDetailAccountFragmentToUpdatePasswordFragment())
             }
         }
     }

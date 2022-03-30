@@ -12,16 +12,21 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.kiri.android.view.activity.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_angkot"
+        android:name="com.kiri.android.view.fragment.AngkotTabFragment"
+        android:label="@string/title_angkot"
+        tools:layout="@layout/fragment_angkot_tab" >
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_history"
         android:name="com.kiri.android.view.fragment.HistoryFragment"
         android:label="@string/title_history_bottom_nav"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_navigation_history_to_qrCodeFragment"
+            app:destination="@id/qrCodeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/account_fragment"
         android:name="com.kiri.android.view.fragment.AccountFragment"
@@ -44,6 +49,19 @@
         android:name="com.kiri.android.view.fragment.FeedbackFragment"
         android:label="Masukan dan Saran"
         tools:layout="@layout/feedback_fragment"/>
+    <fragment
+        android:id="@+id/qrCodeFragment"
+        android:name="com.kiri.android.view.fragment.QrCodeFragment"
+        android:label="QrCodeFragment"
+        tools:layout="@layout/fragment_qr_code">
+        <argument
+            android:name="qrCode"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/angkotTripHistoryFragment"
+        android:name="com.kiri.android.view.fragment.AngkotAngkotHistoryFragment"
+        android:label="AngkotTripHistoryFragment" />
 
 
 </navigation>

@@ -35,15 +35,19 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':core:ui')
+
     implementation 'androidx.core:core-ktx:1.7.0'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     //network
     implementation networkDependencies.retrofit
     implementation networkDependencies.gson
+//    implementation networkDependencies.glideVector
     implementation networkDependencies.okHttpLogginInterceptor
     implementation networkDependencies.convertergson
     debugImplementation networkDependencies.chuckerDebug
+    implementation("io.coil-kt:coil-svg:1.3.2")
 
     //DependencyInjection
     implementation dependenciesInjection.koin

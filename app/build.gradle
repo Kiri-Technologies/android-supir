@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -51,7 +52,7 @@ dependencies {
     implementation project(path: ':core:ui')
     implementation project(path: ':features:auth')
     implementation project(path: ':features:account')
-    implementation project(path: ':features:trip')
+    implementation project(path: ':features:angkot')
 
     implementation supportDependencies.coreKtx
     implementation supportDependencies.appcompat
@@ -66,7 +67,6 @@ dependencies {
     androidTestImplementation testDependencies.androidxJunit
     androidTestImplementation testDependencies.androidxEspresso
 
-//    def multidex_version = "2.0.1"
 //    implementation "androidx.multidex:multidex:$multidex_version"
 
     // viewbBindingDelegate
@@ -76,6 +76,7 @@ dependencies {
     //image
     implementation networkDependencies.glide
     implementation networkDependencies.glideCompiler
+    implementation networkDependencies.glideVector
 
     //Log
     implementation networkDependencies.timber

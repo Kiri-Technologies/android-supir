@@ -21,7 +21,6 @@
         android:id="@+id/rvContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingVertical="12dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="4"
         tools:listitem="@layout/history_trip_layout" />

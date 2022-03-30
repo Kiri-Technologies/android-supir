@@ -7,4 +7,10 @@
     <string name="onboarding2_title">Lihat Rute Angkot</string>
     <string name="onboarding3_title">Pembayaran Lebih Mudah</string>
     <string name="skip_onboarding">Skip</string>
+    <string name="label_all_trip_angkot_history">Semua riwayat perjalanan pada angkot</string>
+    <string name="label_board_history">Semua riwayat narik angkot</string>
+    <string name="label_board_time">Waktu Narik</string>
+    <string name="label_earnings">Pendapatan</string>
+    <string name="label_angkot">Angkot</string>
+    <string name="label_confirm">Konfirmasi</string>
 </resources>
