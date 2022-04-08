@@ -13,8 +13,8 @@ class HistoryAdapter :
     override fun convert(holder: BaseViewHolder, item: TripHistoryData) {
         val route = "${item.vehicle?.route?.titikAwal} - ${item.vehicle?.route?.titikAkhir}"
         holder.setText(R.id.tvTripRoute, route)
-            .setText(R.id.tvBoard, item.titikNaik)
-            .setText(R.id.tvDrop, item.titikTurun)
+            .setText(R.id.tvBoard, item.namaTempatNaik)
+            .setText(R.id.tvDrop, item.namaTempatTurun)
             .getView<TextView>(R.id.tvTripRoute).isSelected = true
 
         val time = item.createdAt?.dateToDateMillis()

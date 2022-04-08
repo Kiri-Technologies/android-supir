@@ -2,11 +2,10 @@ package com.kiri.trip.data.models
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
-import kotlinx.parcelize.RawValue
+import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class AngkotData(
+data class Vehicle(
 
     @field:SerializedName("kir_bulanan")
     val kirBulanan: String? = null,
@@ -14,14 +13,14 @@ data class AngkotData(
     @field:SerializedName("route_id")
     val routeId: Int? = null,
 
-    @field:SerializedName("user_owner")
-    val userOwner: User? = null,
-
     @field:SerializedName("created_at")
     val createdAt: String? = null,
 
     @field:SerializedName("is_beroperasi")
-    val isBeroperasi: String? = null,
+    val isBeroperasi: Int? = null,
+
+    @field:SerializedName("deleted_at")
+    val deletedAt: String? = null,
 
     @field:SerializedName("route")
     val route: Route? = null,

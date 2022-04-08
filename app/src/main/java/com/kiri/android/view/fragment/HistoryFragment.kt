@@ -41,7 +41,7 @@ class HistoryFragment : Fragment(R.layout.fragment_history), AngkotResource {
     private fun initData() {
         val getPref = pref.accountData
         val data = Gson().fromJson(getPref, ProfileData::class.java)
-        viewModel.getTripHistory("supir-123456")
+        data.id?.let { viewModel.getTripHistory(it) }
     }
 
     private fun initUI() {

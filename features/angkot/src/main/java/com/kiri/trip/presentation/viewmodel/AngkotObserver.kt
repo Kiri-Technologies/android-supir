@@ -43,5 +43,29 @@ class AngkotObserver(
                 Resource.Status.ERROR -> resource.onGetAngkotFailed(it.error)
             }
         }
+
+        vm.rideHistory.observe(owner) {
+            when (it.status) {
+                Resource.Status.LOADING -> resource.onRideHistoryLoading()
+                Resource.Status.SUCCESS -> resource.onRideHistorySuccess(it.data)
+                Resource.Status.ERROR -> resource.onRideHistoryFailed(it.error)
+            }
+        }
+
+        vm.listAngkotConfirm.observe(owner) {
+            when (it.status) {
+                Resource.Status.LOADING -> resource.onListAngkotConfirmLoading()
+                Resource.Status.SUCCESS -> resource.onListAngkotConfirmSuccess(it.data)
+                Resource.Status.ERROR -> resource.onListAngkotConfirmFailed(it.error)
+            }
+        }
+
+        vm.confirmAngkot.observe(owner) {
+            when (it.status) {
+                Resource.Status.LOADING -> resource.onConfirmAngkotLoading()
+                Resource.Status.SUCCESS -> resource.onConfirmAngkotSuccess(it.data)
+                Resource.Status.ERROR -> resource.onConfirmAngkotFailed(it.error)
+            }
+        }
     }
 }

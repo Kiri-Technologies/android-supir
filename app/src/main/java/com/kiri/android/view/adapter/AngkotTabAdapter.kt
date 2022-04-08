@@ -10,7 +10,7 @@ import com.kiri.android.view.fragment.ListAngkotFragment
 class AngkotTabAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
 
-    private val fragment = listOf(
+    private val fragment = listOf<Fragment>(
         ListAngkotFragment(),
         AngkotConfirmationFragment()
     )

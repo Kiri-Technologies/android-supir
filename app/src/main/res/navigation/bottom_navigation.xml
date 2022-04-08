@@ -15,14 +15,17 @@
         android:id="@+id/navigation_angkot"
         android:name="com.kiri.android.view.fragment.AngkotTabFragment"
         android:label="@string/title_angkot"
-        tools:layout="@layout/fragment_angkot_tab" >
+        tools:layout="@layout/fragment_angkot_tab">
+        <action
+            android:id="@+id/action_navigation_angkot_to_detailAngkotFragment"
+            app:destination="@id/detailAngkotFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_history"
         android:name="com.kiri.android.view.fragment.HistoryFragment"
         android:label="@string/title_history_bottom_nav"
-        tools:layout="@layout/fragment_history" >
+        tools:layout="@layout/fragment_history">
         <action
             android:id="@+id/action_navigation_history_to_qrCodeFragment"
             app:destination="@id/qrCodeFragment" />
@@ -48,7 +51,7 @@
         android:id="@+id/feedbackFragment"
         android:name="com.kiri.android.view.fragment.FeedbackFragment"
         android:label="Masukan dan Saran"
-        tools:layout="@layout/feedback_fragment"/>
+        tools:layout="@layout/feedback_fragment" />
     <fragment
         android:id="@+id/qrCodeFragment"
         android:name="com.kiri.android.view.fragment.QrCodeFragment"
@@ -59,9 +62,41 @@
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/angkotTripHistoryFragment"
-        android:name="com.kiri.android.view.fragment.AngkotAngkotHistoryFragment"
-        android:label="AngkotTripHistoryFragment" />
-
+        android:id="@+id/detailAngkotFragment"
+        android:name="com.kiri.android.view.fragment.DetailAngkotFragment"
+        android:label="Detail Angkot"
+        tools:layout="@layout/detail_angkot_fragment">
+        <action
+            android:id="@+id/action_detailAngkotFragment_to_angkotHistoryFragment"
+            app:destination="@id/angkotHistoryFragment" />
+        <argument
+            android:name="angkotConfirmData"
+            app:argType="com.kiri.trip.data.models.AngkotConfirmData" />
+        <action
+            android:id="@+id/action_detailAngkotFragment_to_rideHistoryFragment"
+            app:destination="@id/rideHistoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/angkotHistoryFragment"
+        android:name="com.kiri.android.view.fragment.AngkotHistoryFragment"
+        android:label="Riwayat Perjalanan"
+        tools:layout="@layout/angkot_trip_history_fragment">
+        <argument
+            android:name="tripData"
+            app:argType="com.kiri.trip.data.models.TripHistoryData[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/rideHistoryFragment"
+        android:name="com.kiri.android.view.fragment.RideHistoryFragment"
+        android:label="Riwayat Narik"
+        tools:layout="@layout/board_history_fragment">
+        <argument
+            android:name="riwayatNarikData"
+            app:argType="com.kiri.trip.data.models.RiwayatNarikData[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 
 </navigation>

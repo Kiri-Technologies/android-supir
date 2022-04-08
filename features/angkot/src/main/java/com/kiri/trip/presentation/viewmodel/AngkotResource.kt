@@ -1,8 +1,10 @@
 package com.kiri.trip.presentation.viewmodel
 
 import com.kiri.common.utils.ApiResponse
+import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.AngkotData
 import com.kiri.trip.data.models.FeedbackData
+import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.TripHistoryData
 
 interface AngkotResource {
@@ -24,6 +26,21 @@ interface AngkotResource {
 
     // Angkot
     fun onGetAngkotLoading() {}
-    fun onGetAngkotSuccess(data: ApiResponse<List<AngkotData>>?) {}
+    fun onGetAngkotSuccess(data: ApiResponse<List<AngkotConfirmData>>?) {}
     fun onGetAngkotFailed(error: String?) {}
+
+    // RideHistory
+    fun onRideHistoryLoading() {}
+    fun onRideHistorySuccess(data: ApiResponse<List<RiwayatNarikData>>?) {}
+    fun onRideHistoryFailed(error: String?) {}
+
+    // ListAngkotConfirm
+    fun onListAngkotConfirmLoading() {}
+    fun onListAngkotConfirmSuccess(data: ApiResponse<List<Nothing>>?) {}
+    fun onListAngkotConfirmFailed(error: String?) {}
+
+    // ConfirmAngkot
+    fun onConfirmAngkotLoading() {}
+    fun onConfirmAngkotSuccess(data: ApiResponse<List<Nothing>>?) {}
+    fun onConfirmAngkotFailed(error: String?) {}
 }

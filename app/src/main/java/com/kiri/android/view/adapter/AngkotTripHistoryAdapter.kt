@@ -19,8 +19,8 @@ class AngkotTripHistoryAdapter :
             R.id.tvTripRoute,
             user
         ) // tvTripRoute diisi dengan nama penumpang
-            .setText(R.id.tvBoard, item.titikNaik)
-            .setText(R.id.tvDrop, item.titikTurun)
+            .setText(R.id.tvBoard, item.namaTempatNaik)
+            .setText(R.id.tvDrop, item.namaTempatTurun)
             .getView<TextView>(R.id.tvTripRoute).isSelected = true
 
         val time = item.createdAt?.dateToDateMillis()

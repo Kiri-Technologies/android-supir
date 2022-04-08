@@ -13,4 +13,18 @@
     <string name="label_earnings">Pendapatan</string>
     <string name="label_angkot">Angkot</string>
     <string name="label_confirm">Konfirmasi</string>
+    <string name="label_create_earnings">Catat Pendapatan</string>
+    <string name="label_ride_now">Narik Sekarang</string>
+    <string name="label_angkot_earnings">Pendapatan Angkot</string>
+    <string name="label_today_earnings">Pendapatan Hari Ini</string>
+    <string name="label_total_earnings">Total Pendapatan</string>
+    <string name="label_more">Lainnya</string>
+    <string name="label_ride_history">Riwayat Narik</string>
+    <string name="label_feedback_user">Ulasan Penumpang</string>
+    <string name="label_time">Waktu</string>
+    <string name="label_board">Naik</string>
+    <string name="label_drop">Turun</string>
+    <string name="label_date">Tanggal</string>
+    <string name="label_clock">Jam</string>
+    <string name="label_history_trip">Riwayat Perjalanan</string>
 </resources>
