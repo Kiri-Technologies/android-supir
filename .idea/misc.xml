@@ -40,8 +40,10 @@
         <entry key="..\:/Kiri/app/src/main/res/layout/board_history_fragment.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/board_history_item.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/detail_angkot_fragment.xml" value="0.176" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/feedback_detail_fragment.xml" value="0.4" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/feedback_detail_item.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/feedback_fragment.xml" value="0.264" />
-        <entry key="..\:/Kiri/app/src/main/res/layout/feedback_item.xml" value="2.4" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/feedback_item.xml" value="0.264" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_angkot_tab.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_dashboard.xml" value="0.38125" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_history.xml" value="0.4" />

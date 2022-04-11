@@ -41,6 +41,11 @@ class ListAngkotFragment :
         initAction()
     }
 
+    override fun onResume() {
+        super.onResume()
+        initData()
+    }
+
     private fun initData() {
         val profile = Gson().fromJson(pref.accountData, ProfileData::class.java)
         profile.id?.let { viewModel.getAngkot(it) }

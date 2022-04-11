@@ -1,5 +1,7 @@
 package com.kiri.android.view.adapter
 
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.kiri.android.R
@@ -7,6 +9,8 @@ import com.kiri.common.utils.dateToDateMillis
 import com.kiri.common.utils.formatRupiah
 import com.kiri.common.utils.toFormattedString
 import com.kiri.trip.data.models.RiwayatNarikData
+import com.kiri.ui.gone
+import com.kiri.ui.visible
 
 class RideHistoryDetailAdapter :
     BaseQuickAdapter<RiwayatNarikData, BaseViewHolder>(R.layout.board_history_item) {
@@ -20,5 +24,15 @@ class RideHistoryDetailAdapter :
         holder.setText(R.id.tvDate, date)
             .setText(R.id.tvClock, "$startRide - $endRide")
             .setText(R.id.tvEarnings, earnings)
+
+        if (earnings?.isEmpty() == true) {
+            holder.getView<TextView>(R.id.tvEarnings).gone()
+            holder.getView<TextView>(R.id.tvAddEarnings).visible()
+        }
+    }
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        this.addChildClickViewIds(R.id.tvAddEarnings)
     }
 }

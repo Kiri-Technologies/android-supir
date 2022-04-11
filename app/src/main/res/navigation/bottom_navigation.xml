@@ -25,11 +25,7 @@
         android:id="@+id/navigation_history"
         android:name="com.kiri.android.view.fragment.HistoryFragment"
         android:label="@string/title_history_bottom_nav"
-        tools:layout="@layout/fragment_history">
-        <action
-            android:id="@+id/action_navigation_history_to_qrCodeFragment"
-            app:destination="@id/qrCodeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_history"/>
     <fragment
         android:id="@+id/account_fragment"
         android:name="com.kiri.android.view.fragment.AccountFragment"
@@ -55,7 +51,7 @@
     <fragment
         android:id="@+id/qrCodeFragment"
         android:name="com.kiri.android.view.fragment.QrCodeFragment"
-        android:label="QrCodeFragment"
+        android:label="QR Code"
         tools:layout="@layout/fragment_qr_code">
         <argument
             android:name="qrCode"
@@ -75,6 +71,12 @@
         <action
             android:id="@+id/action_detailAngkotFragment_to_rideHistoryFragment"
             app:destination="@id/rideHistoryFragment" />
+        <action
+            android:id="@+id/action_detailAngkotFragment_to_feedbackDetailFragment"
+            app:destination="@id/feedbackDetailFragment" />
+        <action
+            android:id="@+id/action_detailAngkotFragment_to_qrCodeFragment"
+            app:destination="@id/qrCodeFragment" />
     </fragment>
     <fragment
         android:id="@+id/angkotHistoryFragment"
@@ -83,9 +85,9 @@
         tools:layout="@layout/angkot_trip_history_fragment">
         <argument
             android:name="tripData"
+            android:defaultValue="@null"
             app:argType="com.kiri.trip.data.models.TripHistoryData[]"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/rideHistoryFragment"
@@ -94,9 +96,20 @@
         tools:layout="@layout/board_history_fragment">
         <argument
             android:name="riwayatNarikData"
+            android:defaultValue="@null"
             app:argType="com.kiri.trip.data.models.RiwayatNarikData[]"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/feedbackDetailFragment"
+        android:name="com.kiri.android.view.fragment.FeedbackDetailFragment"
+        android:label="Ulasan Penumpang"
+        tools:layout="@layout/feedback_detail_fragment">
+        <argument
+            android:name="tripData"
+            android:defaultValue="@null"
+            app:argType="com.kiri.trip.data.models.TripHistoryData[]"
+            app:nullable="true" />
     </fragment>
 
 </navigation>

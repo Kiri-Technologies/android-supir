@@ -15,7 +15,12 @@ class QrCodeFragment : Fragment(R.layout.fragment_qr_code) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initData()
+        initUI()
+    }
 
-        binding.qrCode
+    private fun initData() {}
+    private fun initUI() = with(binding) {
+        qrCode.loadUrl(args.qrCode)
     }
 }

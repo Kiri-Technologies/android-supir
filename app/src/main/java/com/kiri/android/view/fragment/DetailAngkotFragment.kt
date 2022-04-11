@@ -98,6 +98,20 @@ class DetailAngkotFragment : Fragment(R.layout.detail_angkot_fragment), AngkotRe
                 )
             )
         }
+        tvFeedbackMore.setOnClickListener {
+            findNavController().navigate(
+                DetailAngkotFragmentDirections.actionDetailAngkotFragmentToFeedbackDetailFragment(
+                    tripAngkotAdapter.data.toTypedArray()
+                )
+            )
+        }
+        btnQr.setOnClickListener {
+            findNavController().navigate(
+                DetailAngkotFragmentDirections.actionDetailAngkotFragmentToQrCodeFragment(
+                    tripAngkotAdapter.data.firstOrNull()?.vehicle?.qrCode.toString()
+                )
+            )
+        }
     }
 
     override fun onTripAngkotHistoryLoading() {

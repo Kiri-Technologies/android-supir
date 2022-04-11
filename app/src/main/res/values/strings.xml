@@ -27,4 +27,6 @@
     <string name="label_date">Tanggal</string>
     <string name="label_clock">Jam</string>
     <string name="label_history_trip">Riwayat Perjalanan</string>
+    <string name="label_all_feedback">Semua Ulasan Penumpang</string>
+    <string name="label_add">tambahkan</string>
 </resources>
