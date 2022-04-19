@@ -9,7 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
-import com.kiri.account.data.models.ProfileData
+import com.kiri.account.domain.usecase.model.ProfDom
 import com.kiri.account.presentation.viewmodel.AccountResource
 import com.kiri.account.presentation.viewmodel.AccountViewModel
 import com.kiri.android.R
@@ -62,7 +62,7 @@ class HomeActivity : AppCompatActivity(), AccountResource {
             super.onBackPressed()
     }
 
-    override fun onProfileSuccess(data: ProfileData?) {
+    override fun onProfileSuccess(data: ProfDom?) {
         super.onProfileSuccess(data)
         if (data != null) {
             val profile = Gson().toJson(data)

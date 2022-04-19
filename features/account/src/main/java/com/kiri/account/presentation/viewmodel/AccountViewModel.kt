@@ -8,6 +8,7 @@ import com.kiri.account.data.models.FeedbackAppData
 import com.kiri.account.data.models.ProfileData
 import com.kiri.account.data.models.UpdateProfileBody
 import com.kiri.account.domain.usecase.AccountUseCase
+import com.kiri.account.domain.usecase.model.ProfDom
 import com.kiri.common.utils.Resource
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -25,12 +26,12 @@ class AccountViewModel(private val useCase: AccountUseCase) : ViewModel() {
         }
     }
 
-    private var _profile: MutableLiveData<Resource<ProfileData>> = MutableLiveData()
-    val profile: LiveData<Resource<ProfileData>> = _profile
+    private var _profile: MutableLiveData<Resource<ProfDom>> = MutableLiveData()
+    val profile: LiveData<Resource<ProfDom>> = _profile
 
     fun getProfile() = viewModelScope.launch {
         _profile.value = Resource.loading()
-        useCase.getProfile().collect {
+        useCase.profile().collect {
             _profile.value = it
         }
     }

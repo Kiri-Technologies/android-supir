@@ -16,4 +16,8 @@ class TripAngkotAdapter :
             .setText(R.id.tvBoard, item.namaTempatNaik)
             .setText(R.id.tvDrop, item.namaTempatTurun)
     }
+
+    init {
+        setEmptyView(R.layout.empty_view_item)
+    }
 }

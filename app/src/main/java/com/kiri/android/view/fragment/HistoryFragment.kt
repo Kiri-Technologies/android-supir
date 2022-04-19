@@ -16,6 +16,7 @@ import com.kiri.trip.data.models.TripHistoryData
 import com.kiri.trip.presentation.viewmodel.AngkotResource
 import com.kiri.trip.presentation.viewmodel.AngkotViewModel
 import com.kiri.ui.gone
+import com.kiri.ui.visible
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -48,14 +49,21 @@ class HistoryFragment : Fragment(R.layout.fragment_history), AngkotResource {
         binding.rvContent.apply {
             adapter = rvAdapter
         }
+        rvAdapter.setEmptyView(R.layout.empty_view_item)
     }
 
     private fun initAction() {
     }
 
+    override fun onTripAngkotHistoryLoading() {
+        super.onTripAngkotHistoryLoading()
+        binding.rvContent.gone()
+    }
+
     override fun onTripHistorySuccess(data: ApiResponse<List<TripHistoryData>>?) {
         super.onTripHistorySuccess(data)
         binding.progressBar.gone()
+        binding.rvContent.visible()
         data?.dataData?.map {
             rvAdapter.addData(it)
         }

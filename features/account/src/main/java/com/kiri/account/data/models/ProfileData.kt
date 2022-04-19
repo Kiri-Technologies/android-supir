@@ -3,13 +3,12 @@ package com.kiri.account.data.models
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import kotlinx.parcelize.RawValue
 
 @Parcelize
 data class ProfileData(
 
     @field:SerializedName("image")
-    val image: @RawValue Any? = null,
+    val image: String? = null,
 
     @field:SerializedName("birthdate")
     val birthdate: String? = null,

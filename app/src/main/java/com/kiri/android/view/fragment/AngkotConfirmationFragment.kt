@@ -16,6 +16,8 @@ import com.kiri.common.utils.shortToast
 import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.presentation.viewmodel.AngkotResource
 import com.kiri.trip.presentation.viewmodel.AngkotViewModel
+import com.kiri.ui.gone
+import com.kiri.ui.visible
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -44,9 +46,10 @@ class AngkotConfirmationFragment : Fragment(R.layout.angkot_confirmation_fragmen
     private fun initUI() = with(binding) {
         rvContent.layoutManager = LinearLayoutManager(requireContext())
         rvContent.adapter = rvAdapter
+        rvAdapter.setEmptyView(R.layout.empty_view_item)
     }
 
-    private fun initAction() = with(binding) {
+    private fun initAction() {
         rvAdapter.setOnItemChildClickListener { adapter, view, position ->
             val data = adapter.data[position] as AngkotConfirmData
             when (view.id) {
@@ -64,10 +67,14 @@ class AngkotConfirmationFragment : Fragment(R.layout.angkot_confirmation_fragmen
 
     override fun onGetAngkotLoading() {
         super.onGetAngkotLoading()
+        binding.rvContent.gone()
+        binding.progressBar.visible()
     }
 
     override fun onGetAngkotSuccess(data: ApiResponse<List<AngkotConfirmData>>?) {
         super.onGetAngkotSuccess(data)
+        binding.rvContent.visible()
+        binding.progressBar.gone()
         rvAdapter.data.clear()
         angkotList.clear()
         data?.dataData?.let {
@@ -78,10 +85,6 @@ class AngkotConfirmationFragment : Fragment(R.layout.angkot_confirmation_fragmen
             }
             rvAdapter.addData(angkotList)
         }
-    }
-
-    override fun onGetAngkotFailed(error: String?) {
-        super.onGetAngkotFailed(error)
     }
 
     override fun onConfirmAngkotSuccess(data: ApiResponse<List<Nothing>>?) {

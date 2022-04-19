@@ -2,6 +2,7 @@ package com.kiri.account.presentation.viewmodel
 
 import com.kiri.account.data.models.FeedbackAppData
 import com.kiri.account.data.models.ProfileData
+import com.kiri.account.domain.usecase.model.ProfDom
 
 interface AccountResource {
 
@@ -12,7 +13,7 @@ interface AccountResource {
 
     // PROFILE
     fun onProfileLoading() {}
-    fun onProfileSuccess(data: ProfileData?) {}
+    fun onProfileSuccess(data: ProfDom?) {}
     fun onProfileFailed(error: String?) {}
 
     // UPDATE

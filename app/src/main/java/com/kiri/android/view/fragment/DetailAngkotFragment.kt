@@ -1,5 +1,8 @@
 package com.kiri.android.view.fragment
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,10 +21,12 @@ import com.kiri.android.view.adapter.RideHistoryAdapter
 import com.kiri.android.view.adapter.TripAngkotAdapter
 import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.ApiResponse
+import com.kiri.common.utils.shortToast
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.TripHistoryData
 import com.kiri.trip.presentation.viewmodel.AngkotResource
 import com.kiri.trip.presentation.viewmodel.AngkotViewModel
+import com.kiri.ui.gone
 import com.kiri.ui.visible
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -81,6 +86,10 @@ class DetailAngkotFragment : Fragment(R.layout.detail_angkot_fragment), AngkotRe
         rvRideHistory.adapter = rideHistoryAdapter
         rvTripAngkot.adapter = tripAngkotAdapter
         rvFeedback.adapter = feedbackAdapter
+
+        rideHistoryAdapter.setEmptyView(R.layout.empty_view_item)
+        tripAngkotAdapter.setEmptyView(R.layout.empty_view_item)
+        feedbackAdapter.setEmptyView(R.layout.empty_view_item)
     }
 
     private fun initAction() = with(binding) {
@@ -105,21 +114,20 @@ class DetailAngkotFragment : Fragment(R.layout.detail_angkot_fragment), AngkotRe
                 )
             )
         }
-        btnQr.setOnClickListener {
-            findNavController().navigate(
-                DetailAngkotFragmentDirections.actionDetailAngkotFragmentToQrCodeFragment(
-                    tripAngkotAdapter.data.firstOrNull()?.vehicle?.qrCode.toString()
-                )
-            )
-        }
     }
 
     override fun onTripAngkotHistoryLoading() {
         super.onTripAngkotHistoryLoading()
+        binding.rvTripAngkot.gone()
+        binding.rvFeedback.gone()
     }
 
     override fun onTripAngkotHistorySuccess(data: ApiResponse<List<TripHistoryData>>?) {
         super.onTripAngkotHistorySuccess(data)
+        binding.rvTripAngkot.visible()
+        binding.rvFeedback.visible()
+        binding.pbTripAngkot.gone()
+        binding.pbFeedback.gone()
         data?.dataData?.let {
             tripAngkotAdapter.data.clear()
             feedbackAdapter.data.clear()
@@ -130,26 +138,34 @@ class DetailAngkotFragment : Fragment(R.layout.detail_angkot_fragment), AngkotRe
                 binding.tvFeedbackMore.visible()
             }
         }
+        val qr = data?.dataData?.firstOrNull()?.vehicle?.qrCode.toString()
+        qrCodeToBrowser(qr)
     }
 
-    override fun onTripAngkotHistoryFailed(error: String?) {
-        super.onTripAngkotHistoryFailed(error)
+    private fun qrCodeToBrowser(qr: String) {
+        binding.btnQr.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(qr))
+            try {
+                startActivity(browserIntent)
+            } catch (ex: ActivityNotFoundException) {
+                shortToast(requireContext(), getString(R.string.label_empty_data))
+            }
+        }
     }
 
     override fun onRideHistoryLoading() {
         super.onRideHistoryLoading()
+        binding.rvRideHistory.gone()
     }
 
     override fun onRideHistorySuccess(data: ApiResponse<List<RiwayatNarikData>>?) {
         super.onRideHistorySuccess(data)
+        binding.rvRideHistory.visible()
+        binding.pbRideHistory.gone()
         data?.dataData?.let {
             rideHistoryAdapter.data.clear()
             rideHistoryAdapter.addData(it.take(10))
             if (!it.isNullOrEmpty()) binding.tvRideMore.visible()
         }
-    }
-
-    override fun onRideHistoryFailed(error: String?) {
-        super.onRideHistoryFailed(error)
     }
 }

@@ -20,6 +20,17 @@
         android:queryHint="Cari plat angkot, trayek"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchView" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvContent"
         android:layout_width="match_parent"
@@ -27,7 +38,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searchView"
-        tools:listitem="@layout/list_angkot_item"
-        tools:itemCount="5"/>
+        tools:itemCount="5"
+        tools:listitem="@layout/list_angkot_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,7 +14,8 @@ class FeedbackAdapter : BaseQuickAdapter<TripHistoryData, BaseViewHolder>(R.layo
         val date = time?.toFormattedString("dd/MM/yy")
         holder.setText(R.id.tvDate, date)
 
-        holder.getView<RatingBar>(R.id.rating).rating = item.feedback?.rating?.toFloatOrNull() ?: 0.toFloat()
+        holder.getView<RatingBar>(R.id.rating).rating =
+            item.feedback?.rating?.toFloatOrNull() ?: 0.toFloat()
 
         val comment = "${item.feedback?.komentar?.take(30)}..."
         if (item.feedback?.komentar?.length!! >= 15) {
@@ -22,5 +23,9 @@ class FeedbackAdapter : BaseQuickAdapter<TripHistoryData, BaseViewHolder>(R.layo
         } else {
             holder.setText(R.id.tvComment, item.feedback?.komentar)
         }
+    }
+
+    init {
+        setEmptyView(R.layout.empty_view_item)
     }
 }

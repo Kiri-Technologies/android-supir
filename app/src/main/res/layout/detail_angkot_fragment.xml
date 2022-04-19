@@ -249,6 +249,16 @@
                         android:textSize="14sp" />
                 </LinearLayout>
 
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/pbTripAngkot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llEarningsAngkot"/>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvTripAngkot"
                     android:layout_width="match_parent"
@@ -340,6 +350,16 @@
                         android:textSize="14sp" />
                 </LinearLayout>
 
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/pbRideHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llRideHistory"/>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvRideHistory"
                     android:layout_width="match_parent"
@@ -388,6 +408,13 @@
             android:layout_height="172dp"
             android:layout_marginTop="8dp"
             app:cardCornerRadius="12dp">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/pbFeedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:layout_gravity="center"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvFeedback"

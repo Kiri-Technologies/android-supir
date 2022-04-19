@@ -34,12 +34,13 @@
         <entry key="..\:/Kiri/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Kiri/app/src/main/res/layout/activity_onboarding.xml" value="0.264" />
         <entry key="..\:/Kiri/app/src/main/res/layout/activity_splash.xml" value="0.2" />
-        <entry key="..\:/Kiri/app/src/main/res/layout/angkot_confirmation_fragment.xml" value="0.4" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/angkot_confirmation_fragment.xml" value="0.2" />
         <entry key="..\:/Kiri/app/src/main/res/layout/angkot_trip_history_fragment.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/angkot_trip_item.xml" value="0.38125" />
         <entry key="..\:/Kiri/app/src/main/res/layout/board_history_fragment.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/board_history_item.xml" value="0.4" />
-        <entry key="..\:/Kiri/app/src/main/res/layout/detail_angkot_fragment.xml" value="0.176" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/detail_angkot_fragment.xml" value="0.264" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/empty_view_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Kiri/app/src/main/res/layout/feedback_detail_fragment.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/feedback_detail_item.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/feedback_fragment.xml" value="0.264" />
@@ -53,7 +54,7 @@
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_qr_code.xml" value="0.38125" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_register.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/history_trip_layout.xml" value="0.536" />
-        <entry key="..\:/Kiri/app/src/main/res/layout/list_angkot_fragment.xml" value="0.536" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/list_angkot_fragment.xml" value="0.2" />
         <entry key="..\:/Kiri/app/src/main/res/layout/list_angkot_item.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/load_layout.xml" value="0.38125" />
         <entry key="..\:/Kiri/app/src/main/res/layout/ride_history_adapter.xml" value="0.25416666666666665" />

@@ -14,9 +14,12 @@ import com.kiri.android.databinding.ListAngkotFragmentBinding
 import com.kiri.android.view.adapter.ListAngkotAdapter
 import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.ApiResponse
+import com.kiri.common.utils.shortToast
 import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.presentation.viewmodel.AngkotResource
 import com.kiri.trip.presentation.viewmodel.AngkotViewModel
+import com.kiri.ui.gone
+import com.kiri.ui.visible
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -54,11 +57,12 @@ class ListAngkotFragment :
     private fun initUI() {
         binding.rvContent.layoutManager = LinearLayoutManager(requireContext())
         binding.rvContent.adapter = rvAdapter
+        rvAdapter.setEmptyView(R.layout.empty_view_item)
     }
 
     private fun initAction() {
         binding.searchView.setOnQueryTextListener(this)
-        rvAdapter.setOnItemClickListener { adapter, view, position ->
+        rvAdapter.setOnItemClickListener { adapter, _, position ->
             val data: AngkotConfirmData = adapter.data[position] as AngkotConfirmData
             findNavController().navigate(
                 AngkotTabFragmentDirections.actionNavigationAngkotToDetailAngkotFragment(
@@ -85,10 +89,14 @@ class ListAngkotFragment :
 
     override fun onGetAngkotLoading() {
         super.onGetAngkotLoading()
+        binding.rvContent.gone()
+        binding.progressBar.visible()
     }
 
     override fun onGetAngkotSuccess(data: ApiResponse<List<AngkotConfirmData>>?) {
         super.onGetAngkotSuccess(data)
+        binding.rvContent.visible()
+        binding.progressBar.gone()
         rvAdapter.data.clear()
         angkotList.clear()
         data?.dataData?.let {
@@ -103,6 +111,7 @@ class ListAngkotFragment :
 
     override fun onGetAngkotFailed(error: String?) {
         super.onGetAngkotFailed(error)
+        shortToast(requireContext(), getString(R.string.error_message))
     }
 
     override fun onQueryTextSubmit(query: String): Boolean {

@@ -4,8 +4,12 @@ import com.kiri.account.data.AccountRepositoryImpl
 import com.kiri.account.data.models.FeedbackAppData
 import com.kiri.account.data.models.ProfileData
 import com.kiri.account.data.models.UpdateProfileBody
+import com.kiri.account.domain.usecase.model.ProfDom
+import com.kiri.common.utils.ApiResponse
 import com.kiri.common.utils.Resource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import okhttp3.MultipartBody
 
 class AccountUseCaseImpl(private val accountRepositoryImpl: AccountRepositoryImpl) :
@@ -15,7 +19,21 @@ class AccountUseCaseImpl(private val accountRepositoryImpl: AccountRepositoryImp
     }
 
     override fun getProfile(): Flow<Resource<ProfileData>> {
-        return accountRepositoryImpl.getProfile()
+        return flow {
+            //
+        }
+    }
+
+    override fun profile(): Flow<Resource<ProfDom>> {
+        return accountRepositoryImpl.getProfile().map {
+            val data = it.data?.dataData?.let { it1 ->
+                ProfDom(
+                    it1
+                )
+            }
+            val dataClean = ApiResponse(data, it.error, it.status.name)
+            Resource(it.status, dataClean, it.error)
+        }
     }
 
     override fun doUpdate(body: UpdateProfileBody): Flow<Resource<ProfileData>> {
