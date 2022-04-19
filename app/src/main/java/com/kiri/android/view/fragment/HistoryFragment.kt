@@ -55,8 +55,8 @@ class HistoryFragment : Fragment(R.layout.fragment_history), AngkotResource {
     private fun initAction() {
     }
 
-    override fun onTripAngkotHistoryLoading() {
-        super.onTripAngkotHistoryLoading()
+    override fun onTripHistoryLoading() {
+        super.onTripHistoryLoading()
         binding.rvContent.gone()
     }
 
