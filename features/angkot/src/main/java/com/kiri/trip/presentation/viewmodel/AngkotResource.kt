@@ -2,10 +2,10 @@ package com.kiri.trip.presentation.viewmodel
 
 import com.kiri.common.utils.ApiResponse
 import com.kiri.trip.data.models.AngkotConfirmData
-import com.kiri.trip.data.models.AngkotData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.TripHistoryData
+import com.kiri.trip.domain.usecase.models.TotalEarningsDomain
 
 interface AngkotResource {
 
@@ -43,4 +43,14 @@ interface AngkotResource {
     fun onConfirmAngkotLoading() {}
     fun onConfirmAngkotSuccess(data: ApiResponse<List<Nothing>>?) {}
     fun onConfirmAngkotFailed(error: String?) {}
+
+    // TotalEarnings
+    fun onTotalEarningsLoading() {}
+    fun onTotalEarningsSuccess(data: ApiResponse<TotalEarningsDomain>?) {}
+    fun onTotalEarningsFailed(error: String?) {}
+
+    // TodayEarnings
+    fun onTodayEarningsLoading() {}
+    fun onTodayEarningsSuccess(data: ApiResponse<Int>?) {}
+    fun onTodayEarningsFailed(error: String?) {}
 }

@@ -4,6 +4,7 @@ import com.kiri.common.utils.ApiResponse
 import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.RiwayatNarikData
+import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
 import retrofit2.Response
 
@@ -44,5 +45,19 @@ class RemoteDataSource(private val endpoint: AngkotEndpoint) : AngkotEndpoint {
         isConfirmed: Int
     ): Response<ApiResponse<Nothing>> {
         return endpoint.doConfirmAngkot(id, isConfirmed)
+    }
+
+    override suspend fun getTotalEarnings(
+        angkotId: String,
+        supirId: String
+    ): Response<ApiResponse<TotalEarningsData>> {
+        return endpoint.getTotalEarnings(angkotId, supirId)
+    }
+
+    override suspend fun getTodayEarning(
+        angkotId: String,
+        supirId: String
+    ): Response<ApiResponse<Int>> {
+        return endpoint.getTodayEarning(angkotId, supirId)
     }
 }

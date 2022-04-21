@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kiri.common.utils.Resource
 import com.kiri.trip.data.models.AngkotConfirmData
-import com.kiri.trip.data.models.AngkotData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.TripHistoryData
 import com.kiri.trip.domain.usecase.AngkotUseCase
+import com.kiri.trip.domain.usecase.models.TotalEarningsDomain
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -108,6 +108,36 @@ class AngkotViewModel(private val useCase: AngkotUseCase) : ViewModel() {
             _confirmAngkot.value = Resource.loading()
             useCase.doConfirmAngkot(id, isConfirmed).collect {
                 _confirmAngkot.value = it
+            }
+        }
+    }
+
+    private val _totalEarnings: MutableLiveData<Resource<TotalEarningsDomain>> = MutableLiveData()
+    val totalEarnings: LiveData<Resource<TotalEarningsDomain>> = _totalEarnings
+
+    fun getTotalEarnings(
+        angkotId: String,
+        supirId: String
+    ) {
+        viewModelScope.launch {
+            _totalEarnings.value = Resource.loading()
+            useCase.getTotalEarnings(angkotId, supirId).collect {
+                _totalEarnings.value = it
+            }
+        }
+    }
+
+    private val _todayEarnings: MutableLiveData<Resource<Int>> = MutableLiveData()
+    val todayEarnings: LiveData<Resource<Int>> = _todayEarnings
+
+    fun getTodayEarnings(
+        angkotId: String,
+        supirId: String
+    ) {
+        viewModelScope.launch {
+            _todayEarnings.value = Resource.loading()
+            useCase.getTodayEarning(angkotId, supirId).collect {
+                _todayEarnings.value = it
             }
         }
     }

@@ -4,6 +4,7 @@ import com.kiri.common.utils.ApiResponse
 import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.RiwayatNarikData
+import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
 import retrofit2.Response
 import retrofit2.http.Field
@@ -54,4 +55,16 @@ interface AngkotEndpoint {
         @Path("id") id: String,
         @Field("is_confirmed") isConfirmed: Int
     ): Response<ApiResponse<Nothing>>
+
+    @GET("ownersupir/chart/totalPendapatan")
+    suspend fun getTotalEarnings(
+        @Query("angkot_id") angkotId: String,
+        @Query("supir_id") supirId: String
+    ): Response<ApiResponse<TotalEarningsData>>
+
+    @GET("ownersupir/chart/pendapatanHariIni")
+    suspend fun getTodayEarning(
+        @Query("angkot_id") angkotId: String,
+        @Query("supir_id") supirId: String
+    ): Response<ApiResponse<Int>>
 }

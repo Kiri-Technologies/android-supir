@@ -83,7 +83,7 @@ fun String.toIndonesiaTime(parserPattern: String, targetFormat: String): String 
 }
 
 // Currency
-fun Long.formatRupiah(): String {
+fun Long.toFormatRupiah(): String {
     val localeID = Locale("in", "ID")
     val formatRupiah = NumberFormat.getCurrencyInstance(localeID)
     return formatRupiah.format(this).substringBeforeLast(",")

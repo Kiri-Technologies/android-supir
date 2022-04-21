@@ -131,8 +131,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/pbTodayEarnings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    app:layout_constraintEnd_toEndOf="@id/tvLabelTodayEarnings"
+                    app:layout_constraintStart_toStartOf="@id/tvLabelTodayEarnings"
+                    app:layout_constraintTop_toBottomOf="@id/tvLabelTodayEarnings" />
+
                 <TextView
-                    android:id="@+id/tvEarnings"
+                    android:id="@+id/tvTodayEarnings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -157,17 +166,27 @@
                     app:layout_constraintStart_toEndOf="@id/tvLabelTodayEarnings"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/pbTotalEarnings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    app:layout_constraintEnd_toEndOf="@id/tvLabelTotalEarnings"
+                    app:layout_constraintStart_toStartOf="@id/tvLabelTotalEarnings"
+                    app:layout_constraintTop_toBottomOf="@+id/tvLabelTotalEarnings" />
+
                 <TextView
+                    android:id="@+id/tvTotalEarnings"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:gravity="center"
                     android:textAppearance="@style/textViewTitle"
                     android:textColor="@color/color_primary"
                     android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tvEarnings"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvTodayEarnings"
                     app:layout_constraintEnd_toEndOf="@id/tvLabelTotalEarnings"
                     app:layout_constraintStart_toStartOf="@id/tvLabelTotalEarnings"
-                    app:layout_constraintTop_toTopOf="@+id/tvEarnings"
+                    app:layout_constraintTop_toTopOf="@+id/tvTodayEarnings"
                     tools:text="Rp. 1.500.000" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -257,7 +276,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llEarningsAngkot"/>
+                    app:layout_constraintTop_toBottomOf="@id/llEarningsAngkot" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvTripAngkot"
@@ -358,7 +377,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llRideHistory"/>
+                    app:layout_constraintTop_toBottomOf="@id/llRideHistory" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvRideHistory"
@@ -413,8 +432,8 @@
                 android:id="@+id/pbFeedback"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:indeterminate="true"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:indeterminate="true" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvFeedback"

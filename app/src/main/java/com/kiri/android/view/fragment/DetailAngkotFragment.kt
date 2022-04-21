@@ -22,8 +22,10 @@ import com.kiri.android.view.adapter.TripAngkotAdapter
 import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.ApiResponse
 import com.kiri.common.utils.shortToast
+import com.kiri.common.utils.toFormatRupiah
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.TripHistoryData
+import com.kiri.trip.domain.usecase.models.TotalEarningsDomain
 import com.kiri.trip.presentation.viewmodel.AngkotResource
 import com.kiri.trip.presentation.viewmodel.AngkotViewModel
 import com.kiri.ui.gone
@@ -74,6 +76,8 @@ class DetailAngkotFragment : Fragment(R.layout.detail_angkot_fragment), AngkotRe
                 it
             )
             viewModel.getTripByAngkot(1, angkotId, it)
+            viewModel.getTotalEarnings(angkotId, it)
+            viewModel.getTodayEarnings(angkotId, it)
         }
     }
 
@@ -167,5 +171,47 @@ class DetailAngkotFragment : Fragment(R.layout.detail_angkot_fragment), AngkotRe
             rideHistoryAdapter.addData(it.take(10))
             if (!it.isNullOrEmpty()) binding.tvRideMore.visible()
         }
+    }
+
+    override fun onTotalEarningsLoading() {
+        super.onTotalEarningsLoading()
+        binding.tvTotalEarnings.gone()
+    }
+
+    override fun onTotalEarningsSuccess(data: ApiResponse<TotalEarningsDomain>?) {
+        super.onTotalEarningsSuccess(data)
+        with(binding) {
+            pbTotalEarnings.gone()
+            tvTotalEarnings.visible()
+            tvTotalEarnings.text = data?.dataData?.totalPendapatan?.toLong()?.toFormatRupiah()
+        }
+    }
+
+    override fun onTotalEarningsFailed(error: String?) {
+        super.onTotalEarningsFailed(error)
+        binding.pbTotalEarnings.gone()
+        binding.tvTotalEarnings.visible()
+        binding.tvTotalEarnings.text = "---"
+    }
+
+    override fun onTodayEarningsLoading() {
+        super.onTodayEarningsLoading()
+        binding.tvTodayEarnings.gone()
+    }
+
+    override fun onTodayEarningsSuccess(data: ApiResponse<Int>?) {
+        super.onTodayEarningsSuccess(data)
+        with(binding) {
+            tvTodayEarnings.visible()
+            pbTodayEarnings.gone()
+            tvTodayEarnings.text = data?.dataData?.toLong()?.toFormatRupiah()
+        }
+    }
+
+    override fun onTodayEarningsFailed(error: String?) {
+        super.onTodayEarningsFailed(error)
+        binding.tvTodayEarnings.visible()
+        binding.pbTodayEarnings.gone()
+        binding.tvTodayEarnings.text = "---"
     }
 }
