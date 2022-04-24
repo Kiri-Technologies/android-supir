@@ -17,4 +17,5 @@
     <color name="button_grey">#838383</color>
     <color name="background_fragment">#F2F2F2</color>
     <color name="yellow">#FFCE45</color>
+    <color name="gray_color">#C4C4C4</color>
 </resources>

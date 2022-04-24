@@ -118,6 +118,9 @@ class DetailAngkotFragment : Fragment(R.layout.detail_angkot_fragment), AngkotRe
                 )
             )
         }
+        btnCreateEarnings.setOnClickListener {
+            findNavController().navigate(DetailAngkotFragmentDirections.actionDetailAngkotFragmentToCreateEarningsFragment())
+        }
     }
 
     override fun onTripAngkotHistoryLoading() {

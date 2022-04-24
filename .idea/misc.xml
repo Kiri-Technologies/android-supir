@@ -47,6 +47,7 @@
         <entry key="..\:/Kiri/app/src/main/res/layout/feedback_item.xml" value="0.264" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_angkot_tab.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_dashboard.xml" value="0.38125" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/fragment_earnings_note.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_history.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_home.xml" value="0.38125" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_notifications.xml" value="0.38125" />
@@ -54,6 +55,7 @@
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_qr_code.xml" value="0.38125" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_register.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/history_trip_layout.xml" value="0.536" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/home_fragment.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/list_angkot_fragment.xml" value="0.2" />
         <entry key="..\:/Kiri/app/src/main/res/layout/list_angkot_item.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/load_layout.xml" value="0.38125" />
@@ -76,6 +78,7 @@
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/custom_dash_line.xml" value="0.188" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/custom_dash_vertical.xml" value="0.188" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/custom_line.xml" value="0.218" />
+        <entry key="..\:/Kiri/core/ui/src/main/res/drawable/dot_shape.xml" value="0.213" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_add.xml" value="0.1925" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_check_circle.xml" value="0.1505" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_date.xml" value="0.173" />
@@ -86,6 +89,7 @@
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_people.xml" value="0.2595" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_phone.xml" value="0.173" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/ic_pusat_bantuan.xml" value="0.2275" />
+        <entry key="..\:/Kiri/core/ui/src/main/res/drawable/line_onboarding_shape.xml" value="0.213" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/logo_login.xml" value="0.212" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/splash_layer.xml" value="0.173" />
         <entry key="..\:/Kiri/core/ui/src/main/res/font/poppins.xml" value="0.4265625" />

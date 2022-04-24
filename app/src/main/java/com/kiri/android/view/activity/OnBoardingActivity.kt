@@ -34,12 +34,12 @@ class OnBoardingActivity : AppCompatActivity(R.layout.activity_onboarding), View
             it.lifecycleOwner = this
             it.listener = this
         }
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.toolbar.apply {
-            setNavigationIcon(R.drawable.ic_back_arrow)
-            navigationIcon?.setTint(resources.getColor(R.color.black))
-        }
+//        setSupportActionBar(binding.toolbar)
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        binding.toolbar.apply {
+//            setNavigationIcon(R.drawable.ic_back_arrow)
+//            navigationIcon?.setTint(resources.getColor(R.color.black))
+//        }
         setupStep()
         setupListener()
     }
@@ -108,7 +108,6 @@ class OnBoardingActivity : AppCompatActivity(R.layout.activity_onboarding), View
     override fun onClick(view: View?): Unit = with(binding) {
         when (view) {
             buttonNext -> viewPager.currentItem++
-            buttonSkip -> viewPager.currentItem = 2
             btnLogin -> {
                 pref.firstStart = false
                 startActivity(Intent(this@OnBoardingActivity, AuthActivity::class.java))

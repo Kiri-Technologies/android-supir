@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_fragment"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/tvLabelGreetings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selamat Pagi,"
+        android:textAppearance="@style/textViewBody1"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textAppearance="@style/textViewTitle"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/tvLabelGreetings"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Asep" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvAngkot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelGreetings">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="12dp">
+
+            <ImageView
+                android:id="@+id/ivAngkot"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/angkot"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivAngkot"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Angkot yang digunakan"
+                    android:textAppearance="@style/textViewTitle"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvVehicleId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/textViewTitle"
+                    android:textSize="18sp"
+                    tools:text="D 12125 AD" />
+
+                <TextView
+                    android:id="@+id/tvTripRoute"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="bottom"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textAppearance="@style/textViewBody2"
+                    android:textSize="14sp"
+                    tools:text="Cipagalo - Sederhana" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="12dp"
+                android:gravity="center"
+                android:text="Ayo narik angkot \nsekarang!"
+                android:textAppearance="@style/textViewTitle"
+                android:textSize="18sp"
+                app:drawableEndCompat="@drawable/ic_right_arrow"
+                app:drawableTint="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivAngkot"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tvLabelPerform"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_weight="1"
+        android:text="Performa hari ini"
+        android:textAppearance="@style/textViewTitle"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvAngkot" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelPerform">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvLabelAvgUser"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawablePadding="4dp"
+                android:text="Rata - rata penumpang :"
+                android:textAppearance="@style/textViewTitle"
+                android:textSize="18sp"
+                app:drawableStartCompat="@drawable/dot_shape"
+                app:drawableTint="@color/gray_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textAppearance="@style/textViewBody1"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvLabelAvgUser"
+                app:layout_constraintStart_toEndOf="@id/tvLabelAvgUser"
+                app:layout_constraintTop_toTopOf="@+id/tvLabelAvgUser"
+                tools:text="250" />
+
+
+            <TextView
+                android:id="@+id/tvLabelUserToday"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:drawablePadding="4dp"
+                android:text="Penumpang hari ini :"
+                android:textAppearance="@style/textViewTitle"
+                android:textSize="18sp"
+                app:drawableStartCompat="@drawable/dot_shape"
+                app:drawableTint="@color/color_primary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLabelAvgUser" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textAppearance="@style/textViewBody1"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvLabelUserToday"
+                app:layout_constraintStart_toEndOf="@id/tvLabelUserToday"
+                app:layout_constraintTop_toTopOf="@+id/tvLabelUserToday"
+                tools:text="50" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
