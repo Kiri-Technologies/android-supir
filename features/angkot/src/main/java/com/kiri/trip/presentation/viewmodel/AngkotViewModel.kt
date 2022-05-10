@@ -141,4 +141,32 @@ class AngkotViewModel(private val useCase: AngkotUseCase) : ViewModel() {
             }
         }
     }
+
+    private val _avgUser: MutableLiveData<Resource<Int>> = MutableLiveData()
+    val avgUser: LiveData<Resource<Int>> = _avgUser
+
+    fun getAvgUser(
+        supirId: String
+    ) {
+        viewModelScope.launch {
+            _avgUser.value = Resource.loading()
+            useCase.getAvgUser(supirId).collect {
+                _avgUser.value = it
+            }
+        }
+    }
+
+    private val _todayUser: MutableLiveData<Resource<Int>> = MutableLiveData()
+    val todayUser: LiveData<Resource<Int>> = _todayUser
+
+    fun getUserToday(
+        supirId: String
+    ) {
+        viewModelScope.launch {
+            _todayUser.value = Resource.loading()
+            useCase.getUserToday(supirId).collect {
+                _todayUser.value = it
+            }
+        }
+    }
 }

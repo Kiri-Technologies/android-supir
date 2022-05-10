@@ -28,89 +28,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvLabel" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn20"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="@color/white"
-        android:paddingVertical="7dp"
-        android:text="Rp. 20.000"
-        android:textAlignment="center"
-        app:cornerRadius="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/btn40"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvLabel2" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn40"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="@color/white"
-        android:paddingVertical="7dp"
-        android:text="Rp. 40.000"
-        android:textAlignment="center"
-        app:cornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn20"
-        app:layout_constraintTop_toBottomOf="@id/tvLabel2" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn50"
-        android:layout_width="150dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMoney"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/white"
-        android:paddingVertical="7dp"
-        android:text="Rp. 50.000"
-        android:textAlignment="center"
-        app:cornerRadius="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/btn70"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn20" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn70"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/white"
-        android:paddingVertical="7dp"
-        android:text="Rp. 70.000"
-        android:textAlignment="center"
-        app:cornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn50"
-        app:layout_constraintTop_toBottomOf="@id/btn40" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn100"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/white"
-        android:paddingVertical="7dp"
-        android:text="Rp. 100.000"
-        android:textAlignment="center"
-        app:cornerRadius="10dp"
-        app:layout_constraintEnd_toStartOf="@id/btn150"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn50" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn150"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/white"
-        android:paddingVertical="7dp"
-        android:text="Rp. 150.000"
-        android:textAlignment="center"
-        app:cornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn100"
-        app:layout_constraintTop_toBottomOf="@id/btn70" />
+        app:layout_constraintTop_toBottomOf="@id/tvLabel2"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:itemCount="6"
+        tools:listitem="@layout/earnings_note_item"/>
 
     <TextView
         android:id="@+id/tvEarnings"
@@ -120,7 +46,7 @@
         android:gravity="center"
         android:textAppearance="@style/textViewBody1"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/btn100"
+        app:layout_constraintTop_toBottomOf="@id/rvMoney"
         tools:text="Rp. 100000" />
 
     <View

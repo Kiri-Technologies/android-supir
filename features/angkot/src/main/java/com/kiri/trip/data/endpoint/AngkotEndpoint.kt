@@ -67,4 +67,14 @@ interface AngkotEndpoint {
         @Query("angkot_id") angkotId: String,
         @Query("supir_id") supirId: String
     ): Response<ApiResponse<Int>>
+
+    @GET("ownersupir/chart/averagePenumpangPernarik")
+    suspend fun getAvgUser(
+        @Query("supir_id") supirId: String
+    ): Response<ApiResponse<Int>>
+
+    @GET("ownersupir/chart/totalPenumpangHariIni")
+    suspend fun getUserToday(
+        @Query("supir_id") supirId: String
+    ): Response<ApiResponse<Int>>
 }

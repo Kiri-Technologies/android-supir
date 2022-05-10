@@ -53,4 +53,14 @@ interface AngkotResource {
     fun onTodayEarningsLoading() {}
     fun onTodayEarningsSuccess(data: ApiResponse<Int>?) {}
     fun onTodayEarningsFailed(error: String?) {}
+
+    // AvgUser
+    fun onAvgUserLoading() {}
+    fun onAvgUserSuccess(data: ApiResponse<Int>?) {}
+    fun onAvgUserFailed(error: String?) {}
+
+    // UserToday
+    fun onUserTodayLoading() {}
+    fun onAUserTodaySuccess(data: ApiResponse<Int>?) {}
+    fun onUserTodayFailed(error: String?) {}
 }

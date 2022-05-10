@@ -1,19 +1,24 @@
 package com.kiri.android.view.fragment
 
-import android.content.res.Resources.Theme
 import android.os.Bundle
-import android.view.ContextThemeWrapper
 import android.view.View
 import android.widget.Button
-import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.kiri.android.R
 import com.kiri.android.databinding.FragmentEarningsNoteBinding
-import com.kiri.common.utils.shortToast
+import com.kiri.android.view.adapter.EarningsNoteAdapter
+import com.kiri.ui.selectedBtn
+import com.kiri.ui.unSelectedBtn
 
 class CreateEarningsFragment : Fragment(R.layout.fragment_earnings_note) {
     private val binding by viewBinding<FragmentEarningsNoteBinding>()
+    private val adapterBtn by lazy {
+        EarningsNoteAdapter()
+    }
+    private lateinit var dataBtn: List<String>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -22,54 +27,35 @@ class CreateEarningsFragment : Fragment(R.layout.fragment_earnings_note) {
         initAction()
     }
 
-    private fun initData() {}
+    private fun initData() {
+        dataBtn = listOf(
+            "Rp. 20.000",
+            "Rp. 40.000",
+            "Rp. 50.000",
+            "Rp. 70.000",
+            "Rp. 100.000",
+            "Rp. 150.000"
+        )
+    }
+
     private fun initUI() = with(binding) {
-        val listBtn = listOf(
-            R.id.btn20, R.id.btn40, R.id.btn50, R.id.btn70, R.id.btn100, R.id.btn150
-        )
+        rvMoney.layoutManager = GridLayoutManager(context, 2)
+        rvMoney.adapter = adapterBtn
+        adapterBtn.addData(dataBtn)
     }
 
-    private fun selectedBtn(btn: Button) {
-        val theme: Theme = ContextThemeWrapper(
-            context,
-            R.style.Theme_Kiri
-        ).theme
-        btn.setBackgroundColor(
-            ResourcesCompat.getColor(
-                resources,
-                R.color.blue_color,
-                theme
-            )
-        )
-        btn.setTextColor(
-            ResourcesCompat.getColor(
-                resources,
-                R.color.white,
-                theme
-            )
-        )
-    }
+    private fun initAction() {
+        adapterBtn.setOnItemClickListener { adapter, _, position ->
+            val data = adapter.data[position] as String
+            binding.rvMoney.children.forEach {
+                if (it.tag == data) {
+                    context?.selectedBtn(it as Button)
+                } else {
+                    context?.unSelectedBtn(it as Button)
+                }
+            }
 
-    private fun unSelectedBtn(btn: Button) {
-        val theme: Theme = ContextThemeWrapper(
-            context,
-            R.style.Theme_Kiri
-        ).theme
-        btn.setBackgroundColor(
-            ResourcesCompat.getColor(
-                resources,
-                R.color.white,
-                theme
-            )
-        )
-        btn.setTextColor(
-            ResourcesCompat.getColor(
-                resources,
-                R.color.black,
-                theme
-            )
-        )
+            binding.tvEarnings.text = data
+        }
     }
-
-    private fun initAction() {}
 }

@@ -1,6 +1,5 @@
 package com.kiri.trip.data
 
-import com.kiri.common.utils.ApiResponse
 import com.kiri.common.utils.Resource
 import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.FeedbackData
@@ -8,7 +7,6 @@ import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Response
 
 interface AngkotRepository {
     suspend fun getTripHistory(sopirId: String): Flow<Resource<List<TripHistoryData>>>
@@ -41,6 +39,14 @@ interface AngkotRepository {
 
     suspend fun getTodayEarning(
         angkotId: String,
+        supirId: String
+    ): Flow<Resource<Int>>
+
+    suspend fun getAvgUser(
+        supirId: String
+    ): Flow<Resource<Int>>
+
+    suspend fun getUserToday(
         supirId: String
     ): Flow<Resource<Int>>
 }

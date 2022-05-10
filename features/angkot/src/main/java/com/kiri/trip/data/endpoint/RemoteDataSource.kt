@@ -60,4 +60,12 @@ class RemoteDataSource(private val endpoint: AngkotEndpoint) : AngkotEndpoint {
     ): Response<ApiResponse<Int>> {
         return endpoint.getTodayEarning(angkotId, supirId)
     }
+
+    override suspend fun getAvgUser(supirId: String): Response<ApiResponse<Int>> {
+        return endpoint.getAvgUser(supirId)
+    }
+
+    override suspend fun getUserToday(supirId: String): Response<ApiResponse<Int>> {
+        return endpoint.getUserToday(supirId)
+    }
 }

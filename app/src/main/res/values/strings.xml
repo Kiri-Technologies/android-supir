@@ -30,4 +30,9 @@
     <string name="label_all_feedback">Semua Ulasan Penumpang</string>
     <string name="label_add">tambahkan</string>
     <string name="label_empty_data">Data Tidak Ditemukan</string>
+    <string name="label_avg_user">Rata - rata penumpang :</string>
+    <string name="label_user_today">Penumpang hari ini :</string>
+    <string name="label_perform_today">Performa hari ini</string>
+    <string name="label_button_home">Ayo narik angkot \nsekarang!</string>
+    <string name="label_angkot_used">Angkot yang digunakan</string>
 </resources>

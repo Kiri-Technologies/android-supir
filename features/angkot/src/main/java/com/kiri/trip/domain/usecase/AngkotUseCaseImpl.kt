@@ -66,4 +66,12 @@ class AngkotUseCaseImpl(private val angkotRepositoryImpl: AngkotRepositoryImpl) 
     override suspend fun getTodayEarning(angkotId: String, supirId: String): Flow<Resource<Int>> {
         return angkotRepositoryImpl.getTodayEarning(angkotId, supirId)
     }
+
+    override suspend fun getAvgUser(supirId: String): Flow<Resource<Int>> {
+        return angkotRepositoryImpl.getAvgUser(supirId)
+    }
+
+    override suspend fun getUserToday(supirId: String): Flow<Resource<Int>> {
+        return angkotRepositoryImpl.getUserToday(supirId)
+    }
 }

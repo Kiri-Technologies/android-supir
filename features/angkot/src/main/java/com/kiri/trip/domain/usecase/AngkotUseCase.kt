@@ -42,4 +42,12 @@ interface AngkotUseCase {
         angkotId: String,
         supirId: String
     ): Flow<Resource<Int>>
+
+    suspend fun getAvgUser(
+        supirId: String
+    ): Flow<Resource<Int>>
+
+    suspend fun getUserToday(
+        supirId: String
+    ): Flow<Resource<Int>>
 }
