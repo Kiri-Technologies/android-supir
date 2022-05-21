@@ -2,6 +2,7 @@ package com.kiri.trip.presentation.viewmodel
 
 import com.kiri.common.utils.ApiResponse
 import com.kiri.trip.data.models.AngkotConfirmData
+import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.TripHistoryData
@@ -63,4 +64,9 @@ interface AngkotResource {
     fun onUserTodayLoading() {}
     fun onAUserTodaySuccess(data: ApiResponse<Int>?) {}
     fun onUserTodayFailed(error: String?) {}
+
+    // EarningsToday
+    fun onEarningsTodayLoading() {}
+    fun onEarningsTodaySuccess(data: ApiResponse<EarningsByTodayData>?) {}
+    fun onEarningsTodayFailed(error: String?) {}
 }

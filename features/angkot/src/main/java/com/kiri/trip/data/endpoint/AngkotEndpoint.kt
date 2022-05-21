@@ -2,6 +2,7 @@ package com.kiri.trip.data.endpoint
 
 import com.kiri.common.utils.ApiResponse
 import com.kiri.trip.data.models.AngkotConfirmData
+import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.TotalEarningsData
@@ -77,4 +78,17 @@ interface AngkotEndpoint {
     suspend fun getUserToday(
         @Query("supir_id") supirId: String
     ): Response<ApiResponse<Int>>
+
+    @GET("ownersupir/chart/pendapatanHarian")
+    suspend fun getEarningsByToday(
+        @Query("angkot_id") angkotId: String,
+        @Query("supir_id") supirId: String
+    ): Response<ApiResponse<EarningsByTodayData>>
+
+//    @GET("ownersupir/riwayat/find")
+//    suspend fun contoh(
+//        @Query("angkot_id") angkotId: String,
+//        @Query("supir_id") supirId: String,
+//        @Query("jumlah_pendapatan") earnings: String? = null
+//    ): Response<ApiResponse<List<RiwayatNarikData>>>
 }

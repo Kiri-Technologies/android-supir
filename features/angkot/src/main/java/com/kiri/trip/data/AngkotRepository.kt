@@ -2,6 +2,7 @@ package com.kiri.trip.data
 
 import com.kiri.common.utils.Resource
 import com.kiri.trip.data.models.AngkotConfirmData
+import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.TotalEarningsData
@@ -49,4 +50,9 @@ interface AngkotRepository {
     suspend fun getUserToday(
         supirId: String
     ): Flow<Resource<Int>>
+
+    suspend fun getEarningsByToday(
+        angkotId: String,
+        supirId: String
+    ): Flow<Resource<EarningsByTodayData>>
 }

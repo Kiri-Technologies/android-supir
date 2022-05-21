@@ -12,10 +12,17 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.github.mikephil.charting.components.AxisBase
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.google.gson.Gson
 import com.kiri.account.data.models.ProfileData
 import com.kiri.android.R
 import com.kiri.android.databinding.DetailAngkotFragmentBinding
+import com.kiri.android.model.Score
 import com.kiri.android.view.adapter.FeedbackAdapter
 import com.kiri.android.view.adapter.RideHistoryAdapter
 import com.kiri.android.view.adapter.TripAngkotAdapter
@@ -23,6 +30,7 @@ import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.ApiResponse
 import com.kiri.common.utils.shortToast
 import com.kiri.common.utils.toFormatRupiah
+import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.TripHistoryData
 import com.kiri.trip.domain.usecase.models.TotalEarningsDomain
@@ -48,6 +56,8 @@ class DetailAngkotFragment : Fragment(R.layout.detail_angkot_fragment), AngkotRe
     private val feedbackAdapter by lazy {
         FeedbackAdapter()
     }
+
+    private var scoreList = ArrayList<Score>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,6 +88,7 @@ class DetailAngkotFragment : Fragment(R.layout.detail_angkot_fragment), AngkotRe
             viewModel.getTripByAngkot(1, angkotId, it)
             viewModel.getTotalEarnings(angkotId, it)
             viewModel.getTodayEarnings(angkotId, it)
+            viewModel.getEarningsToday(angkotId, it)
         }
     }
 
@@ -94,6 +105,61 @@ class DetailAngkotFragment : Fragment(R.layout.detail_angkot_fragment), AngkotRe
         rideHistoryAdapter.setEmptyView(R.layout.empty_view_item)
         tripAngkotAdapter.setEmptyView(R.layout.empty_view_item)
         feedbackAdapter.setEmptyView(R.layout.empty_view_item)
+    }
+
+    private fun initBarChart() = with(binding) {
+//        hide grid lines
+        barChart.axisLeft.setDrawGridLines(false)
+        val xAxis: XAxis = barChart.xAxis
+        xAxis.setDrawGridLines(false)
+        xAxis.setDrawAxisLine(false)
+
+        // remove right y-axis
+        barChart.axisRight.isEnabled = false
+
+        // remove legend
+        barChart.legend.isEnabled = false
+
+        // remove description label
+        barChart.description.isEnabled = false
+
+        // add animation
+        barChart.animateY(3000)
+
+        // to draw label on xAxis
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.valueFormatter = MyAxisFormatter()
+        xAxis.setDrawLabels(true)
+        xAxis.granularity = 1f
+    }
+
+    inner class MyAxisFormatter : IndexAxisValueFormatter() {
+
+        override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+            val index = value.toInt()
+            return if (index < scoreList.size) {
+                scoreList[index].name
+            } else {
+                ""
+            }
+        }
+    }
+
+    private fun chartData() = with(binding) {
+        // now draw bar chart with dynamic data
+        val entries: ArrayList<BarEntry> = ArrayList()
+
+        // you can replace this data object with  your custom object
+        for (i in scoreList.indices) {
+            val score = scoreList[i]
+            entries.add(BarEntry(i.toFloat(), score.earnings.toFloat()))
+        }
+
+        val barDataSet = BarDataSet(entries, "")
+        barDataSet.color = resources.getColor(R.color.color_primary, null)
+        val data = BarData(barDataSet)
+        barChart.data = data
+        barChart.invalidate()
     }
 
     private fun initAction() = with(binding) {
@@ -216,5 +282,23 @@ class DetailAngkotFragment : Fragment(R.layout.detail_angkot_fragment), AngkotRe
         binding.tvTodayEarnings.visible()
         binding.pbTodayEarnings.gone()
         binding.tvTodayEarnings.text = "---"
+    }
+
+    override fun onEarningsTodaySuccess(data: ApiResponse<EarningsByTodayData>?) {
+        super.onEarningsTodaySuccess(data)
+        scoreList.clear()
+        data?.dataData?.day1?.let { Score("Senin", it) }?.let { scoreList.add(it) }
+        data?.dataData?.day2?.let { Score("Selasa", it) }?.let { scoreList.add(it) }
+        data?.dataData?.day3?.let { Score("Rabu", it) }?.let { scoreList.add(it) }
+        data?.dataData?.day4?.let { Score("Kamis", it) }?.let { scoreList.add(it) }
+        data?.dataData?.day5?.let { Score("Jumat", it) }?.let { scoreList.add(it) }
+        data?.dataData?.day6?.let { Score("Sabtu", it) }?.let { scoreList.add(it) }
+        data?.dataData?.day7?.let { Score("Minggu", it) }?.let { scoreList.add(it) }
+
+        val allEarning = scoreList.all { it.earnings == 0 }
+        if (!allEarning) {
+            initBarChart()
+            chartData()
+        }
     }
 }

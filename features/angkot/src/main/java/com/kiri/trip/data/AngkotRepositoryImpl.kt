@@ -4,6 +4,7 @@ import com.kiri.common.utils.BaseApiResponse
 import com.kiri.common.utils.Resource
 import com.kiri.trip.data.endpoint.RemoteDataSource
 import com.kiri.trip.data.models.AngkotConfirmData
+import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.TotalEarningsData
@@ -92,5 +93,12 @@ class AngkotRepositoryImpl(private val remoteDataSource: RemoteDataSource) : Ang
 
     override suspend fun getUserToday(supirId: String): Flow<Resource<Int>> {
         return flow { emit(safeApiCall { remoteDataSource.getUserToday(supirId) }) }
+    }
+
+    override suspend fun getEarningsByToday(
+        angkotId: String,
+        supirId: String
+    ): Flow<Resource<EarningsByTodayData>> {
+        return flow { emit(safeApiCall { remoteDataSource.getEarningsByToday(angkotId, supirId) }) }
     }
 }

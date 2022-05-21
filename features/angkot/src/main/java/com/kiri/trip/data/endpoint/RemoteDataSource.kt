@@ -2,6 +2,7 @@ package com.kiri.trip.data.endpoint
 
 import com.kiri.common.utils.ApiResponse
 import com.kiri.trip.data.models.AngkotConfirmData
+import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.TotalEarningsData
@@ -67,5 +68,12 @@ class RemoteDataSource(private val endpoint: AngkotEndpoint) : AngkotEndpoint {
 
     override suspend fun getUserToday(supirId: String): Response<ApiResponse<Int>> {
         return endpoint.getUserToday(supirId)
+    }
+
+    override suspend fun getEarningsByToday(
+        angkotId: String,
+        supirId: String
+    ): Response<ApiResponse<EarningsByTodayData>> {
+        return endpoint.getEarningsByToday(angkotId, supirId)
     }
 }

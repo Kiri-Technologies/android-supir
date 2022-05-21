@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kiri.common.utils.Resource
 import com.kiri.trip.data.models.AngkotConfirmData
+import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.TripHistoryData
@@ -166,6 +167,21 @@ class AngkotViewModel(private val useCase: AngkotUseCase) : ViewModel() {
             _todayUser.value = Resource.loading()
             useCase.getUserToday(supirId).collect {
                 _todayUser.value = it
+            }
+        }
+    }
+
+    private val _earningsToday: MutableLiveData<Resource<EarningsByTodayData>> = MutableLiveData()
+    val earningsToday: LiveData<Resource<EarningsByTodayData>> = _earningsToday
+
+    fun getEarningsToday(
+        angkotId: String,
+        supirId: String
+    ) {
+        viewModelScope.launch {
+            _earningsToday.value = Resource.loading()
+            useCase.getEarningsByToday(angkotId, supirId).collect {
+                _earningsToday.value = it
             }
         }
     }
