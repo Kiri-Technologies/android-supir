@@ -17,6 +17,8 @@ import com.kiri.android.databinding.ActivityHomeBinding
 import com.kiri.common.data.pref.PrefKey
 import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.ConnectionCheck
+import com.kiri.ui.gone
+import com.kiri.ui.visible
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -52,6 +54,15 @@ class HomeActivity : AppCompatActivity(), AccountResource {
         )
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.navigation_home -> navView.visible()
+                R.id.navigation_angkot -> navView.visible()
+                R.id.navigation_history -> navView.visible()
+                R.id.account_fragment -> navView.visible()
+                else -> navView.gone()
+            }
+        }
         connectionCheck()
     }
 

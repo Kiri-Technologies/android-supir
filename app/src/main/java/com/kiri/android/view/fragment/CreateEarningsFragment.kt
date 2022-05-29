@@ -1,5 +1,6 @@
 package com.kiri.android.view.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -44,6 +45,7 @@ class CreateEarningsFragment : Fragment(R.layout.fragment_earnings_note) {
         adapterBtn.addData(dataBtn)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initAction() {
         adapterBtn.setOnItemClickListener { adapter, _, position ->
             val data = adapter.data[position] as String
@@ -54,8 +56,7 @@ class CreateEarningsFragment : Fragment(R.layout.fragment_earnings_note) {
                     context?.unSelectedBtn(it as Button)
                 }
             }
-
-            binding.tvEarnings.text = data
+            binding.etEarnings.setText(data.substring(4))
         }
     }
 }

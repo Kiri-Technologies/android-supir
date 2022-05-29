@@ -3,6 +3,7 @@ package com.kiri.android.view.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.kiri.android.R
@@ -21,6 +22,7 @@ class RideHistoryFragment : Fragment(R.layout.board_history_fragment) {
         super.onViewCreated(view, savedInstanceState)
         initData()
         initUI()
+        initAction()
     }
 
     private fun initData() {
@@ -36,5 +38,11 @@ class RideHistoryFragment : Fragment(R.layout.board_history_fragment) {
         tvVehicleId.text = item?.vehicle?.platNomor
         val route = "${item?.vehicle?.route?.titikAwal} - ${item?.vehicle?.route?.titikAkhir}"
         tvTripRoute.text = route
+    }
+
+    private fun initAction() {
+        adapter.setOnItemChildClickListener { _, _, _ ->
+            findNavController().navigate(RideHistoryFragmentDirections.actionRideHistoryFragmentToCreateEarningsFragment())
+        }
     }
 }

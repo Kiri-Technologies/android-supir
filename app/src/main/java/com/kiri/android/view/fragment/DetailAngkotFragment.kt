@@ -58,6 +58,8 @@ class DetailAngkotFragment : Fragment(R.layout.detail_angkot_fragment), AngkotRe
     }
 
     private var scoreList = ArrayList<Score>()
+    private var angkotId: String = ""
+    private var supirId: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,7 +80,7 @@ class DetailAngkotFragment : Fragment(R.layout.detail_angkot_fragment), AngkotRe
     }
 
     private fun initData() {
-        val angkotId = args.angkotConfirmData.id.toString()
+        angkotId = args.angkotConfirmData.id.toString()
         val supir = Gson().fromJson(pref.accountData, ProfileData::class.java)
         supir.id?.let {
             viewModel.getRideHistory(
@@ -89,6 +91,7 @@ class DetailAngkotFragment : Fragment(R.layout.detail_angkot_fragment), AngkotRe
             viewModel.getTotalEarnings(angkotId, it)
             viewModel.getTodayEarnings(angkotId, it)
             viewModel.getEarningsToday(angkotId, it)
+            supirId = it
         }
     }
 
@@ -184,8 +187,14 @@ class DetailAngkotFragment : Fragment(R.layout.detail_angkot_fragment), AngkotRe
                 )
             )
         }
-        btnCreateEarnings.setOnClickListener {
-            findNavController().navigate(DetailAngkotFragmentDirections.actionDetailAngkotFragmentToCreateEarningsFragment())
+        if (supirId.isNotEmpty() && angkotId.isNotEmpty()) {
+            btnCreateEarnings.setOnClickListener {
+                findNavController().navigate(
+                    DetailAngkotFragmentDirections.actionDetailAngkotFragmentToEarningListFragment(
+                        angkotId, supirId
+                    )
+                )
+            }
         }
     }
 

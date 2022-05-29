@@ -78,8 +78,8 @@
             android:id="@+id/action_detailAngkotFragment_to_qrCodeFragment"
             app:destination="@id/qrCodeFragment" />
         <action
-            android:id="@+id/action_detailAngkotFragment_to_createEarningsFragment"
-            app:destination="@id/createEarningsFragment" />
+            android:id="@+id/action_detailAngkotFragment_to_earningListFragment"
+            app:destination="@id/earningListFragment" />
     </fragment>
     <fragment
         android:id="@+id/angkotHistoryFragment"
@@ -102,6 +102,9 @@
             android:defaultValue="@null"
             app:argType="com.kiri.trip.data.models.RiwayatNarikData[]"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_rideHistoryFragment_to_createEarningsFragment"
+            app:destination="@id/createEarningsFragment" />
     </fragment>
     <fragment
         android:id="@+id/feedbackDetailFragment"
@@ -119,5 +122,20 @@
         android:name="com.kiri.android.view.fragment.CreateEarningsFragment"
         android:label="Catatan Pendapatan"
         tools:layout="@layout/fragment_earnings_note" />
+    <fragment
+        android:id="@+id/earningListFragment"
+        android:name="com.kiri.android.view.fragment.EarningListFragment"
+        android:label="Catat Pendapatan"
+        tools:layout="@layout/board_history_fragment">
+        <argument
+            android:name="angkotId"
+            app:argType="string" />
+        <argument
+            android:name="supirId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_earningListFragment_to_createEarningsFragment"
+            app:destination="@id/createEarningsFragment" />
+    </fragment>
 
 </navigation>

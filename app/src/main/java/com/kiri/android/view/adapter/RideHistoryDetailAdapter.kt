@@ -25,7 +25,7 @@ class RideHistoryDetailAdapter :
             .setText(R.id.tvClock, "$startRide - $endRide")
             .setText(R.id.tvEarnings, earnings)
 
-        if (earnings?.isEmpty() == true) {
+        if (earnings.isNullOrEmpty()) {
             holder.getView<TextView>(R.id.tvEarnings).gone()
             holder.getView<TextView>(R.id.tvAddEarnings).visible()
         }
