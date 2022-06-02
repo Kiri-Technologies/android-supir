@@ -76,12 +76,29 @@ class FeedbackFragment :
     }
 
     private fun initUI() {
+        ratingButton()
+//        binding.rbFeedback.setSmileySelectedListener {
+//            review.value = it.name
+//        }
+        binding.etComment.doOnTextChanged { text, _, _, _ ->
+            comment.value = text.toString()
+        }
+    }
+
+    private fun ratingButton() {
         val rating = listOf(
-            SmileyRating.Type.BAD,
-            SmileyRating.Type.GOOD,
             SmileyRating.Type.TERRIBLE,
-            SmileyRating.Type.GREAT,
-            SmileyRating.Type.OKAY
+            SmileyRating.Type.BAD,
+            SmileyRating.Type.OKAY,
+            SmileyRating.Type.GOOD,
+            SmileyRating.Type.GREAT
+        )
+        val title = listOf(
+            "awful",
+            "sad",
+            "neutral",
+            "happy",
+            "excellent"
         )
         rating.forEach {
             binding.rbFeedback.setFaceBackgroundColor(
@@ -93,12 +110,22 @@ class FeedbackFragment :
                 ContextCompat.getColor(requireContext(), R.color.white)
             )
         }
-
-        binding.rbFeedback.setSmileySelectedListener {
-            review.value = it.name
+        binding.rbFeedback.apply {
+            setTitle(rating[0], title[0].uppercase())
+            setTitle(rating[1], title[1].uppercase())
+            setTitle(rating[2], title[2].uppercase())
+            setTitle(rating[3], title[3].uppercase())
+            setTitle(rating[4], title[4].uppercase())
         }
-        binding.etComment.doOnTextChanged { text, _, _, _ ->
-            comment.value = text.toString()
+        binding.rbFeedback.setSmileySelectedListener {
+            when (it) {
+                rating[0] -> review.value = title[0]
+                rating[1] -> review.value = title[1]
+                rating[2] -> review.value = title[2]
+                rating[3] -> review.value = title[3]
+                rating[4] -> review.value = title[4]
+                else -> {}
+            }
         }
     }
 
