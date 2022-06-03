@@ -9,6 +9,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.kiri.android.R
 import com.kiri.android.databinding.BoardHistoryFragmentBinding
 import com.kiri.android.view.adapter.RideHistoryDetailAdapter
+import com.kiri.common.utils.shortToast
+import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.ui.gone
 
 class RideHistoryFragment : Fragment(R.layout.board_history_fragment) {
@@ -17,6 +19,7 @@ class RideHistoryFragment : Fragment(R.layout.board_history_fragment) {
     private val adapter by lazy {
         RideHistoryDetailAdapter()
     }
+    private var earningId: String = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,8 +44,16 @@ class RideHistoryFragment : Fragment(R.layout.board_history_fragment) {
     }
 
     private fun initAction() {
-        adapter.setOnItemChildClickListener { _, _, _ ->
-            findNavController().navigate(RideHistoryFragmentDirections.actionRideHistoryFragmentToCreateEarningsFragment())
+        adapter.setOnItemChildClickListener { adapter, _, position ->
+            val data = adapter.data[position] as RiwayatNarikData
+            earningId = data.id.toString()
+            if (earningId.isEmpty()) {
+                shortToast(requireContext(), "Catatan Tidak Ditemukan")
+            } else findNavController().navigate(
+                RideHistoryFragmentDirections.actionRideHistoryFragmentToCreateEarningsFragment(
+                    earningId
+                )
+            )
         }
     }
 }

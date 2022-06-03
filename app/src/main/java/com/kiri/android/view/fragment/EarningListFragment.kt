@@ -23,6 +23,7 @@ class EarningListFragment : Fragment(R.layout.board_history_fragment), AngkotRes
     private val binding by viewBinding<BoardHistoryFragmentBinding>()
     private val args: EarningListFragmentArgs by navArgs()
     private val viewModel by viewModel<AngkotViewModel> { parametersOf(lifecycle, this) }
+    private var earningId: String = ""
     private val adapter by lazy {
         EarningListAdapter()
     }
@@ -47,8 +48,18 @@ class EarningListFragment : Fragment(R.layout.board_history_fragment), AngkotRes
     }
 
     private fun initAction() {
-        adapter.setOnItemClickListener { _, _, _ ->
-            findNavController().navigate(EarningListFragmentDirections.actionEarningListFragmentToCreateEarningsFragment())
+        adapter.setOnItemClickListener { adapter, _, position ->
+            val data = adapter.data[position] as RiwayatNarikData
+            earningId = data.id.toString()
+            if (earningId.isEmpty()) {
+                shortToast(requireContext(), "Catatan Tidak Ditemukan")
+            } else {
+                findNavController().navigate(
+                    EarningListFragmentDirections.actionEarningListFragmentToCreateEarningsFragment(
+                        earningId
+                    )
+                )
+            }
         }
     }
 

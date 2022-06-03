@@ -85,10 +85,10 @@ interface AngkotEndpoint {
         @Query("supir_id") supirId: String
     ): Response<ApiResponse<EarningsByTodayData>>
 
-//    @GET("ownersupir/riwayat/find")
-//    suspend fun contoh(
-//        @Query("angkot_id") angkotId: String,
-//        @Query("supir_id") supirId: String,
-//        @Query("jumlah_pendapatan") earnings: String? = null
-//    ): Response<ApiResponse<List<RiwayatNarikData>>>
+    @FormUrlEncoded
+    @POST("supir/riwayat/{earning_id}/update")
+    suspend fun createEarningNote(
+        @Path("earning_id") earningId: String,
+        @Field("jumlah_pendapatan") earnings: Int
+    ): Response<ApiResponse<Nothing>>
 }

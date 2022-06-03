@@ -82,4 +82,11 @@ class AngkotUseCaseImpl(private val angkotRepositoryImpl: AngkotRepositoryImpl) 
     ): Flow<Resource<EarningsByTodayData>> {
         return angkotRepositoryImpl.getEarningsByToday(angkotId, supirId)
     }
+
+    override suspend fun createEarningNote(
+        earningId: String,
+        earnings: Int
+    ): Flow<Resource<Nothing>> {
+        return angkotRepositoryImpl.createEarningNote(earningId, earnings)
+    }
 }

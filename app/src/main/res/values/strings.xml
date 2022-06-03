@@ -37,4 +37,5 @@
     <string name="label_angkot_earning">Pilih riwayat narik</string>
     <string name="label_ride_time">Waktu Narik</string>
     <string name="label_opening_earnings_fragment">Kamu bisa catat pendapatan mu hari ini disini</string>
+    <string name="label_welcome">Selamat Datang,</string>
 </resources>

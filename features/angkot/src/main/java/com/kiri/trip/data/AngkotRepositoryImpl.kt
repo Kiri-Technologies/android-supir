@@ -101,4 +101,20 @@ class AngkotRepositoryImpl(private val remoteDataSource: RemoteDataSource) : Ang
     ): Flow<Resource<EarningsByTodayData>> {
         return flow { emit(safeApiCall { remoteDataSource.getEarningsByToday(angkotId, supirId) }) }
     }
+
+    override suspend fun createEarningNote(
+        earningId: String,
+        earnings: Int
+    ): Flow<Resource<Nothing>> {
+        return flow {
+            emit(
+                safeApiCall {
+                    remoteDataSource.createEarningNote(
+                        earningId,
+                        earnings
+                    )
+                }
+            )
+        }
+    }
 }

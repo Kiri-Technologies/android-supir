@@ -55,4 +55,9 @@ interface AngkotRepository {
         angkotId: String,
         supirId: String
     ): Flow<Resource<EarningsByTodayData>>
+
+    suspend fun createEarningNote(
+        earningId: String,
+        earnings: Int
+    ): Flow<Resource<Nothing>>
 }

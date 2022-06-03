@@ -40,4 +40,7 @@ dependencies {
 
     // lottie
     implementation lottieDependency.lottie
+
+    //MPChart
+    implementation libraries.MpChart
 }

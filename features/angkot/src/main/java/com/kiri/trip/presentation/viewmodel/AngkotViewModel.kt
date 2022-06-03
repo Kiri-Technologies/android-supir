@@ -185,4 +185,19 @@ class AngkotViewModel(private val useCase: AngkotUseCase) : ViewModel() {
             }
         }
     }
+
+    private val _createEarning: MutableLiveData<Resource<Nothing>> = MutableLiveData()
+    val createEarning: LiveData<Resource<Nothing>> = _createEarning
+
+    fun createEarning(
+        earningId: String,
+        earning: Int
+    ) {
+        viewModelScope.launch {
+            _createEarning.value = Resource.loading()
+            useCase.createEarningNote(earningId, earning).collect {
+                _createEarning.value = it
+            }
+        }
+    }
 }

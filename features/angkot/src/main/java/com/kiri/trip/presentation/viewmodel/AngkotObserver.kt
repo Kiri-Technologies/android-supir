@@ -102,5 +102,12 @@ class AngkotObserver(
                 Resource.Status.ERROR -> resource.onEarningsTodayFailed(it.error)
             }
         }
+        vm.createEarning.observe(owner) {
+            when (it.status) {
+                Resource.Status.LOADING -> resource.onCreateEarningLoading()
+                Resource.Status.SUCCESS -> resource.onCreateEarningSuccess(it.data)
+                Resource.Status.ERROR -> resource.onCreateEarningFailed(it.error)
+            }
+        }
     }
 }

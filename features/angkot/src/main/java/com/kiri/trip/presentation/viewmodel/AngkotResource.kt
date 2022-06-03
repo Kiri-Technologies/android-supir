@@ -69,4 +69,9 @@ interface AngkotResource {
     fun onEarningsTodayLoading() {}
     fun onEarningsTodaySuccess(data: ApiResponse<EarningsByTodayData>?) {}
     fun onEarningsTodayFailed(error: String?) {}
+
+    // CreateEarning
+    fun onCreateEarningLoading() {}
+    fun onCreateEarningSuccess(data: ApiResponse<Nothing>?) {}
+    fun onCreateEarningFailed(error: String?) {}
 }

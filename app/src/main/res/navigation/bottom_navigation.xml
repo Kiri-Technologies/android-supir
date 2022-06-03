@@ -121,7 +121,11 @@
         android:id="@+id/createEarningsFragment"
         android:name="com.kiri.android.view.fragment.CreateEarningsFragment"
         android:label="Catatan Pendapatan"
-        tools:layout="@layout/fragment_earnings_note" />
+        tools:layout="@layout/fragment_earnings_note" >
+        <argument
+            android:name="earningId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/earningListFragment"
         android:name="com.kiri.android.view.fragment.EarningListFragment"

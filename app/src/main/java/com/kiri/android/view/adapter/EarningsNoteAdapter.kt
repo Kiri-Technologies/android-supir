@@ -4,12 +4,13 @@ import android.widget.Button
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.kiri.android.R
+import com.kiri.common.utils.toFormatRupiah
 
 class EarningsNoteAdapter() :
     BaseQuickAdapter<String, BaseViewHolder>(R.layout.earnings_note_item) {
     override fun convert(holder: BaseViewHolder, item: String) {
         holder.getView<Button>(R.id.btn).apply {
-            text = item
+            text = item.toLong().toFormatRupiah()
             tag = item
         }
     }
