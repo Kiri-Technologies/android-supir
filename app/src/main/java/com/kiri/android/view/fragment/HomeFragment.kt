@@ -5,52 +5,43 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.gson.Gson
-import com.kiri.account.data.models.ProfileData
+import com.kiri.account.domain.usecase.model.ProfDom
+import com.kiri.account.presentation.viewmodel.AccountResource
+import com.kiri.account.presentation.viewmodel.AccountViewModel
 import com.kiri.android.R
 import com.kiri.android.data.chartData
 import com.kiri.android.databinding.HomeFragmentBinding
 import com.kiri.android.widget.initBarChart
 import com.kiri.common.data.model.Earning
-import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.ApiResponse
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.presentation.viewmodel.AngkotResource
 import com.kiri.trip.presentation.viewmodel.AngkotViewModel
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class HomeFragment : Fragment(R.layout.home_fragment), AngkotResource {
+class HomeFragment : Fragment(R.layout.home_fragment), AngkotResource, AccountResource {
     private val binding by viewBinding<HomeFragmentBinding>()
-    private val pref: PrefUseCase by inject()
     private val viewModel by viewModel<AngkotViewModel> { parametersOf(lifecycle, this) }
-    private lateinit var profile: ProfileData
+    private val viewModelProfile: AccountViewModel by viewModel {
+        parametersOf(lifecycle, this)
+    }
     private var earningList = ArrayList<Earning>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initData()
         initUI()
-        initAction()
     }
 
     private fun initData() {
-        profile = Gson().fromJson(pref.accountData, ProfileData::class.java)
-        profile.id?.let {
-            viewModel.getAvgUser(it)
-            viewModel.getUserToday(it)
-            viewModel.getEarningsToday("", it)
-        }
+        viewModelProfile.getProfile()
     }
 
     private fun initUI() {
         (requireActivity() as AppCompatActivity).title =
             getString(R.string.title_home)
-        binding.tvName.text = profile.name
     }
-
-    private fun initAction() {}
 
     override fun onAvgUserSuccess(data: ApiResponse<Int>?) {
         super.onAvgUserSuccess(data)
@@ -80,5 +71,15 @@ class HomeFragment : Fragment(R.layout.home_fragment), AngkotResource {
                 chartData(earningList)
             }
         }
+    }
+
+    override fun onProfileSuccess(data: ProfDom?) {
+        super.onProfileSuccess(data)
+        if (data != null) {
+            viewModel.getAvgUser(data.id)
+            viewModel.getUserToday(data.id)
+            viewModel.getEarningsToday("", data.id)
+        }
+        binding.tvName.text = data?.name
     }
 }

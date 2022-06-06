@@ -20,7 +20,7 @@ class PrefRepositoryImpl(private val sharedPref: SharedPref) : PrefRepository {
             }
         }
     override var accountData: String?
-        get() = sharedPref.preferences.getString(PrefKey.PROFILE, null)
+        get() = sharedPref.preferences.getString(PrefKey.PROFILE, "{}")
         set(value) {
             sharedPref.preferences.edit {
                 putString(PrefKey.PROFILE, value)
