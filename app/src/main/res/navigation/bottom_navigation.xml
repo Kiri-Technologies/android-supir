@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.kiri.android.view.fragment.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment">
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_angkot"
+            app:destination="@id/navigation_angkot" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_angkot"
@@ -49,15 +53,6 @@
         android:label="Masukan dan Saran"
         tools:layout="@layout/feedback_fragment" />
     <fragment
-        android:id="@+id/qrCodeFragment"
-        android:name="com.kiri.android.view.fragment.QrCodeFragment"
-        android:label="QR Code"
-        tools:layout="@layout/fragment_qr_code">
-        <argument
-            android:name="qrCode"
-            app:argType="string" />
-    </fragment>
-    <fragment
         android:id="@+id/detailAngkotFragment"
         android:name="com.kiri.android.view.fragment.DetailAngkotFragment"
         android:label="Detail Angkot"
@@ -75,11 +70,11 @@
             android:id="@+id/action_detailAngkotFragment_to_feedbackDetailFragment"
             app:destination="@id/feedbackDetailFragment" />
         <action
-            android:id="@+id/action_detailAngkotFragment_to_qrCodeFragment"
-            app:destination="@id/qrCodeFragment" />
-        <action
             android:id="@+id/action_detailAngkotFragment_to_earningListFragment"
             app:destination="@id/earningListFragment" />
+        <action
+            android:id="@+id/action_detailAngkotFragment_to_rideAngkotFragment"
+            app:destination="@id/rideAngkotFragment" />
     </fragment>
     <fragment
         android:id="@+id/angkotHistoryFragment"
@@ -121,7 +116,7 @@
         android:id="@+id/createEarningsFragment"
         android:name="com.kiri.android.view.fragment.CreateEarningsFragment"
         android:label="Catatan Pendapatan"
-        tools:layout="@layout/fragment_earnings_note" >
+        tools:layout="@layout/fragment_earnings_note">
         <argument
             android:name="earningId"
             app:argType="string" />
@@ -141,5 +136,10 @@
             android:id="@+id/action_earningListFragment_to_createEarningsFragment"
             app:destination="@id/createEarningsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/rideAngkotFragment"
+        android:name="com.kiri.android.view.fragment.RideAngkotFragment"
+        android:label="Tarik Angkot"
+        tools:layout="@layout/fragment_ride_angkot" />
 
 </navigation>

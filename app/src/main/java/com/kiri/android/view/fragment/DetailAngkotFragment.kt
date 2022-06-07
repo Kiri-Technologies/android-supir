@@ -38,7 +38,10 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class DetailAngkotFragment : Fragment(R.layout.detail_angkot_fragment), AngkotResource {
+class DetailAngkotFragment :
+    Fragment(R.layout.detail_angkot_fragment),
+    AngkotResource,
+    View.OnClickListener {
     private val binding by viewBinding<DetailAngkotFragmentBinding>()
     private val viewModel by viewModel<AngkotViewModel> { parametersOf(lifecycle, this) }
     private val args: DetailAngkotFragmentArgs by navArgs()
@@ -107,36 +110,13 @@ class DetailAngkotFragment : Fragment(R.layout.detail_angkot_fragment), AngkotRe
     }
 
     private fun initAction() = with(binding) {
-        tvTripHistoryMore.setOnClickListener {
-            findNavController().navigate(
-                DetailAngkotFragmentDirections.actionDetailAngkotFragmentToAngkotHistoryFragment(
-                    tripAngkotAdapter.data.toTypedArray()
-                )
-            )
-        }
-        tvRideMore.setOnClickListener {
-            findNavController().navigate(
-                DetailAngkotFragmentDirections.actionDetailAngkotFragmentToRideHistoryFragment(
-                    rideHistoryAdapter.data.toTypedArray()
-                )
-            )
-        }
-        tvFeedbackMore.setOnClickListener {
-            findNavController().navigate(
-                DetailAngkotFragmentDirections.actionDetailAngkotFragmentToFeedbackDetailFragment(
-                    tripAngkotAdapter.data.toTypedArray()
-                )
-            )
-        }
+        tvTripHistoryMore.setOnClickListener(this@DetailAngkotFragment)
+        tvRideMore.setOnClickListener(this@DetailAngkotFragment)
+        tvFeedbackMore.setOnClickListener(this@DetailAngkotFragment)
         if (supirId.isNotEmpty() && angkotId.isNotEmpty()) {
-            btnCreateEarnings.setOnClickListener {
-                findNavController().navigate(
-                    DetailAngkotFragmentDirections.actionDetailAngkotFragmentToEarningListFragment(
-                        angkotId, supirId
-                    )
-                )
-            }
+            btnCreateEarnings.setOnClickListener(this@DetailAngkotFragment)
         }
+        btnNarik.setOnClickListener(this@DetailAngkotFragment)
     }
 
     override fun onTripAngkotHistoryLoading() {
@@ -250,6 +230,34 @@ class DetailAngkotFragment : Fragment(R.layout.detail_angkot_fragment), AngkotRe
             binding.barChart.apply {
                 initBarChart(earningList)
                 chartData(earningList)
+            }
+        }
+    }
+
+    override fun onClick(v: View?) {
+        with(binding) {
+            when (v) {
+                tvTripHistoryMore -> findNavController().navigate(
+                    DetailAngkotFragmentDirections.actionDetailAngkotFragmentToAngkotHistoryFragment(
+                        tripAngkotAdapter.data.toTypedArray()
+                    )
+                )
+                tvRideMore -> findNavController().navigate(
+                    DetailAngkotFragmentDirections.actionDetailAngkotFragmentToRideHistoryFragment(
+                        rideHistoryAdapter.data.toTypedArray()
+                    )
+                )
+                tvFeedbackMore -> findNavController().navigate(
+                    DetailAngkotFragmentDirections.actionDetailAngkotFragmentToFeedbackDetailFragment(
+                        tripAngkotAdapter.data.toTypedArray()
+                    )
+                )
+                btnCreateEarnings -> findNavController().navigate(
+                    DetailAngkotFragmentDirections.actionDetailAngkotFragmentToEarningListFragment(
+                        angkotId, supirId
+                    )
+                )
+                btnNarik -> findNavController().navigate(DetailAngkotFragmentDirections.actionDetailAngkotFragmentToRideAngkotFragment())
             }
         }
     }

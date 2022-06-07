@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.kiri.account.domain.usecase.model.ProfDom
 import com.kiri.account.presentation.viewmodel.AccountResource
@@ -20,7 +21,11 @@ import com.kiri.trip.presentation.viewmodel.AngkotViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class HomeFragment : Fragment(R.layout.home_fragment), AngkotResource, AccountResource {
+class HomeFragment :
+    Fragment(R.layout.home_fragment),
+    AngkotResource,
+    AccountResource,
+    View.OnClickListener {
     private val binding by viewBinding<HomeFragmentBinding>()
     private val viewModel by viewModel<AngkotViewModel> { parametersOf(lifecycle, this) }
     private val viewModelProfile: AccountViewModel by viewModel {
@@ -32,6 +37,7 @@ class HomeFragment : Fragment(R.layout.home_fragment), AngkotResource, AccountRe
         super.onViewCreated(view, savedInstanceState)
         initData()
         initUI()
+        initAction()
     }
 
     private fun initData() {
@@ -41,6 +47,10 @@ class HomeFragment : Fragment(R.layout.home_fragment), AngkotResource, AccountRe
     private fun initUI() {
         (requireActivity() as AppCompatActivity).title =
             getString(R.string.title_home)
+    }
+
+    private fun initAction() {
+        binding.tvRide.setOnClickListener(this)
     }
 
     override fun onAvgUserSuccess(data: ApiResponse<Int>?) {
@@ -81,5 +91,11 @@ class HomeFragment : Fragment(R.layout.home_fragment), AngkotResource, AccountRe
             viewModel.getEarningsToday("", data.id)
         }
         binding.tvName.text = data?.name
+    }
+
+    override fun onClick(v: View?) {
+        when (v) {
+            binding.tvRide -> findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToNavigationAngkot())
+        }
     }
 }
