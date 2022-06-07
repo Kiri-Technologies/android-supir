@@ -17,6 +17,7 @@ import com.kiri.account.data.models.ProfileData
 import com.kiri.android.R
 import com.kiri.android.data.chartData
 import com.kiri.android.databinding.DetailAngkotFragmentBinding
+import com.kiri.android.view.activity.RideAngkotActivity
 import com.kiri.android.view.adapter.FeedbackAdapter
 import com.kiri.android.view.adapter.RideHistoryAdapter
 import com.kiri.android.view.adapter.TripAngkotAdapter
@@ -257,7 +258,15 @@ class DetailAngkotFragment :
                         angkotId, supirId
                     )
                 )
-                btnNarik -> findNavController().navigate(DetailAngkotFragmentDirections.actionDetailAngkotFragmentToRideAngkotFragment())
+                btnNarik -> {
+                    startActivity(
+                        Intent(
+                            requireContext(),
+                            RideAngkotActivity::class.java
+                        )
+                    )
+                }
+                else -> {}
             }
         }
     }

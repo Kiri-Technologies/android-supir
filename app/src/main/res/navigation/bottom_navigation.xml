@@ -73,8 +73,8 @@
             android:id="@+id/action_detailAngkotFragment_to_earningListFragment"
             app:destination="@id/earningListFragment" />
         <action
-            android:id="@+id/action_detailAngkotFragment_to_rideAngkotFragment"
-            app:destination="@id/rideAngkotFragment" />
+            android:id="@+id/action_detailAngkotFragment_to_rideAngkotActivity"
+            app:destination="@id/rideAngkotActivity" />
     </fragment>
     <fragment
         android:id="@+id/angkotHistoryFragment"
@@ -136,10 +136,10 @@
             android:id="@+id/action_earningListFragment_to_createEarningsFragment"
             app:destination="@id/createEarningsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/rideAngkotFragment"
-        android:name="com.kiri.android.view.fragment.RideAngkotFragment"
-        android:label="Tarik Angkot"
-        tools:layout="@layout/fragment_ride_angkot" />
+    <activity
+        android:id="@+id/rideAngkotActivity"
+        android:name="com.kiri.android.view.activity.RideAngkotActivity"
+        android:label="RideAngkotActivity"
+        tools:layout="@layout/activity_account" />
 
 </navigation>
