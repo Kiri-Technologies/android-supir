@@ -9,7 +9,6 @@ import com.kiri.android.R
 class AuthActivity : AppCompatActivity(R.layout.activity_auth) {
 
     private lateinit var navController: NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val navHostFragment =
@@ -25,5 +24,9 @@ class AuthActivity : AppCompatActivity(R.layout.activity_auth) {
         } else {
             super.onBackPressed()
         }
+    }
+
+    companion object {
+        const val IS_REGISTER = "register"
     }
 }

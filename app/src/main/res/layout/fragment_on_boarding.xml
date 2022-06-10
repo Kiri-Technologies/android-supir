@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".view.fragment.OnBoardingFragment">
 
-   <ImageView
-       android:id="@+id/imageOnboarding"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       />
+    <ImageView
+        android:id="@+id/imageOnboarding"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="ContentDescription" />
 
 </FrameLayout>

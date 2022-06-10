@@ -5,4 +5,5 @@ object PrefKey {
     const val FIRSTTIME = "first time"
     const val TOKEN = "token"
     const val PROFILE = "profileData"
+    const val IS_RIDING_ANGKOT = "narik"
 }

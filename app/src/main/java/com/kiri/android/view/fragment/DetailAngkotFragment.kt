@@ -16,6 +16,13 @@ import com.google.gson.Gson
 import com.kiri.account.data.models.ProfileData
 import com.kiri.android.R
 import com.kiri.android.data.chartData
+import com.kiri.android.data.day1
+import com.kiri.android.data.day2
+import com.kiri.android.data.day3
+import com.kiri.android.data.day4
+import com.kiri.android.data.day5
+import com.kiri.android.data.day6
+import com.kiri.android.data.now
 import com.kiri.android.databinding.DetailAngkotFragmentBinding
 import com.kiri.android.view.activity.RideAngkotActivity
 import com.kiri.android.view.adapter.FeedbackAdapter
@@ -80,7 +87,7 @@ class DetailAngkotFragment :
     }
 
     private fun initData() {
-        angkotId = args.angkotConfirmData.id.toString()
+        angkotId = args.angkotConfirmData.angkotId.toString()
         val supir = Gson().fromJson(pref.accountData, ProfileData::class.java)
         supir.id?.let {
             viewModel.getRideHistory(
@@ -136,7 +143,7 @@ class DetailAngkotFragment :
             tripAngkotAdapter.data.clear()
             feedbackAdapter.data.clear()
             tripAngkotAdapter.addData(it.take(10))
-            feedbackAdapter.addData(it.take(5))
+            if (it.firstOrNull()?.feedback != null) feedbackAdapter.addData(it.take(10))
             if (it.isNotEmpty()) {
                 binding.tvTripHistoryMore.visible()
                 binding.tvFeedbackMore.visible()
@@ -218,13 +225,13 @@ class DetailAngkotFragment :
     override fun onEarningsTodaySuccess(data: ApiResponse<EarningsByTodayData>?) {
         super.onEarningsTodaySuccess(data)
         earningList.clear()
-        data?.dataData?.day1?.let { Earning("Senin", it) }?.let { earningList.add(it) }
-        data?.dataData?.day2?.let { Earning("Selasa", it) }?.let { earningList.add(it) }
-        data?.dataData?.day3?.let { Earning("Rabu", it) }?.let { earningList.add(it) }
-        data?.dataData?.day4?.let { Earning("Kamis", it) }?.let { earningList.add(it) }
-        data?.dataData?.day5?.let { Earning("Jumat", it) }?.let { earningList.add(it) }
-        data?.dataData?.day6?.let { Earning("Sabtu", it) }?.let { earningList.add(it) }
-        data?.dataData?.day7?.let { Earning("Minggu", it) }?.let { earningList.add(it) }
+        data?.dataData?.day7?.let { Earning(day6(), it) }?.let { earningList.add(it) }
+        data?.dataData?.day6?.let { Earning(day5(), it) }?.let { earningList.add(it) }
+        data?.dataData?.day5?.let { Earning(day4(), it) }?.let { earningList.add(it) }
+        data?.dataData?.day4?.let { Earning(day3(), it) }?.let { earningList.add(it) }
+        data?.dataData?.day3?.let { Earning(day2(), it) }?.let { earningList.add(it) }
+        data?.dataData?.day2?.let { Earning(day1(), it) }?.let { earningList.add(it) }
+        data?.dataData?.day1?.let { Earning(now(), it) }?.let { earningList.add(it) }
 
         val allEarning = earningList.all { it.earnings == 0 }
         if (!allEarning) {
@@ -259,6 +266,7 @@ class DetailAngkotFragment :
                     )
                 )
                 btnNarik -> {
+                    pref.isRidingAngkot = true
                     startActivity(
                         Intent(
                             requireContext(),

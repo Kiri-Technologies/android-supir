@@ -47,7 +47,7 @@
         <entry key="..\:/Kiri/app/src/main/res/layout/feedback_detail_fragment.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/feedback_detail_item.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/feedback_fragment.xml" value="0.264" />
-        <entry key="..\:/Kiri/app/src/main/res/layout/feedback_item.xml" value="0.264" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/feedback_item.xml" value="0.536" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_angkot_tab.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_dashboard.xml" value="0.38125" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_earnings_note.xml" value="0.264" />
@@ -66,6 +66,7 @@
         <entry key="..\:/Kiri/app/src/main/res/layout/load_layout.xml" value="0.38125" />
         <entry key="..\:/Kiri/app/src/main/res/layout/ride_history_adapter.xml" value="0.25416666666666665" />
         <entry key="..\:/Kiri/app/src/main/res/layout/ride_history_item.xml" value="0.536" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/rv_string_item.xml" value="0.536" />
         <entry key="..\:/Kiri/app/src/main/res/layout/sample_form.xml" value="0.24010416666666667" />
         <entry key="..\:/Kiri/app/src/main/res/layout/trip_angkot_item.xml" value="0.536" />
         <entry key="..\:/Kiri/app/src/main/res/menu/auth_nav.xml" value="0.38125" />

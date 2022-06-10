@@ -2,13 +2,17 @@ package com.kiri.android.view.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.kiri.android.view.activity.AuthActivity
 import com.kiri.android.view.activity.HomeActivity
 import com.kiri.auth.R
 import com.kiri.auth.data.models.LoginData
@@ -34,7 +38,6 @@ class LoginFragment : Fragment(R.layout.login_fragment), View.OnClickListener, A
         parametersOf(lifecycle, this)
     }
     private val pref: PrefUseCase by inject()
-
     private var errorMessage: String? = null
     private val email = MutableStateFlow("")
     private val password = MutableStateFlow("")
@@ -61,9 +64,19 @@ class LoginFragment : Fragment(R.layout.login_fragment), View.OnClickListener, A
         emailIsValid and passwordIsValid
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val isRegister = activity?.intent?.getBooleanExtra(AuthActivity.IS_REGISTER, false) == true
+        if (isRegister) findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+        Log.d("ISREGISTER", isRegister.toString())
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.apply {
             tvGoToRegister.setOnClickListener(this@LoginFragment)
             btnLogin.setOnClickListener(this@LoginFragment)
@@ -75,7 +88,7 @@ class LoginFragment : Fragment(R.layout.login_fragment), View.OnClickListener, A
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tvGoToRegister -> {
-                findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
             }
             R.id.btnLogin -> {
                 binding.apply {

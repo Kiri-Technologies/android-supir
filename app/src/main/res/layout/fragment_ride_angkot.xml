@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -105,7 +106,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="8dp">
+                android:padding="16dp">
 
                 <TextView
                     android:id="@+id/tvLabelUserRide"
@@ -141,7 +142,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="8dp">
+                android:padding="16dp">
 
                 <TextView
                     android:id="@+id/tvLabelUserDrop"
@@ -154,7 +155,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvTripAngkot"
+                    android:id="@+id/rvDropUSer"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:scrollbars="vertical"

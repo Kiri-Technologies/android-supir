@@ -10,17 +10,13 @@ import com.kiri.trip.data.models.TripHistoryData
 
 class FeedbackAdapter : BaseQuickAdapter<TripHistoryData, BaseViewHolder>(R.layout.feedback_item) {
     override fun convert(holder: BaseViewHolder, item: TripHistoryData) {
-        val time = item.feedback?.createdAt?.dateToDateMillis()
-        val date = time?.toFormattedString("dd/MM/yy")
-        holder.setText(R.id.tvDate, date)
+        item.feedback?.let {
+            val time = it.createdAt?.dateToDateMillis()
+            val date = time?.toFormattedString("dd/MM/yy")
+            holder.setText(R.id.tvDate, date)
 
-        holder.getView<RatingBar>(R.id.rating).rating =
-            item.feedback?.rating?.toFloatOrNull() ?: 0.toFloat()
-
-        val comment = "${item.feedback?.komentar?.take(30)}..."
-        if (item.feedback?.komentar?.length!! >= 15) {
-            holder.setText(R.id.tvComment, comment)
-        } else {
+            holder.getView<RatingBar>(R.id.rating).rating =
+                it.rating?.toFloatOrNull() ?: 0.toFloat()
             holder.setText(R.id.tvComment, item.feedback?.komentar)
         }
     }

@@ -15,6 +15,8 @@ import com.kiri.android.R
 import com.kiri.android.databinding.ActivityOnboardingBinding
 import com.kiri.android.view.fragment.OnBoardingFragment
 import com.kiri.common.domain.PrefUseCase
+import com.kiri.ui.gone
+import com.kiri.ui.visible
 import org.koin.android.ext.android.inject
 
 class OnBoardingActivity : AppCompatActivity(R.layout.activity_onboarding), View.OnClickListener {
@@ -51,14 +53,12 @@ class OnBoardingActivity : AppCompatActivity(R.layout.activity_onboarding), View
                     return when (position) {
                         0 ->
                             OnBoardingFragment.newInstance(0)
-                        1 ->
-                            OnBoardingFragment.newInstance(1)
                         else ->
-                            OnBoardingFragment.newInstance(2)
+                            OnBoardingFragment.newInstance(1)
                     }
                 }
 
-                override fun getItemCount() = 3
+                override fun getItemCount() = 2
             }
             addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
                 override fun onViewDetachedFromWindow(p0: View?) {
@@ -88,17 +88,22 @@ class OnBoardingActivity : AppCompatActivity(R.layout.activity_onboarding), View
                         0 -> {
                             isLastValue.set(false)
                             isFirstValue.set(true)
-                            binding.tvTitle.text = resources.getText(R.string.onboarding1_title)
+                            binding.apply {
+                                tvTitle.text = resources.getText(R.string.onboarding1_title)
+                                tvDesc.text = resources.getText(R.string.onboarding1_desc)
+                                btnLogin.gone()
+                                btnRegister.gone()
+                            }
                         }
                         1 -> {
-                            isLastValue.set(false)
-                            isFirstValue.set(false)
-                            binding.tvTitle.text = resources.getText(R.string.onboarding2_title)
-                        }
-                        2 -> {
                             isLastValue.set(true)
                             isFirstValue.set(false)
-                            binding.tvTitle.text = resources.getText(R.string.onboarding3_title)
+                            binding.apply {
+                                tvDesc.text = resources.getText(R.string.onboarding2_desc)
+                                tvTitle.text = resources.getText(R.string.onboarding2_title)
+                                btnLogin.visible()
+                                btnRegister.visible()
+                            }
                         }
                     }
                 }
@@ -108,11 +113,8 @@ class OnBoardingActivity : AppCompatActivity(R.layout.activity_onboarding), View
     override fun onClick(view: View?): Unit = with(binding) {
         when (view) {
             buttonNext -> viewPager.currentItem++
-            btnLogin -> {
-                pref.firstStart = false
-                startActivity(Intent(this@OnBoardingActivity, AuthActivity::class.java))
-                finish()
-            }
+            btnLogin -> toLogin()
+            btnRegister -> toRegister()
         }
     }
 
@@ -130,5 +132,21 @@ class OnBoardingActivity : AppCompatActivity(R.layout.activity_onboarding), View
         mTabLayoutMediator?.detach()
         mTabLayoutMediator = null
         super.onDestroy()
+    }
+
+    private fun toLogin() {
+        pref.firstStart = false
+        startActivity(Intent(this@OnBoardingActivity, AuthActivity::class.java))
+        finish()
+    }
+
+    private fun toRegister() {
+        pref.firstStart = false
+        val intent = Intent(this@OnBoardingActivity, AuthActivity::class.java).putExtra(
+            AuthActivity.IS_REGISTER,
+            true
+        )
+        startActivity(intent)
+        finish()
     }
 }

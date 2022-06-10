@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -55,13 +56,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="60dp"
+                    android:layout_marginTop="32dp"
                     android:layout_weight="1"
                     android:animateLayoutChanges="true"
                     android:gravity="center_horizontal"
-                    android:text="Title Text"
                     android:textColor="@color/white"
-                    android:textSize="32sp" />
+                    android:textSize="32sp"
+                    tools:text="Title Text" />
 
                 <TextView
                     android:id="@+id/tvDesc"
@@ -69,9 +70,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="Desc Text"
                     android:textColor="@color/white"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:text="Desc Text" />
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabLayout"
@@ -79,9 +80,9 @@
                     android:layout_height="12dp"
                     android:layout_marginBottom="48dp"
                     android:background="@android:color/transparent"
+                    android:scrollIndicators="none"
                     app:tabBackground="@drawable/line_onboarding_shape"
                     app:tabGravity="center"
-                    android:scrollIndicators="none"
                     app:tabMode="fixed" />
             </LinearLayout>
 
@@ -91,12 +92,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-55dp"
                 android:animateLayoutChanges="true"
-                android:background="@drawable/button_onboarding"
+                android:background="@drawable/button_login"
                 android:onClick="@{listener}"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@id/linLayout"
-                app:layout_constraintStart_toStartOf="@id/linLayout"
-                app:layout_constraintTop_toTopOf="@id/linLayout" />
+                android:paddingBottom="8dp"
+                android:text="Selanjutnya"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/linLayout"
+                app:layout_constraintTop_toBottomOf="@+id/linLayout" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnLogin"
@@ -114,11 +117,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/linLayout" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-55dp"
                 android:background="@drawable/button_register"
                 android:includeFontPadding="true"
+                android:onClick="@{listener}"
                 android:paddingBottom="8dp"
                 android:text="Daftar"
                 android:textColor="@color/color_primary"

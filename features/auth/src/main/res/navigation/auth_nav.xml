@@ -21,12 +21,6 @@
         android:id="@+id/registerFragment"
         android:name="com.kiri.android.view.fragment.RegisterFragment"
         android:label="register_fragment"
-        tools:layout="@layout/register_fragment">
-        <action
-            android:id="@+id/action_registerFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:exitAnim="@animator/nav_default_exit_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-    </fragment>
+        tools:layout="@layout/register_fragment" />
 
 </navigation>

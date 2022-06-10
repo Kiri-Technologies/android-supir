@@ -45,9 +45,6 @@ class OnBoardingFragment : Fragment(R.layout.fragment_on_boarding) {
                 drawableId = R.drawable.onboarding_image1,
             )
             1 -> setupWalkthrough(
-                drawableId = R.drawable.onboarding_image2,
-            )
-            2 -> setupWalkthrough(
                 drawableId = R.drawable.onboarding_image3,
             )
         }

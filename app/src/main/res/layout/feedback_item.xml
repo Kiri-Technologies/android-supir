@@ -9,8 +9,8 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
         app:cardCornerRadius="12dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/button_grey"
         app:strokeWidth="1dp">
 
@@ -44,8 +44,9 @@
             <TextView
                 android:id="@+id/tvComment"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="12dp"
+                android:ellipsize="end"
                 android:textAppearance="@style/textViewBody1"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/tvIcon"

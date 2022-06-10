@@ -3,8 +3,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="onboarding1_title">Selamat Datang di Kiri!</string>
-    <string name="onboarding2_title">Lihat Rute Angkot</string>
-    <string name="onboarding3_title">Pembayaran Lebih Mudah</string>
+    <string name="onboarding1_desc">Selamat datang ke era digitalisasi angkot menuju angkot yang lebih baik lagi</string>
+    <string name="onboarding2_title">Catat Transaksi Harian Kamu</string>
+    <string name="onboarding2_desc">Kamu bisa catat transaksi harian kamu agar kamu dapat mengetahui berapa pendapatan kamu</string>
     <string name="skip_onboarding">Skip</string>
     <string name="label_all_trip_angkot_history">Semua riwayat perjalanan pada angkot</string>
     <string name="label_board_history">Semua riwayat narik angkot</string>

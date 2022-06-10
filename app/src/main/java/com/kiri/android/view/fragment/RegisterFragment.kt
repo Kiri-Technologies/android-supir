@@ -6,9 +6,9 @@ import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.kiri.android.view.activity.AuthActivity
 import com.kiri.auth.R
 import com.kiri.auth.data.models.RegisterBody
 import com.kiri.auth.data.models.RegisterData
@@ -76,6 +76,7 @@ class RegisterFragment : Fragment(R.layout.register_fragment), View.OnClickListe
         binding.etBirthDate.setOnClickListener(this)
         formEditText()
         validationButton()
+        activity?.intent?.removeExtra(AuthActivity.IS_REGISTER)
     }
 
     private fun formEditText() = with(binding) {
@@ -147,7 +148,7 @@ class RegisterFragment : Fragment(R.layout.register_fragment), View.OnClickListe
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tvGoToLogin -> {
-                findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+                activity?.onBackPressed()
             }
             R.id.btnRegister -> {
                 submit()

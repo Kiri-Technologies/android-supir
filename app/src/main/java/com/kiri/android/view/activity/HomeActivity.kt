@@ -64,6 +64,7 @@ class HomeActivity : AppCompatActivity(), AccountResource {
             }
         }
         connectionCheck()
+        ridingCheck()
     }
 
     override fun onBackPressed() {
@@ -103,5 +104,14 @@ class HomeActivity : AppCompatActivity(), AccountResource {
                 viewModel.getProfile()
             }
         }
+    }
+
+    private fun ridingCheck() {
+        if (pref.isRidingAngkot) startActivity(
+            Intent(
+                this,
+                RideAngkotActivity::class.java
+            )
+        )
     }
 }
