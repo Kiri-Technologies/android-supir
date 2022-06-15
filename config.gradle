@@ -15,6 +15,7 @@ ext {
     timberVersion = "5.0.1"
     koinVersion = "3.1.5"
     lottieVersion = "3.4.0"
+    googleVersion = "4.3.10"
 
     networkDependencies = [
             retrofit               : "com.squareup.retrofit2:retrofit:$retrofitVersion",
@@ -65,7 +66,7 @@ ext {
             ui         : "androidx.navigation:navigation-ui:$navigationVersion",
             fragmentKtx: "androidx.navigation:navigation-fragment-ktx:$navigationVersion",
             uiKtx      : "androidx.navigation:navigation-ui-ktx:$navigationVersion",
-            safeArgs   :"androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
+            safeArgs   : "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
     ]
 
     databaseDependencies = [
@@ -104,5 +105,11 @@ ext {
 
     splashScreen = [
             splash: 'androidx.core:core-splashscreen:1.0.0-beta01'
+    ]
+
+    google = [
+            google           : "com.google.gms:google-services:$googleVersion",
+            firebase         : 'com.google.firebase:firebase-bom:30.1.0',
+            firebaseAnalytics: 'com.google.firebase:firebase-analytics-ktx'
     ]
 }

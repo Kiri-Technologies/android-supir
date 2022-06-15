@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1033300413912",
+    "firebase_url": "https://kiri-maps-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "kiri-maps",
+    "storage_bucket": "kiri-maps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1033300413912:android:cc333aba7c5d974167b6ad",
+        "android_client_info": {
+          "package_name": "com.kiri.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1033300413912-bteo0b874dup8s43odvkkcdn31ce0q50.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZWjzkO8K8YW6u4ZG6eU2dEnAEBrllwos"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1033300413912-bteo0b874dup8s43odvkkcdn31ce0q50.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

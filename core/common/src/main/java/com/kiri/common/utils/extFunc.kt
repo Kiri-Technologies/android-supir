@@ -1,7 +1,16 @@
 package com.kiri.common.utils
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
 import android.text.format.Time
+import androidx.activity.result.ActivityResultLauncher
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
@@ -89,3 +98,54 @@ fun Long.toFormatRupiah(): String {
     return formatRupiah.format(this).substringBeforeLast(",")
 }
 
+@RequiresApi(Build.VERSION_CODES.Q)
+fun Context.foregroundLocation(activity: Activity, action: (() -> Unit)? = null) {
+    val hasForegroundLocationPermission = ActivityCompat.checkSelfPermission(
+        this,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    ) == PackageManager.PERMISSION_GRANTED
+    if (hasForegroundLocationPermission) {
+        val hasBackgroundLocationPermission = ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_BACKGROUND_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+        if (hasBackgroundLocationPermission) {
+            // handle location update
+            action?.invoke()
+        } else {
+            ActivityCompat.requestPermissions(
+                activity,
+                arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), 111
+            )
+        }
+    } else {
+        ActivityCompat.requestPermissions(
+            activity,
+            arrayOf(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+            ),
+            111
+        )
+    }
+}
+
+fun Context.permission(
+    permissionResult: ActivityResultLauncher<String>,
+    permissionType: String,
+    action: (() -> Unit)? = null
+) {
+    when (PackageManager.PERMISSION_GRANTED) {
+        ContextCompat.checkSelfPermission(
+            this,
+            permissionType
+        ) -> {
+            action?.invoke()
+        }
+        else -> {
+            permissionResult.launch(
+                permissionType
+            )
+        }
+    }
+}

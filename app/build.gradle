@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -69,7 +70,7 @@ dependencies {
 
 //    implementation "androidx.multidex:multidex:$multidex_version"
 
-    // viewbBindingDelegate
+    // viewBindingDelegate
     implementation viewbinding.kirichViewBinding
     implementation viewbinding.kirichNonReflection
 
@@ -103,9 +104,13 @@ dependencies {
     //RatingBar
     implementation libraries.smileyRatingBar
 
-    // RV
+    //RV
     implementation libraries.chadRv
 
     //MPChart
     implementation libraries.MpChart
+
+    //Google
+    implementation platform(google.firebase)
+    implementation google.firebaseAnalytics
 }

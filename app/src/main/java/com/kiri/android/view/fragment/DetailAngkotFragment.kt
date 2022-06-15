@@ -1,5 +1,6 @@
 package com.kiri.android.view.fragment
 
+import android.Manifest
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
@@ -7,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -32,6 +34,7 @@ import com.kiri.android.widget.initBarChart
 import com.kiri.common.data.model.Earning
 import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.ApiResponse
+import com.kiri.common.utils.permission
 import com.kiri.common.utils.shortToast
 import com.kiri.common.utils.toFormatRupiah
 import com.kiri.trip.data.models.EarningsByTodayData
@@ -63,10 +66,18 @@ class DetailAngkotFragment :
     private val feedbackAdapter by lazy {
         FeedbackAdapter()
     }
-
     private var earningList = ArrayList<Earning>()
     private var angkotId: String = ""
     private var supirId: String = ""
+
+    private val permissionResult =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                goToNarik()
+            } else {
+                shortToast(requireContext(), "Akses Lokasi Tidak Nyala")
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -266,16 +277,25 @@ class DetailAngkotFragment :
                     )
                 )
                 btnNarik -> {
-                    pref.isRidingAngkot = true
-                    startActivity(
-                        Intent(
-                            requireContext(),
-                            RideAngkotActivity::class.java
-                        )
-                    )
+                    requireContext().permission(
+                        permissionResult,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) {
+                        goToNarik()
+                    }
                 }
                 else -> {}
             }
         }
+    }
+
+    private fun goToNarik() {
+        pref.isRidingAngkot = true
+        startActivity(
+            Intent(
+                requireContext(),
+                RideAngkotActivity::class.java
+            )
+        )
     }
 }

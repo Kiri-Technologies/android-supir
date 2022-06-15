@@ -1,7 +1,6 @@
 package com.kiri.android.view.fragment
 
 import android.Manifest
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -23,6 +21,7 @@ import com.kiri.account.presentation.viewmodel.AccountViewModel
 import com.kiri.android.R
 import com.kiri.common.BuildConfig
 import com.kiri.common.domain.PrefUseCase
+import com.kiri.common.utils.permission
 import com.kiri.common.utils.shortToast
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -94,26 +93,15 @@ class DetailAccountFragment :
                 findNavController().navigate(DetailAccountFragmentDirections.actionDetailAccountFragmentToUpdateProfileFragment())
             }
             R.id.ivAccount -> {
-                permission()
+                requireContext().permission(
+                    permissionResult,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) {
+                    pictureResult.launch("image/*")
+                }
             }
             R.id.btnUpdatePassword -> {
                 findNavController().navigate(DetailAccountFragmentDirections.actionDetailAccountFragmentToUpdatePasswordFragment())
-            }
-        }
-    }
-
-    private fun permission() {
-        when (PackageManager.PERMISSION_GRANTED) {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) -> {
-                pictureResult.launch("image/*")
-            }
-            else -> {
-                permissionResult.launch(
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                )
             }
         }
     }
