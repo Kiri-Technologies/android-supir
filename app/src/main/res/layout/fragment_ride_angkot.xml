@@ -80,6 +80,7 @@
                     app:layout_constraintTop_toBottomOf="@id/llAngkot" />
 
                 <TextView
+                    android:id="@+id/tvLocationName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="8dp"
@@ -89,6 +90,28 @@
                     android:textSize="24sp"
                     app:drawableStartCompat="@drawable/ic_place"
                     app:layout_constraintTop_toBottomOf="@id/tvLabelLoc" />
+
+                <TextView
+                    android:id="@+id/tvLat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:textAppearance="@style/textViewTitle"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    app:drawableStartCompat="@drawable/ic_place"
+                    app:layout_constraintTop_toBottomOf="@id/tvLocationName" />
+
+                <TextView
+                    android:id="@+id/tvLong"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:textAppearance="@style/textViewTitle"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    app:drawableStartCompat="@drawable/ic_place"
+                    app:layout_constraintTop_toBottomOf="@id/tvLat" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

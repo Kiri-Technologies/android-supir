@@ -279,7 +279,7 @@ class DetailAngkotFragment :
                 btnNarik -> {
                     requireContext().permission(
                         permissionResult,
-                        Manifest.permission.ACCESS_COARSE_LOCATION
+                        Manifest.permission.ACCESS_FINE_LOCATION
                     ) {
                         goToNarik()
                     }

@@ -63,6 +63,7 @@ dependencies {
     implementation networkDependencies.gson
     implementation supportDependencies.lifecycleLiveData
     implementation supportDependencies.lifecycleViewModel
+    implementation 'com.google.android.gms:play-services-location:20.0.0'
 
     testImplementation testDependencies.junit
     androidTestImplementation testDependencies.androidxJunit
