@@ -24,6 +24,7 @@ import com.kiri.android.view.adapter.DropUserAdapter
 import com.kiri.android.view.adapter.UserRideAdapter
 import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.shortToast
+import com.kiri.ui.showDialog
 import org.koin.android.ext.android.inject
 import java.util.concurrent.TimeUnit
 
@@ -124,6 +125,8 @@ class RideAngkotFragment : Fragment(R.layout.fragment_ride_angkot), View.OnClick
                     currentLocation = it
                     binding.tvLat.text = it.latitude.toString()
                     binding.tvLong.text = it.longitude.toString()
+                    it.latitude - 0.0001 * 5
+                    it.longitude - 0.0001 * 5
                     // use latitude and longitude as per your need
                 } ?: shortToast(requireContext(), getString(R.string.error_message))
             }
@@ -131,23 +134,23 @@ class RideAngkotFragment : Fragment(R.layout.fragment_ride_angkot), View.OnClick
     }
 
     private fun locationNotNeeded(): Task<Void> {
-        val removeTask = fusedLocationProviderClient.removeLocationUpdates(locationCallback)
-        removeTask.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                shortToast(requireContext(), "Location Callback removed.")
-            } else {
-                shortToast(requireContext(), "Failed to remove Location Callback.")
-            }
-        }
-        return removeTask
+        return fusedLocationProviderClient.removeLocationUpdates(locationCallback)
+    }
+
+    private fun finishRide() {
+        pref.isRidingAngkot = false
+        activity?.finish()
+        locationNotNeeded()
     }
 
     override fun onClick(v: View?) {
         when (v) {
             binding.btnDoneRide -> {
-                pref.isRidingAngkot = false
-                activity?.finish()
-                locationNotNeeded()
+                requireContext().showDialog(
+                    message = getString(R.string.label_finish_ride_message),
+                    positiveAction = { finishRide() },
+                    negativeAction = {}
+                )
             }
         }
     }

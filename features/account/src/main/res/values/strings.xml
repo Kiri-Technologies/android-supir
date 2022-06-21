@@ -13,7 +13,7 @@
     <string name="label_success_feedback">Terima kasih telah memberikan tanggapan kamu</string>
     <string name="label_feedback_again">Tinggalkan tanggapan lain</string>
     <string name="label_feedback_thank">Terima Kasih Banyak,</string>
-    <string name="hint_comment">masukkan tanggapan kamu disini...</string>
+    <string name="hint_comment">masukkan tanggapan kamu disini…</string>
     <string name="label_feedback_app">Berikan tanggapan mu mengenai aplikasi Kiri agar menjadi lebih baik lagi</string>
     <string name="title_feedback">Kami butuh tanggapanmu</string>
 </resources>

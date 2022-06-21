@@ -1,219 +1,240 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none">
+    android:background="@color/background_fragment"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_fragment"
-        android:orientation="vertical">
+        app:cardBackgroundColor="@color/color_primary"
+        app:layout_constraintTop_toTopOf="parent">
 
-
-        <com.google.android.material.card.MaterialCardView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/color_primary"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingHorizontal="32dp"
-                android:paddingVertical="24dp">
-
-                <TextView
-                    android:id="@+id/tvLabelRange"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Jarak angkot didepan"
-                    android:textAppearance="@style/textViewTitle"
-                    android:textColor="@color/white"
-                    android:textSize="36sp"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <LinearLayout
-                    android:id="@+id/llAngkot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/tvLabelRange">
-
-                    <TextView
-                        android:id="@+id/tvTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawablePadding="8dp"
-                        android:text="20 Menit"
-                        android:textAppearance="@style/textViewTitle"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        app:drawableStartCompat="@drawable/ic_time" />
-
-                    <TextView
-                        android:id="@+id/tvDistance"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:drawablePadding="8dp"
-                        android:text="1 KM"
-                        android:textAppearance="@style/textViewTitle"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        app:drawableStartCompat="@drawable/ic_disctance" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tvLabelLoc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="Lokasi saat ini"
-                    android:textAppearance="@style/textViewBody1"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    app:layout_constraintTop_toBottomOf="@id/llAngkot" />
-
-                <TextView
-                    android:id="@+id/tvLocationName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="8dp"
-                    android:text="Terminal Kebon Kelapa"
-                    android:textAppearance="@style/textViewTitle"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    app:drawableStartCompat="@drawable/ic_place"
-                    app:layout_constraintTop_toBottomOf="@id/tvLabelLoc" />
-
-                <TextView
-                    android:id="@+id/tvLat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="8dp"
-                    android:textAppearance="@style/textViewTitle"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    app:drawableStartCompat="@drawable/ic_place"
-                    app:layout_constraintTop_toBottomOf="@id/tvLocationName" />
-
-                <TextView
-                    android:id="@+id/tvLong"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="8dp"
-                    android:textAppearance="@style/textViewTitle"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    app:drawableStartCompat="@drawable/ic_place"
-                    app:layout_constraintTop_toBottomOf="@id/tvLat" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="8dp"
-            app:cardCornerRadius="12dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp">
-
-                <TextView
-                    android:id="@+id/tvLabelUserRide"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Calon Penumpang"
-                    android:textAppearance="@style/textViewTitle"
-                    android:textSize="24sp"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvRideUser"
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:scrollbars="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvLabelUserRide"
-                    tools:itemCount="10"
-                    tools:listitem="@layout/ride_history_item" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="24dp"
-            app:cardCornerRadius="12dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp">
-
-                <TextView
-                    android:id="@+id/tvLabelUserDrop"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Penumpang Turun"
-                    android:textAppearance="@style/textViewTitle"
-                    android:textColor="@color/red_color"
-                    android:textSize="24sp"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvDropUSer"
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:scrollbars="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvLabelUserDrop"
-                    tools:itemCount="10"
-                    tools:listitem="@layout/ride_history_item" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/btnDoneRide"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="24dp"
-            android:backgroundTint="@color/red_color"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardCornerRadius="14dp">
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="24dp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:paddingVertical="4dp"
-                android:text="Selesai Narik"
+                android:id="@+id/tvLabelRange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jarak angkot didepan"
                 android:textAppearance="@style/textViewTitle"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
-        </com.google.android.material.card.MaterialCardView>
+                android:textSize="24sp"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
-</ScrollView>
+            <LinearLayout
+                android:id="@+id/llAngkot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/tvLabelRange">
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="8dp"
+                    android:text="20 Menit"
+                    android:textAppearance="@style/textViewTitle"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:drawableStartCompat="@drawable/ic_time" />
+
+                <TextView
+                    android:id="@+id/tvDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawablePadding="8dp"
+                    android:text="1 KM"
+                    android:textAppearance="@style/textViewTitle"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:drawableStartCompat="@drawable/ic_disctance" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvLabelLoc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Lokasi saat ini"
+                android:textAppearance="@style/textViewBody1"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/llAngkot" />
+
+            <TextView
+                android:id="@+id/tvLocationName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:text="Terminal Kebon Kelapa"
+                android:textAppearance="@style/textViewTitle"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:drawableStartCompat="@drawable/ic_place"
+                app:layout_constraintTop_toBottomOf="@id/tvLabelLoc" />
+
+            <TextView
+                android:id="@+id/tvLat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:textAppearance="@style/textViewTitle"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:drawableStartCompat="@drawable/ic_place"
+                app:layout_constraintTop_toBottomOf="@id/tvLocationName" />
+
+            <TextView
+                android:id="@+id/tvLong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:textAppearance="@style/textViewTitle"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:drawableStartCompat="@drawable/ic_place"
+                app:layout_constraintTop_toBottomOf="@id/tvLat" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/swNgetem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngetem"
+                android:textAppearance="@style/textViewBody1"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLong"
+                app:switchPadding="12dp" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/swFull"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Angkot Penuh"
+                android:textAppearance="@style/textViewBody1"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLong"
+                app:switchPadding="12dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        app:cardCornerRadius="12dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tvLabelUserRide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calon Penumpang"
+                android:textAppearance="@style/textViewTitle"
+                android:textSize="18sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRideUser"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scrollbars="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvLabelUserRide"
+                tools:itemCount="10"
+                tools:listitem="@layout/ride_history_item" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        app:cardCornerRadius="12dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tvLabelUserDrop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Penumpang Turun"
+                android:textAppearance="@style/textViewTitle"
+                android:textColor="@color/red_color"
+                android:textSize="18sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDropUSer"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scrollbars="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvLabelUserDrop"
+                tools:itemCount="10"
+                tools:listitem="@layout/ride_history_item" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/btnDoneRide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/red_color"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardCornerRadius="14dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingVertical="4dp"
+            android:text="Selesai Narik"
+            android:textAppearance="@style/textViewTitle"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

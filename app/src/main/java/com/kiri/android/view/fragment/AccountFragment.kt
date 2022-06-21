@@ -18,6 +18,7 @@ import com.kiri.common.BuildConfig
 import com.kiri.common.data.pref.PrefKey
 import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.shortToast
+import com.kiri.ui.showDialog
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -43,7 +44,11 @@ class AccountFragment : Fragment(R.layout.account_fragment), View.OnClickListene
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnLogout -> {
-                viewModel.doLogout()
+                requireContext().showDialog(
+                    message = getString(R.string.label_logout_message),
+                    positiveAction = { viewModel.doLogout() },
+                    negativeAction = {}
+                )
             }
             R.id.cvAccount -> {
                 findNavController().navigate(AccountFragmentDirections.actionAccountFragmentToAccountActivity())

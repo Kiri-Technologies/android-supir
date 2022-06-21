@@ -39,4 +39,6 @@
     <string name="label_ride_time">Waktu Narik</string>
     <string name="label_opening_earnings_fragment">Kamu bisa catat pendapatan mu hari ini disini</string>
     <string name="label_welcome">Selamat Datang,</string>
+    <string name="label_logout_message">Apakah anda yakin untuk keluar?</string>
+    <string name="label_finish_ride_message">Apakah anda yakin untuk menyelesaikan narik angkot hari ini?</string>
 </resources>
