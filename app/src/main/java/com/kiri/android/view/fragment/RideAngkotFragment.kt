@@ -19,12 +19,14 @@ import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.Task
 import com.kiri.android.R
 import com.kiri.android.data.calonUser
+import com.kiri.android.data.userNaik
 import com.kiri.android.databinding.FragmentRideAngkotBinding
 import com.kiri.android.view.adapter.DropUserAdapter
 import com.kiri.android.view.adapter.UserRideAdapter
 import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.shortToast
 import com.kiri.ui.showDialog
+import com.kiri.ui.showDialogList
 import org.koin.android.ext.android.inject
 import java.util.concurrent.TimeUnit
 
@@ -54,9 +56,9 @@ class RideAngkotFragment : Fragment(R.layout.fragment_ride_angkot), View.OnClick
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnDoneRide.setOnClickListener(this@RideAngkotFragment)
         initData()
         initUI()
+        initAction()
     }
 
     private fun initData() {
@@ -64,7 +66,7 @@ class RideAngkotFragment : Fragment(R.layout.fragment_ride_angkot), View.OnClick
         dropAdapter.data.addAll(calonUser)
 
         rideAdapter.data.clear()
-        rideAdapter.data.addAll(calonUser)
+        rideAdapter.data.addAll(userNaik)
     }
 
     private fun initUI() = with(binding) {
@@ -74,6 +76,12 @@ class RideAngkotFragment : Fragment(R.layout.fragment_ride_angkot), View.OnClick
         locationCallback()
         location()
         locationPermissionCheck()
+    }
+
+    private fun initAction() = with(binding) {
+        btnDoneRide.setOnClickListener(this@RideAngkotFragment)
+        containerDropPassenger.setOnClickListener(this@RideAngkotFragment)
+        containerRidePassenger.setOnClickListener(this@RideAngkotFragment)
     }
 
     @SuppressLint("InlinedApi")
@@ -150,6 +158,19 @@ class RideAngkotFragment : Fragment(R.layout.fragment_ride_angkot), View.OnClick
                     message = getString(R.string.label_finish_ride_message),
                     positiveAction = { finishRide() },
                     negativeAction = {}
+                )
+            }
+            binding.containerRidePassenger -> {
+                requireContext().showDialogList(
+                    rideAdapter,
+                    getString(R.string.tittle_user_ride)
+                )
+            }
+            binding.containerDropPassenger -> {
+                requireContext().showDialogList(
+                    dropAdapter,
+                    getString(R.string.tittle_drop_user),
+                    true
                 )
             }
         }

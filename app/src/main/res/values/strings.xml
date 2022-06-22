@@ -41,4 +41,6 @@
     <string name="label_welcome">Selamat Datang,</string>
     <string name="label_logout_message">Apakah anda yakin untuk keluar?</string>
     <string name="label_finish_ride_message">Apakah anda yakin untuk menyelesaikan narik angkot hari ini?</string>
+    <string name="tittle_user_ride">Calon Penumpang</string>
+    <string name="tittle_drop_user">Penumpang Turun</string>
 </resources>

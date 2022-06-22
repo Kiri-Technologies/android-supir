@@ -45,4 +45,7 @@ dependencies {
 
     //MPChart
     implementation libraries.MpChart
+
+    //RV
+    implementation libraries.chadRv
 }

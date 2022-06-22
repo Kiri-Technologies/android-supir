@@ -115,6 +115,7 @@
                 android:textAppearance="@style/textViewBody1"
                 android:textColor="@color/white"
                 android:textSize="12sp"
+                android:theme="@style/Theme.Kiri"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvLong"
                 app:switchPadding="12dp" />
@@ -143,18 +144,21 @@
         android:layout_marginHorizontal="12dp"
         android:layout_marginTop="8dp"
         android:layout_weight="1"
+        android:minHeight="120dp"
         app:cardCornerRadius="12dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/containerRidePassenger"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:foreground="?attr/selectableItemBackground"
             android:padding="16dp">
 
             <TextView
                 android:id="@+id/tvLabelUserRide"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Calon Penumpang"
+                android:text="@string/tittle_user_ride"
                 android:textAppearance="@style/textViewTitle"
                 android:textSize="18sp"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -170,7 +174,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvLabelUserRide"
                 tools:itemCount="10"
-                tools:listitem="@layout/ride_history_item" />
+                tools:listitem="@layout/rv_string_item" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
@@ -184,15 +188,17 @@
         app:cardCornerRadius="12dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/containerDropPassenger"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:foreground="?attr/selectableItemBackground"
             android:padding="16dp">
 
             <TextView
                 android:id="@+id/tvLabelUserDrop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Penumpang Turun"
+                android:text="@string/tittle_drop_user"
                 android:textAppearance="@style/textViewTitle"
                 android:textColor="@color/red_color"
                 android:textSize="18sp"
@@ -209,7 +215,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvLabelUserDrop"
                 tools:itemCount="10"
-                tools:listitem="@layout/ride_history_item" />
+                tools:listitem="@layout/rv_string_item" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>

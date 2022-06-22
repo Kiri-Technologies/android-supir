@@ -58,15 +58,16 @@
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_on_boarding.xml" value="0.264" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_qr_code.xml" value="0.38125" />
         <entry key="..\:/Kiri/app/src/main/res/layout/fragment_register.xml" value="0.4" />
-        <entry key="..\:/Kiri/app/src/main/res/layout/fragment_ride_angkot.xml" value="0.264" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/fragment_ride_angkot.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/history_trip_layout.xml" value="0.536" />
         <entry key="..\:/Kiri/app/src/main/res/layout/home_fragment.xml" value="0.4" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/layout_dialog_list.xml" value="0.38125" />
         <entry key="..\:/Kiri/app/src/main/res/layout/list_angkot_fragment.xml" value="0.2" />
         <entry key="..\:/Kiri/app/src/main/res/layout/list_angkot_item.xml" value="0.4" />
         <entry key="..\:/Kiri/app/src/main/res/layout/load_layout.xml" value="0.38125" />
         <entry key="..\:/Kiri/app/src/main/res/layout/ride_history_adapter.xml" value="0.25416666666666665" />
         <entry key="..\:/Kiri/app/src/main/res/layout/ride_history_item.xml" value="0.536" />
-        <entry key="..\:/Kiri/app/src/main/res/layout/rv_string_item.xml" value="0.536" />
+        <entry key="..\:/Kiri/app/src/main/res/layout/rv_string_item.xml" value="0.72" />
         <entry key="..\:/Kiri/app/src/main/res/layout/sample_form.xml" value="0.24010416666666667" />
         <entry key="..\:/Kiri/app/src/main/res/layout/trip_angkot_item.xml" value="0.536" />
         <entry key="..\:/Kiri/app/src/main/res/menu/auth_nav.xml" value="0.38125" />
@@ -74,7 +75,9 @@
         <entry key="..\:/Kiri/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.184" />
         <entry key="..\:/Kiri/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.184" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable-xxhdpi/button_update_password.xml" value="0.205" />
+        <entry key="..\:/Kiri/core/ui/src/main/res/drawable-xxhdpi/ic_acc.xml" value="0.173" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable-xxhdpi/ic_back_arrow.xml" value="0.2505" />
+        <entry key="..\:/Kiri/core/ui/src/main/res/drawable-xxhdpi/ic_cancel.xml" value="0.173" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/back_toolbar.xml" value="0.173" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/background_button.xml" value="0.173" />
         <entry key="..\:/Kiri/core/ui/src/main/res/drawable/button_black_shape.xml" value="0.173" />

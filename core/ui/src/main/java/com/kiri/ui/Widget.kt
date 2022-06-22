@@ -8,7 +8,9 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.kiri.ui.databinding.LayoutDialogBinding
+import com.kiri.ui.databinding.LayoutDialogListBinding
 
 fun disableBtn(view: ButtonView) {
     view.isEnabled = false
@@ -79,13 +81,11 @@ fun Context.showDialog(
 
     var alertDialog: AlertDialog? = null
 
-    val builder = AlertDialog.Builder(this)
+    val builder = AlertDialog.Builder(this, R.style.RoundedCornersDialog)
     val binding = LayoutDialogBinding.inflate(LayoutInflater.from(this))
     builder.setView(binding.root)
 
-    if (title == null) {
-        binding.tvTitle.visibility = View.GONE
-    }
+    if (title == null) binding.tvTitle.gone()
 
     title?.let { _ ->
         binding.tvTitle.text = title
@@ -105,6 +105,27 @@ fun Context.showDialog(
         }
     }
 
+    builder.create()
+    alertDialog = builder.show()
+}
+
+fun Context.showDialogList(
+    adapter: Any,
+    title: String,
+    redColor: Boolean? = null
+) {
+
+    var alertDialog: AlertDialog? = null
+    val builder = AlertDialog.Builder(this)
+    val binding = LayoutDialogListBinding.inflate(LayoutInflater.from(this))
+    builder.setView(binding.root)
+    binding.rvContent.adapter = adapter as BaseQuickAdapter<*, *>
+    if (redColor == true) binding.tvTitle.setTextColor(getColor(R.color.red_color))
+
+    binding.tvTitle.text = title
+    binding.ivClose.setOnClickListener {
+        alertDialog?.dismiss()
+    }
     builder.create()
     alertDialog = builder.show()
 }
