@@ -4,8 +4,8 @@ import androidx.lifecycle.Lifecycle
 import com.kiri.common.utils.register
 import com.kiri.trip.data.AngkotRepository
 import com.kiri.trip.data.AngkotRepositoryImpl
-import com.kiri.trip.data.endpoint.RemoteDataSource
 import com.kiri.trip.data.endpoint.AngkotEndpoint
+import com.kiri.trip.data.endpoint.RemoteDataSource
 import com.kiri.trip.domain.usecase.AngkotUseCase
 import com.kiri.trip.domain.usecase.AngkotUseCaseImpl
 import com.kiri.trip.presentation.viewmodel.AngkotObserver
@@ -19,8 +19,8 @@ val tripModule = module {
     single(createdAtStart = false) { get<Retrofit>().create(AngkotEndpoint::class.java) }
 
     single { RemoteDataSource(get()) }
-    single<AngkotRepository> { AngkotRepositoryImpl(get()) }
-    single<AngkotUseCase> { AngkotUseCaseImpl(AngkotRepositoryImpl(get())) }
+    single<AngkotRepository> { AngkotRepositoryImpl(get(), get()) }
+    single<AngkotUseCase> { AngkotUseCaseImpl(AngkotRepositoryImpl(get(), get())) }
 
     viewModel { (lifecycle: Lifecycle, resource: AngkotResource) ->
         lifecycle.register(AngkotViewModel(get())) { AngkotObserver(resource, it) }

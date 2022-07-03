@@ -24,6 +24,11 @@ class PrefUseCaseImpl(private val repositoryImpl: PrefRepositoryImpl) : PrefUseC
         set(value) {
             repositoryImpl.isRidingAngkot = value
         }
+    override var angkotId: String?
+        get() = repositoryImpl.angkotId
+        set(value) {
+            repositoryImpl.angkotId = value
+        }
 
     override fun removeByKey(key: String) {
         repositoryImpl.removeByKey(key)

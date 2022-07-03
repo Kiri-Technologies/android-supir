@@ -5,6 +5,7 @@ import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.RiwayatNarikData
+import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
 import retrofit2.Response
@@ -82,5 +83,9 @@ class RemoteDataSource(private val endpoint: AngkotEndpoint) : AngkotEndpoint {
         earnings: Int
     ): Response<ApiResponse<Nothing>> {
         return endpoint.createEarningNote(earningId, earnings)
+    }
+
+    override suspend fun getRoutesById(angkotId: String): Response<ApiResponse<RoutesData>> {
+        return endpoint.getRoutesById(angkotId)
     }
 }

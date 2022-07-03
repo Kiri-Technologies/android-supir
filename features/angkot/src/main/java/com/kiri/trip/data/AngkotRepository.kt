@@ -1,10 +1,13 @@
 package com.kiri.trip.data
 
+import androidx.lifecycle.MutableLiveData
 import com.kiri.common.utils.Resource
 import com.kiri.trip.data.models.AngkotConfirmData
+import com.kiri.trip.data.models.AngkotData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.RiwayatNarikData
+import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
 import kotlinx.coroutines.flow.Flow
@@ -60,4 +63,8 @@ interface AngkotRepository {
         earningId: String,
         earnings: Int
     ): Flow<Resource<Nothing>>
+
+    suspend fun getRoutesById(angkotId: String): Flow<Resource<RoutesData>>
+
+    suspend fun getAngkotDistance(): MutableLiveData<Resource<AngkotData>>
 }

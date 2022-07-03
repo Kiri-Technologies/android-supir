@@ -5,6 +5,7 @@ import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.RiwayatNarikData
+import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
 import retrofit2.Response
@@ -91,4 +92,9 @@ interface AngkotEndpoint {
         @Path("earning_id") earningId: String,
         @Field("jumlah_pendapatan") earnings: Int
     ): Response<ApiResponse<Nothing>>
+
+    @GET("routes/{id}")
+    suspend fun getRoutesById(
+        @Path("id") angkotId: String
+    ): Response<ApiResponse<RoutesData>>
 }

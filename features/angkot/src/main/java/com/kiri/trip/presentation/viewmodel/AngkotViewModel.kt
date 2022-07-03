@@ -9,6 +9,7 @@ import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.RiwayatNarikData
+import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.TripHistoryData
 import com.kiri.trip.domain.usecase.AngkotUseCase
 import com.kiri.trip.domain.usecase.models.TotalEarningsDomain
@@ -200,4 +201,24 @@ class AngkotViewModel(private val useCase: AngkotUseCase) : ViewModel() {
             }
         }
     }
+
+    private val _routes: MutableLiveData<Resource<RoutesData>> = MutableLiveData()
+    val routes: LiveData<Resource<RoutesData>> = _routes
+
+    fun getRoutes(
+        angkotId: String
+    ) {
+        viewModelScope.launch {
+            _routes.value = Resource.loading()
+            useCase.getRoutesById(angkotId).collect {
+                _routes.value = it
+            }
+        }
+    }
+
+    //    val getDistance: LiveData<Resource<AngkotData>>
+//    fun getAngkotDistance(): LiveData<Resource<AngkotData>> {
+//        viewModelScope.launch {
+//        }
+//    }
 }

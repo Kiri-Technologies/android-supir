@@ -5,6 +5,7 @@ import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.RiwayatNarikData
+import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.TripHistoryData
 import com.kiri.trip.domain.usecase.models.TotalEarningsDomain
 
@@ -74,4 +75,12 @@ interface AngkotResource {
     fun onCreateEarningLoading() {}
     fun onCreateEarningSuccess(data: ApiResponse<Nothing>?) {}
     fun onCreateEarningFailed(error: String?) {}
+
+    // GetRoutes
+    fun onGetRoutesLoading() {}
+    fun onGetRoutesSuccess(data: ApiResponse<RoutesData>?) {}
+    fun onGetRoutesFailed(error: String?) {}
+
+    // GetAngkotDistance
+    fun onGetDistance() {}
 }

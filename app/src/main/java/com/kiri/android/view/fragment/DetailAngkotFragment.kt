@@ -26,7 +26,6 @@ import com.kiri.android.data.day5
 import com.kiri.android.data.day6
 import com.kiri.android.data.now
 import com.kiri.android.databinding.DetailAngkotFragmentBinding
-import com.kiri.android.view.activity.RideAngkotActivity
 import com.kiri.android.view.adapter.FeedbackAdapter
 import com.kiri.android.view.adapter.RideHistoryAdapter
 import com.kiri.android.view.adapter.TripAngkotAdapter
@@ -66,6 +65,9 @@ class DetailAngkotFragment :
     private val feedbackAdapter by lazy {
         FeedbackAdapter()
     }
+    private val btmSheet by lazy {
+        RideWayBtmSheet()
+    }
     private var earningList = ArrayList<Earning>()
     private var angkotId: String = ""
     private var supirId: String = ""
@@ -73,7 +75,7 @@ class DetailAngkotFragment :
     private val permissionResult =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
-                goToNarik()
+                shortToast(requireContext(), "Akses Lokasi Nyala, Klik sekali lagi")
             } else {
                 shortToast(requireContext(), "Akses Lokasi Tidak Nyala")
             }
@@ -281,7 +283,7 @@ class DetailAngkotFragment :
                         permissionResult,
                         Manifest.permission.ACCESS_FINE_LOCATION
                     ) {
-                        goToNarik()
+                        btmSheetShow()
                     }
                 }
                 else -> {}
@@ -289,13 +291,10 @@ class DetailAngkotFragment :
         }
     }
 
-    private fun goToNarik() {
-        pref.isRidingAngkot = true
-        startActivity(
-            Intent(
-                requireContext(),
-                RideAngkotActivity::class.java
-            )
-        )
+    private fun btmSheetShow() {
+        val bundle = Bundle()
+        bundle.putString(RideWayBtmSheet.ANGKOTID, angkotId)
+        btmSheet.arguments = bundle
+        btmSheet.show(childFragmentManager, RideWayBtmSheet.TAG)
     }
 }

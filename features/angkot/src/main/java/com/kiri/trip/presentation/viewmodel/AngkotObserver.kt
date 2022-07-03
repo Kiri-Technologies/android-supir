@@ -109,5 +109,12 @@ class AngkotObserver(
                 Resource.Status.ERROR -> resource.onCreateEarningFailed(it.error)
             }
         }
+        vm.routes.observe(owner) {
+            when (it.status) {
+                Resource.Status.LOADING -> resource.onGetRoutesLoading()
+                Resource.Status.SUCCESS -> resource.onGetRoutesSuccess(it.data)
+                Resource.Status.ERROR -> resource.onGetRoutesFailed(it.error)
+            }
+        }
     }
 }
