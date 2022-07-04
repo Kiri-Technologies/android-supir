@@ -1,12 +1,12 @@
 ext {
-    gradleVersion = '7.2.1'
+    gradleVersion = '7.1.0'
     kotlinVersion = '1.6.10'
 
     lifecycleVersion = '2.4.1'
     coroutineVersion = '1.3.9'
     glideVersion = '4.13.0'
     chuckOkHttpLoggingVersion = '1.1.0'
-    navigationVersion = '2.4.1'
+    navigationVersion = '2.3.5'
     roomVersion = '2.3.0'
     retrofitVersion = '2.9.0'
     okHttpVersion = '4.9.0'
@@ -30,7 +30,6 @@ ext {
             timber                 : "com.jakewharton.timber:timber:$timberVersion",
             gson                   : "com.google.code.gson:gson:2.8.6",
             convertergson          : "com.squareup.retrofit2:converter-gson:2.9.0",
-            retrofitDynamic        : 'me.jessyan:retrofit-url-manager:1.4.0'
     ]
 
     supportDependencies = [

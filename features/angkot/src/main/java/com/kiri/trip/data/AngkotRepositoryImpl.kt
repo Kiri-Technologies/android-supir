@@ -1,8 +1,12 @@
 package com.kiri.trip.data
 
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.BaseApiResponse
 import com.kiri.common.utils.Resource
 import com.kiri.trip.data.endpoint.RemoteDataSource
@@ -18,7 +22,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class AngkotRepositoryImpl(
-    private val remoteDataSource: RemoteDataSource
+    private val remoteDataSource: RemoteDataSource,
+    private val pref: PrefUseCase
 ) : AngkotRepository,
     BaseApiResponse() {
 
@@ -135,24 +140,24 @@ class AngkotRepositoryImpl(
     }
 
     override suspend fun getAngkotDistance(): MutableLiveData<Resource<AngkotData>> {
-//        val angkotDistanceData: DatabaseReference =
-//            rootRef.child("jarak_antar_angkot").child("angkot_${pref.angkotId}")
-//
+        val angkotDistanceData: DatabaseReference =
+            rootRef.child("jarak_antar_angkot").child("angkot_${pref.angkotId}")
+
         val mLiveData = MutableLiveData<Resource<AngkotData>>()
-//        mLiveData.postValue(Resource.loading(null))
-//        angkotDistanceData.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                if (snapshot.exists()) {
-//                    val data = snapshot.value as AngkotData
-//                    mLiveData.postValue(Resource.success(null))
-//                }
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                mLiveData.postValue(Resource.error(error.message))
-//            }
-//        })
-//
+        mLiveData.postValue(Resource.loading(null))
+        angkotDistanceData.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val data = snapshot.value as AngkotData
+                    mLiveData.postValue(Resource.success(null))
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                mLiveData.postValue(Resource.error(error.message))
+            }
+        })
+
         return mLiveData
     }
 }

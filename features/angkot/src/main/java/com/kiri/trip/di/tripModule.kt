@@ -19,8 +19,8 @@ val tripModule = module {
     single(createdAtStart = false) { get<Retrofit>().create(AngkotEndpoint::class.java) }
 
     single { RemoteDataSource(get()) }
-    single<AngkotRepository> { AngkotRepositoryImpl(get()) }
-    single<AngkotUseCase> { AngkotUseCaseImpl(AngkotRepositoryImpl(get())) }
+    single<AngkotRepository> { AngkotRepositoryImpl(get(), get()) }
+    single<AngkotUseCase> { AngkotUseCaseImpl(AngkotRepositoryImpl(get(), get())) }
 
     viewModel { (lifecycle: Lifecycle, resource: AngkotResource) ->
         lifecycle.register(AngkotViewModel(get())) { AngkotObserver(resource, it) }

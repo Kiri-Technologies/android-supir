@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.gson.Gson
 import com.kiri.account.data.models.ProfileData
-import com.kiri.account.presentation.viewmodel.AccountResource
 import com.kiri.android.R
 import com.kiri.android.databinding.FragmentHistoryBinding
 import com.kiri.android.view.adapter.HistoryAdapter
@@ -22,7 +21,7 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class HistoryFragment : Fragment(R.layout.fragment_history), AngkotResource, AccountResource {
+class HistoryFragment : Fragment(R.layout.fragment_history), AngkotResource {
     private val binding by viewBinding<FragmentHistoryBinding>()
     private val viewModel by viewModel<AngkotViewModel> {
         parametersOf(lifecycle, this)
@@ -37,12 +36,13 @@ class HistoryFragment : Fragment(R.layout.fragment_history), AngkotResource, Acc
         super.onViewCreated(view, savedInstanceState)
         initData()
         initUI()
+        initAction()
     }
 
     private fun initData() {
         val getPref = pref.accountData
         val data = Gson().fromJson(getPref, ProfileData::class.java)
-        viewModel.getTripHistory(data.id ?: "")
+        data.id?.let { viewModel.getTripHistory(it) }
     }
 
     private fun initUI() {
@@ -52,11 +52,16 @@ class HistoryFragment : Fragment(R.layout.fragment_history), AngkotResource, Acc
         rvAdapter.setEmptyView(R.layout.empty_view_item)
     }
 
+    private fun initAction() {
+    }
+
     override fun onTripHistoryLoading() {
+        super.onTripHistoryLoading()
         binding.rvContent.gone()
     }
 
     override fun onTripHistorySuccess(data: ApiResponse<List<TripHistoryData>>?) {
+        super.onTripHistorySuccess(data)
         binding.progressBar.gone()
         binding.rvContent.visible()
         data?.dataData?.map {
@@ -65,6 +70,7 @@ class HistoryFragment : Fragment(R.layout.fragment_history), AngkotResource, Acc
     }
 
     override fun onTripHistoryFailed(error: String?) {
+        super.onTripHistoryFailed(error)
         binding.progressBar.gone()
         error?.let { shortToast(requireContext(), it) }
     }
