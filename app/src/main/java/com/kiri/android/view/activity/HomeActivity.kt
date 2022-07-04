@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.kiri.account.domain.usecase.model.ProfDom
@@ -23,9 +24,9 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class HomeActivity : AppCompatActivity(), AccountResource {
+class HomeActivity : AppCompatActivity(R.layout.activity_home), AccountResource {
 
-    private lateinit var binding: ActivityHomeBinding
+    private val binding by viewBinding<ActivityHomeBinding>()
     private lateinit var navController: NavController
     private val viewModel: AccountViewModel by viewModel {
         parametersOf(lifecycle, this)
@@ -35,9 +36,6 @@ class HomeActivity : AppCompatActivity(), AccountResource {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         val navView: BottomNavigationView = binding.navView
         setSupportActionBar(binding.toolbar)
 
@@ -49,7 +47,7 @@ class HomeActivity : AppCompatActivity(), AccountResource {
                 R.id.navigation_home,
                 R.id.navigation_angkot,
                 R.id.navigation_history,
-                R.id.account_fragment
+                R.id.navigation_account
             )
         )
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
@@ -59,7 +57,7 @@ class HomeActivity : AppCompatActivity(), AccountResource {
                 R.id.navigation_home -> navView.visible()
                 R.id.navigation_angkot -> navView.visible()
                 R.id.navigation_history -> navView.visible()
-                R.id.account_fragment -> navView.visible()
+                R.id.navigation_account -> navView.visible()
                 else -> navView.gone()
             }
         }

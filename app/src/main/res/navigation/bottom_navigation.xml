@@ -30,16 +30,17 @@
         android:name="com.kiri.android.view.fragment.HistoryFragment"
         android:label="@string/title_history_bottom_nav"
         tools:layout="@layout/fragment_history" />
+
     <fragment
-        android:id="@+id/account_fragment"
+        android:id="@+id/navigation_account"
         android:name="com.kiri.android.view.fragment.AccountFragment"
         android:label="@string/title_account"
         tools:layout="@layout/account_fragment">
         <action
-            android:id="@+id/action_account_fragment_to_accountActivity"
+            android:id="@+id/navigation_account_to_accountActivity"
             app:destination="@id/accountActivity" />
         <action
-            android:id="@+id/action_account_fragment_to_feedbackFragment"
+            android:id="@+id/navigation_account_to_feedbackFragment"
             app:destination="@id/feedbackFragment" />
     </fragment>
     <activity
