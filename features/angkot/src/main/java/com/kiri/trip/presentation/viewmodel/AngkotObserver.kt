@@ -116,5 +116,12 @@ class AngkotObserver(
                 Resource.Status.ERROR -> resource.onGetRoutesFailed(it.error)
             }
         }
+        vm.rideAngkot.observe(owner) {
+            when (it.status) {
+                Resource.Status.LOADING -> resource.onReadyRideLoading()
+                Resource.Status.SUCCESS -> resource.onReadyRideSuccess(it.data)
+                Resource.Status.ERROR -> resource.onReadyRideFailed(it.error)
+            }
+        }
     }
 }

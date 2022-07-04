@@ -81,6 +81,11 @@ interface AngkotResource {
     fun onGetRoutesSuccess(data: ApiResponse<RoutesData>?) {}
     fun onGetRoutesFailed(error: String?) {}
 
+    // RideAngkot
+    fun onReadyRideLoading() {}
+    fun onReadyRideSuccess(data: ApiResponse<Nothing>?) {}
+    fun onReadyRideFailed(error: String?) {}
+
     // GetAngkotDistance
     fun onGetDistance() {}
 }

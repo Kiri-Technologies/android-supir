@@ -18,9 +18,12 @@ android {
         debug {
             buildConfigField("String", "BASE_URL", "\"https://kiri.mfaiztriputra.id/\"")
             minifyEnabled false
+            debuggable true
         }
         release {
+            buildConfigField("String", "BASE_URL", "\"https://kiri.mfaiztriputra.id/\"")
             minifyEnabled true
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

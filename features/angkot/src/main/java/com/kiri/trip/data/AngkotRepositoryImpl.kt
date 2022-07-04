@@ -9,6 +9,7 @@ import com.google.firebase.database.ValueEventListener
 import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.BaseApiResponse
 import com.kiri.common.utils.Resource
+import com.kiri.trip.BuildConfig
 import com.kiri.trip.data.endpoint.RemoteDataSource
 import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.AngkotData
@@ -18,6 +19,7 @@ import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
+import com.kiri.trip.data.models.setWayBody
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -159,5 +161,39 @@ class AngkotRepositoryImpl(
         })
 
         return mLiveData
+    }
+
+    override suspend fun statusAngkot(
+        angkotId: String,
+        is_Beroperasi: String,
+        supirId: String
+    ): Flow<Resource<Nothing>> {
+        return flow {
+            emit(
+                safeApiCall {
+                    remoteDataSource.statusAngkot(
+                        angkotId,
+                        is_Beroperasi,
+                        supirId
+                    )
+                }
+            )
+        }
+    }
+
+    override suspend fun createHistory(
+        supirId: String,
+        angkotId: String,
+        rideTime: String
+    ): Flow<Resource<Nothing>> {
+        return flow {
+            emit(safeApiCall { remoteDataSource.createHistory(supirId, angkotId, rideTime) })
+        }
+    }
+
+    override suspend fun setWayMaps(body: setWayBody): Flow<Resource<Nothing>> {
+        return flow {
+            emit(safeApiCall { remoteDataSource.setWayMaps("${BuildConfig.BASE_URL_MAPS}tarikangkot", body) })
+        }
     }
 }

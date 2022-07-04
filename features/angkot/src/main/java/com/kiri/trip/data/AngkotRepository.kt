@@ -10,6 +10,7 @@ import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
+import com.kiri.trip.data.models.setWayBody
 import kotlinx.coroutines.flow.Flow
 
 interface AngkotRepository {
@@ -67,4 +68,18 @@ interface AngkotRepository {
     suspend fun getRoutesById(angkotId: String): Flow<Resource<RoutesData>>
 
     suspend fun getAngkotDistance(): MutableLiveData<Resource<AngkotData>>
+
+    suspend fun statusAngkot(
+        angkotId: String,
+        is_Beroperasi: String,
+        supirId: String
+    ): Flow<Resource<Nothing>>
+
+    suspend fun createHistory(
+        supirId: String,
+        angkotId: String,
+        rideTime: String
+    ): Flow<Resource<Nothing>>
+
+    suspend fun setWayMaps(body: setWayBody): Flow<Resource<Nothing>>
 }

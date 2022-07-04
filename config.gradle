@@ -30,6 +30,7 @@ ext {
             timber                 : "com.jakewharton.timber:timber:$timberVersion",
             gson                   : "com.google.code.gson:gson:2.8.6",
             convertergson          : "com.squareup.retrofit2:converter-gson:2.9.0",
+            retrofitDynamic        : 'me.jessyan:retrofit-url-manager:1.2.5'
     ]
 
     supportDependencies = [

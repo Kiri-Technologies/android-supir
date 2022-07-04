@@ -8,6 +8,7 @@ import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
+import com.kiri.trip.data.models.setWayBody
 import retrofit2.Response
 
 class RemoteDataSource(private val endpoint: AngkotEndpoint) : AngkotEndpoint {
@@ -87,5 +88,25 @@ class RemoteDataSource(private val endpoint: AngkotEndpoint) : AngkotEndpoint {
 
     override suspend fun getRoutesById(angkotId: String): Response<ApiResponse<RoutesData>> {
         return endpoint.getRoutesById(angkotId)
+    }
+
+    override suspend fun statusAngkot(
+        angkotId: String,
+        is_Beroperasi: String,
+        supirId: String
+    ): Response<ApiResponse<Nothing>> {
+        return endpoint.statusAngkot(angkotId, is_Beroperasi, supirId)
+    }
+
+    override suspend fun createHistory(
+        supirId: String,
+        angkotId: String,
+        rideTime: String
+    ): Response<ApiResponse<Nothing>> {
+        return endpoint.createHistory(supirId, angkotId, rideTime)
+    }
+
+    override suspend fun setWayMaps(url: String, body: setWayBody): Response<ApiResponse<Nothing>> {
+        return endpoint.setWayMaps(url, body)
     }
 }

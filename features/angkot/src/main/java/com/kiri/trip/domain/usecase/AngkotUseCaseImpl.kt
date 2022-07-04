@@ -11,8 +11,10 @@ import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.TripHistoryData
+import com.kiri.trip.data.models.setWayBody
 import com.kiri.trip.domain.usecase.models.TotalEarningsDomain
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.map
 
 class AngkotUseCaseImpl(private val angkotRepositoryImpl: AngkotRepositoryImpl) : AngkotUseCase {
@@ -99,5 +101,39 @@ class AngkotUseCaseImpl(private val angkotRepositoryImpl: AngkotRepositoryImpl) 
 
     override suspend fun getAngkotDistance(): MutableLiveData<Resource<AngkotData>> {
         return angkotRepositoryImpl.getAngkotDistance()
+    }
+
+    override suspend fun statusAngkot(
+        angkotId: String,
+        is_Beroperasi: String,
+        supirId: String
+    ): Flow<Resource<Nothing>> {
+        return angkotRepositoryImpl.statusAngkot(angkotId, is_Beroperasi, supirId)
+    }
+
+    override suspend fun createHistory(
+        supirId: String,
+        angkotId: String,
+        rideTime: String
+    ): Flow<Resource<Nothing>> {
+        return angkotRepositoryImpl.createHistory(supirId, angkotId, rideTime)
+    }
+
+    override suspend fun setWayMaps(body: setWayBody): Flow<Resource<Nothing>> {
+        return angkotRepositoryImpl.setWayMaps(body)
+    }
+
+    override suspend fun send3API(
+        angkotId: String,
+        is_Beroperasi: String,
+        supirId: String,
+        rideTime: String,
+        body: setWayBody
+    ): Flow<Resource<Nothing>> {
+        return angkotRepositoryImpl.statusAngkot(angkotId, is_Beroperasi, supirId).flatMapConcat {
+            angkotRepositoryImpl.createHistory(supirId, angkotId, rideTime)
+        }.flatMapConcat {
+            angkotRepositoryImpl.setWayMaps(body)
+        }
     }
 }

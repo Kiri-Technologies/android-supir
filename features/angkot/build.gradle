@@ -17,8 +17,15 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
+            buildConfigField("String", "BASE_URL_MAPS", "\"https://maps.kiri.mfaiztriputra.id/api/\"")
             minifyEnabled false
+            debuggable true
+        }
+        release {
+            buildConfigField("String", "BASE_URL_MAPS", "\"https://maps.kiri.mfaiztriputra.id/api/\"")
+            minifyEnabled true
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

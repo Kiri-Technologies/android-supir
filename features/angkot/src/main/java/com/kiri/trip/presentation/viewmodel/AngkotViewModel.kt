@@ -11,6 +11,7 @@ import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.TripHistoryData
+import com.kiri.trip.data.models.setWayBody
 import com.kiri.trip.domain.usecase.AngkotUseCase
 import com.kiri.trip.domain.usecase.models.TotalEarningsDomain
 import kotlinx.coroutines.flow.collect
@@ -216,9 +217,21 @@ class AngkotViewModel(private val useCase: AngkotUseCase) : ViewModel() {
         }
     }
 
-    //    val getDistance: LiveData<Resource<AngkotData>>
-//    fun getAngkotDistance(): LiveData<Resource<AngkotData>> {
-//        viewModelScope.launch {
-//        }
-//    }
+    private val _sendToRideAngkot: MutableLiveData<Resource<Nothing>> = MutableLiveData()
+    val rideAngkot: LiveData<Resource<Nothing>> = _sendToRideAngkot
+
+    fun rideAngkot(
+        angkotId: String,
+        is_Beroperasi: String,
+        supirId: String,
+        rideTime: String,
+        body: setWayBody
+    ) {
+        viewModelScope.launch {
+            _sendToRideAngkot.value = Resource.loading()
+            useCase.send3API(angkotId, is_Beroperasi, supirId, rideTime, body).collect {
+                _sendToRideAngkot.value = it
+            }
+        }
+    }
 }

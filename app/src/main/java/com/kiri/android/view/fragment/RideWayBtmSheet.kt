@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.gson.Gson
+import com.kiri.account.data.models.ProfileData
 import com.kiri.android.R
 import com.kiri.android.databinding.DialogRadioBinding
 import com.kiri.android.view.activity.RideAngkotActivity
@@ -13,6 +15,7 @@ import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.ApiResponse
 import com.kiri.common.utils.shortToast
 import com.kiri.trip.data.models.RoutesData
+import com.kiri.trip.data.models.setWayBody
 import com.kiri.trip.presentation.viewmodel.AngkotResource
 import com.kiri.trip.presentation.viewmodel.AngkotViewModel
 import com.kiri.ui.gone
@@ -26,6 +29,7 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
     private lateinit var viewModel: AngkotViewModel
     private val pref by inject<PrefUseCase>()
     private var angkotId: String? = null
+    private lateinit var body: setWayBody
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,11 +56,19 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
             when (checkedId) {
                 R.id.rbAwal -> {
                     btnChoose.isEnabled = true
+                    setBody(rbAwal.text.toString())
                 }
                 R.id.rbAkhir -> {
                     btnChoose.isEnabled = true
+                    setBody(rbAkhir.text.toString())
                 }
             }
+        }
+        btnChoose.setOnClickListener {
+            val supir = Gson().fromJson(pref.accountData, ProfileData::class.java)
+            viewModel.rideAngkot(
+                angkotId ?: "", "1", supir.id ?: "", "2010-12-11 04:20:16", body
+            )
         }
     }
 
@@ -68,6 +80,15 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
                 requireContext(),
                 RideAngkotActivity::class.java
             )
+        )
+    }
+
+    private fun setBody(arah: String) {
+        body = setWayBody(
+            angkotId ?: "",
+            arah,
+            "1",
+            "1"
         )
     }
 
@@ -92,6 +113,11 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
     override fun onGetRoutesFailed(error: String?) {
         super.onGetRoutesFailed(error)
         shortToast(requireContext(), getString(R.string.error_message))
+    }
+
+    override fun onReadyRideSuccess(data: ApiResponse<Nothing>?) {
+        super.onReadyRideSuccess(data)
+        shortToast(requireContext(), data?.message.toString())
     }
 
     private fun unloadingView() {

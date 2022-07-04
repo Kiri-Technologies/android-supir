@@ -8,13 +8,16 @@ import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
+import com.kiri.trip.data.models.setWayBody
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.Url
 
 interface AngkotEndpoint {
 
@@ -97,4 +100,23 @@ interface AngkotEndpoint {
     suspend fun getRoutesById(
         @Path("id") angkotId: String
     ): Response<ApiResponse<RoutesData>>
+
+    @FormUrlEncoded
+    @POST("supir/angkot/{id}/updateStatusOperasi")
+    suspend fun statusAngkot(
+        @Path("id") angkotId: String,
+        @Field("is_beroperasi") is_Beroperasi: String,
+        @Field("supir_yg_beroperasi") supirId: String
+    ): Response<ApiResponse<Nothing>>
+
+    @FormUrlEncoded
+    @POST("supir/riwayat/create")
+    suspend fun createHistory(
+        @Field("user_id") supirId: String,
+        @Field("angkot_id") angkotId: String,
+        @Field("mulai_narik") rideTime: String
+    ): Response<ApiResponse<Nothing>>
+
+    @POST
+    suspend fun setWayMaps(@Url url: String, @Body body: setWayBody): Response<ApiResponse<Nothing>>
 }
