@@ -4,8 +4,11 @@ import com.kiri.common.utils.ApiResponse
 import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
+import com.kiri.trip.data.models.LocationBody
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
+import com.kiri.trip.data.models.ToggleFullBody
+import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
 import com.kiri.trip.data.models.setWayBody
@@ -108,5 +111,26 @@ class RemoteDataSource(private val endpoint: AngkotEndpoint) : AngkotEndpoint {
 
     override suspend fun setWayMaps(url: String, body: setWayBody): Response<ApiResponse<Nothing>> {
         return endpoint.setWayMaps(url, body)
+    }
+
+    override suspend fun setLocation(
+        url: String,
+        body: LocationBody
+    ): Response<ApiResponse<Nothing>> {
+        return endpoint.setLocation(url, body)
+    }
+
+    override suspend fun toggleStop(
+        url: String,
+        body: ToggleStopBody
+    ): Response<ApiResponse<Nothing>> {
+        return endpoint.toggleStop(url, body)
+    }
+
+    override suspend fun toggleFull(
+        url: String,
+        body: ToggleFullBody
+    ): Response<ApiResponse<Nothing>> {
+        return endpoint.toggleFull(url, body)
     }
 }

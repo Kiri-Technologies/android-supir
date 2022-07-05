@@ -86,6 +86,21 @@ interface AngkotResource {
     fun onReadyRideSuccess(data: ApiResponse<Nothing>?) {}
     fun onReadyRideFailed(error: String?) {}
 
+    // SetLocation
+    fun onSetLocationLoading() {}
+    fun onSetLocationSuccess(data: ApiResponse<Nothing>?) {}
+    fun onSetLocationFailed(error: String?) {}
+
+    // ToggleNgetem
+    fun onToggleNgetemLoading() {}
+    fun onToggleNgetemSuccess(data: ApiResponse<Nothing>?) {}
+    fun onToggleNgetemFailed(error: String?) {}
+
+    // ToggleFull
+    fun onToggleFullLoading() {}
+    fun onToggleFullSuccess(data: ApiResponse<Nothing>?) {}
+    fun onToggleFullFailed(error: String?) {}
+
     // GetAngkotDistance
     fun onGetDistance() {}
 }

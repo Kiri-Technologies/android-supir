@@ -26,13 +26,6 @@ class PrefRepositoryImpl(private val sharedPref: SharedPref) : PrefRepository {
                 putString(PrefKey.PROFILE, value)
             }
         }
-    override var isRidingAngkot: Boolean
-        get() = sharedPref.preferences.getBoolean(PrefKey.IS_RIDING_ANGKOT, false)
-        set(value) {
-            sharedPref.preferences.edit {
-                putBoolean(PrefKey.IS_RIDING_ANGKOT, value)
-            }
-        }
     override var angkotId: String?
         get() = sharedPref.preferences.getString(PrefKey.ANGKOT_ID, null)
         set(value) {

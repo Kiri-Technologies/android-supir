@@ -89,7 +89,6 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
 
     private fun goToNarik() {
         this.dismiss()
-        pref.isRidingAngkot = true
         pref.angkotId = angkotId
         startActivity(
             Intent(

@@ -8,8 +8,11 @@ import com.kiri.common.utils.Resource
 import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
+import com.kiri.trip.data.models.LocationBody
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
+import com.kiri.trip.data.models.ToggleFullBody
+import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TripHistoryData
 import com.kiri.trip.data.models.setWayBody
 import com.kiri.trip.domain.usecase.AngkotUseCase
@@ -231,6 +234,42 @@ class AngkotViewModel(private val useCase: AngkotUseCase) : ViewModel() {
             _sendToRideAngkot.value = Resource.loading()
             useCase.send3API(angkotId, is_Beroperasi, supirId, rideTime, body).collect {
                 _sendToRideAngkot.value = it
+            }
+        }
+    }
+
+    private val _setLocation: MutableLiveData<Resource<Nothing>> = MutableLiveData()
+    val setLocation: LiveData<Resource<Nothing>> = _setLocation
+
+    fun setLocation(body: LocationBody) {
+        viewModelScope.launch {
+            _setLocation.value = Resource.loading()
+            useCase.setLocation(body).collect {
+                _setLocation.value = it
+            }
+        }
+    }
+
+    private val _toggleStop: MutableLiveData<Resource<Nothing>> = MutableLiveData()
+    val toggleStop: LiveData<Resource<Nothing>> = _toggleStop
+
+    fun toggleNgetem(body: ToggleStopBody) {
+        viewModelScope.launch {
+            _toggleStop.value = Resource.loading()
+            useCase.toggleStop(body).collect {
+                _toggleStop.value = it
+            }
+        }
+    }
+
+    private val _toggleFull: MutableLiveData<Resource<Nothing>> = MutableLiveData()
+    val toggleFull: LiveData<Resource<Nothing>> = _toggleFull
+
+    fun toggleFull(body: ToggleFullBody) {
+        viewModelScope.launch {
+            _toggleFull.value = Resource.loading()
+            useCase.toggleFull(body).collect {
+                _toggleFull.value = it
             }
         }
     }

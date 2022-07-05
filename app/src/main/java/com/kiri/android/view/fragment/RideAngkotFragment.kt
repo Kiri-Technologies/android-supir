@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -24,16 +23,27 @@ import com.kiri.android.data.userNaik
 import com.kiri.android.databinding.FragmentRideAngkotBinding
 import com.kiri.android.view.adapter.DropUserAdapter
 import com.kiri.android.view.adapter.UserRideAdapter
+import com.kiri.common.data.pref.PrefKey
 import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.shortToast
+import com.kiri.trip.data.models.LocationBody
+import com.kiri.trip.data.models.ToggleStopBody
+import com.kiri.trip.presentation.viewmodel.AngkotResource
+import com.kiri.trip.presentation.viewmodel.AngkotViewModel
 import com.kiri.ui.showDialog
 import com.kiri.ui.showDialogList
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import java.util.concurrent.TimeUnit
 
-class RideAngkotFragment : Fragment(R.layout.fragment_ride_angkot), View.OnClickListener {
+class RideAngkotFragment :
+    Fragment(R.layout.fragment_ride_angkot),
+    View.OnClickListener,
+    AngkotResource {
     private val binding by viewBinding<FragmentRideAngkotBinding>()
     private val pref by inject<PrefUseCase>()
+    private val viewModel by viewModel<AngkotViewModel> { parametersOf(lifecycle, this) }
     private val dropAdapter by lazy {
         DropUserAdapter()
     }
@@ -93,7 +103,7 @@ class RideAngkotFragment : Fragment(R.layout.fragment_ride_angkot), View.OnClick
             // Sets the desired interval for
             // active location updates.
             // This interval is inexact.
-            interval = TimeUnit.SECONDS.toMillis(5)
+            interval = TimeUnit.SECONDS.toMillis(10)
 
             // Sets the fastest rate for active location updates.
             // This interval is exact, and your application will never
@@ -134,9 +144,14 @@ class RideAngkotFragment : Fragment(R.layout.fragment_ride_angkot), View.OnClick
                     currentLocation = it
                     binding.tvLat.text = it.latitude.toString()
                     binding.tvLong.text = it.longitude.toString()
-                    it.latitude - 0.0001 * 5
-                    it.longitude - 0.0001 * 5
-                    // use latitude and longitude as per your need
+                    viewModel.setLocation(
+                        LocationBody(
+                            pref.angkotId,
+                            it.latitude.toString(),
+                            it.longitude.toString()
+                        )
+                    )
+                    toggleNgetem(it.latitude.toString(), it.longitude.toString())
                 } ?: shortToast(requireContext(), getString(R.string.error_message))
             }
         }
@@ -147,9 +162,23 @@ class RideAngkotFragment : Fragment(R.layout.fragment_ride_angkot), View.OnClick
     }
 
     private fun finishRide() {
-        pref.isRidingAngkot = false
+        pref.removeByKey(PrefKey.ANGKOT_ID)
         activity?.finish()
         locationNotNeeded()
+    }
+
+    private fun toggleNgetem(lat: String, long: String) {
+        binding.swNgetem.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) viewModel.toggleNgetem(
+                ToggleStopBody(
+                    pref.angkotId, lat, long, "1"
+                )
+            ) else {
+                ToggleStopBody(
+                    pref.angkotId, lat, long, "0"
+                )
+            }
+        }
     }
 
     override fun onClick(v: View?) {

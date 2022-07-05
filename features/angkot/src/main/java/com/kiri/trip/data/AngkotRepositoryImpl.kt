@@ -15,8 +15,11 @@ import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.AngkotData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
+import com.kiri.trip.data.models.LocationBody
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
+import com.kiri.trip.data.models.ToggleFullBody
+import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
 import com.kiri.trip.data.models.setWayBody
@@ -193,7 +196,53 @@ class AngkotRepositoryImpl(
 
     override suspend fun setWayMaps(body: setWayBody): Flow<Resource<Nothing>> {
         return flow {
-            emit(safeApiCall { remoteDataSource.setWayMaps("${BuildConfig.BASE_URL_MAPS}tarikangkot", body) })
+            emit(
+                safeApiCall {
+                    remoteDataSource.setWayMaps(
+                        "${BuildConfig.BASE_URL_MAPS}tarikangkot",
+                        body
+                    )
+                }
+            )
+        }
+    }
+
+    override suspend fun setLocation(body: LocationBody): Flow<Resource<Nothing>> {
+        return flow {
+            emit(
+                safeApiCall {
+                    remoteDataSource.setLocation(
+                        "${BuildConfig.BASE_URL_MAPS}setLocation",
+                        body
+                    )
+                }
+            )
+        }
+    }
+
+    override suspend fun toggleStop(body: ToggleStopBody): Flow<Resource<Nothing>> {
+        return flow {
+            emit(
+                safeApiCall {
+                    remoteDataSource.toggleStop(
+                        "${BuildConfig.BASE_URL_MAPS}togglestop",
+                        body
+                    )
+                }
+            )
+        }
+    }
+
+    override suspend fun toggleFull(body: ToggleFullBody): Flow<Resource<Nothing>> {
+        return flow {
+            emit(
+                safeApiCall {
+                    remoteDataSource.toggleFull(
+                        "${BuildConfig.BASE_URL_MAPS}togglefull",
+                        body
+                    )
+                }
+            )
         }
     }
 }

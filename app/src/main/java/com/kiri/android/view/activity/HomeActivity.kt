@@ -107,7 +107,7 @@ class HomeActivity : AppCompatActivity(), AccountResource {
     }
 
     private fun ridingCheck() {
-        if (pref.isRidingAngkot) startActivity(
+        if (!pref.angkotId.isNullOrEmpty()) startActivity(
             Intent(
                 this,
                 RideAngkotActivity::class.java

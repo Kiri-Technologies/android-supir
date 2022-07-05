@@ -19,11 +19,6 @@ class PrefUseCaseImpl(private val repositoryImpl: PrefRepositoryImpl) : PrefUseC
         set(value) {
             repositoryImpl.accountData = value
         }
-    override var isRidingAngkot: Boolean
-        get() = repositoryImpl.isRidingAngkot
-        set(value) {
-            repositoryImpl.isRidingAngkot = value
-        }
     override var angkotId: String?
         get() = repositoryImpl.angkotId
         set(value) {

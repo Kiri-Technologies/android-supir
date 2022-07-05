@@ -4,8 +4,11 @@ import com.kiri.common.utils.ApiResponse
 import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
+import com.kiri.trip.data.models.LocationBody
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
+import com.kiri.trip.data.models.ToggleFullBody
+import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
 import com.kiri.trip.data.models.setWayBody
@@ -119,4 +122,22 @@ interface AngkotEndpoint {
 
     @POST
     suspend fun setWayMaps(@Url url: String, @Body body: setWayBody): Response<ApiResponse<Nothing>>
+
+    @POST
+    suspend fun setLocation(
+        @Url url: String,
+        @Body body: LocationBody
+    ): Response<ApiResponse<Nothing>>
+
+    @POST
+    suspend fun toggleStop(
+        @Url url: String,
+        @Body body: ToggleStopBody
+    ): Response<ApiResponse<Nothing>>
+
+    @POST
+    suspend fun toggleFull(
+        @Url url: String,
+        @Body body: ToggleFullBody
+    ): Response<ApiResponse<Nothing>>
 }

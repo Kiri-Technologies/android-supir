@@ -123,5 +123,26 @@ class AngkotObserver(
                 Resource.Status.ERROR -> resource.onReadyRideFailed(it.error)
             }
         }
+        vm.setLocation.observe(owner) {
+            when (it.status) {
+                Resource.Status.LOADING -> resource.onSetLocationLoading()
+                Resource.Status.SUCCESS -> resource.onSetLocationSuccess(it.data)
+                Resource.Status.ERROR -> resource.onSetLocationFailed(it.error)
+            }
+        }
+        vm.toggleStop.observe(owner) {
+            when (it.status) {
+                Resource.Status.LOADING -> resource.onToggleNgetemLoading()
+                Resource.Status.SUCCESS -> resource.onToggleNgetemSuccess(it.data)
+                Resource.Status.ERROR -> resource.onToggleNgetemFailed(it.error)
+            }
+        }
+        vm.toggleFull.observe(owner) {
+            when (it.status) {
+                Resource.Status.LOADING -> resource.onToggleFullLoading()
+                Resource.Status.SUCCESS -> resource.onToggleFullSuccess(it.data)
+                Resource.Status.ERROR -> resource.onToggleFullFailed(it.error)
+            }
+        }
     }
 }

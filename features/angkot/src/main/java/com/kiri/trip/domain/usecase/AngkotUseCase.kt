@@ -6,8 +6,11 @@ import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.AngkotData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
+import com.kiri.trip.data.models.LocationBody
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
+import com.kiri.trip.data.models.ToggleFullBody
+import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TripHistoryData
 import com.kiri.trip.data.models.setWayBody
 import com.kiri.trip.domain.usecase.models.TotalEarningsDomain
@@ -90,5 +93,17 @@ interface AngkotUseCase {
         supirId: String,
         rideTime: String,
         body: setWayBody
+    ): Flow<Resource<Nothing>>
+
+    suspend fun setLocation(
+        body: LocationBody
+    ): Flow<Resource<Nothing>>
+
+    suspend fun toggleStop(
+        body: ToggleStopBody
+    ): Flow<Resource<Nothing>>
+
+    suspend fun toggleFull(
+        body: ToggleFullBody
     ): Flow<Resource<Nothing>>
 }
