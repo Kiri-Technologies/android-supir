@@ -23,6 +23,8 @@ import com.kiri.ui.visible
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
     private lateinit var binding: DialogRadioBinding
@@ -30,6 +32,13 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
     private val pref by inject<PrefUseCase>()
     private var angkotId: String? = null
     private lateinit var body: setWayBody
+    private var routeId: Int? = null
+
+    companion object {
+        const val TAG = "Pilih Rute"
+        const val ANGKOTID = "angkotId"
+        const val IS_BEROPERASI = "1"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,7 +61,7 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
         btnCancel.setOnClickListener {
             this@RideWayBtmSheet.dismiss()
         }
-        rGroup.setOnCheckedChangeListener { group, checkedId ->
+        rGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.rbAwal -> {
                     btnChoose.isEnabled = true
@@ -67,12 +76,19 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
         btnChoose.setOnClickListener {
             val supir = Gson().fromJson(pref.accountData, ProfileData::class.java)
             viewModel.rideAngkot(
-                angkotId ?: "", "1", supir.id ?: "", "2010-12-11 04:20:16", body
+                angkotId ?: "", IS_BEROPERASI, supir.id ?: "", currentTime(), body
             )
         }
     }
 
+    private fun currentTime(): String {
+        val calendar = Calendar.getInstance()
+        val outFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        return outFormat.format(calendar.time)
+    }
+
     private fun goToNarik() {
+        this.dismiss()
         pref.isRidingAngkot = true
         pref.angkotId = angkotId
         startActivity(
@@ -87,14 +103,9 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
         body = setWayBody(
             angkotId ?: "",
             arah,
-            "1",
-            "1"
+            IS_BEROPERASI,
+            routeId.toString()
         )
-    }
-
-    companion object {
-        const val TAG = "Pilih Rute"
-        const val ANGKOTID = "angkotId"
     }
 
     override fun onGetRoutesSuccess(data: ApiResponse<RoutesData>?) {
@@ -103,6 +114,7 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
 
         binding.rbAwal.text = data?.dataData?.titikAwal
         binding.rbAkhir.text = data?.dataData?.titikAkhir
+        routeId = data?.dataData?.id
     }
 
     override fun onGetRoutesLoading() {
@@ -115,9 +127,21 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
         shortToast(requireContext(), getString(R.string.error_message))
     }
 
+    override fun onReadyRideLoading() {
+        super.onReadyRideLoading()
+        binding.btnChoose.setLoading(true)
+    }
+
     override fun onReadyRideSuccess(data: ApiResponse<Nothing>?) {
         super.onReadyRideSuccess(data)
-        shortToast(requireContext(), data?.message.toString())
+        binding.btnChoose.setLoading(false)
+        goToNarik()
+    }
+
+    override fun onReadyRideFailed(error: String?) {
+        super.onReadyRideFailed(error)
+        binding.btnChoose.setLoading(false)
+        shortToast(requireContext(), getString(R.string.error_message))
     }
 
     private fun unloadingView() {

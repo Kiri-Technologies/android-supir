@@ -18,7 +18,7 @@ class RideHistoryDetailAdapter :
         val time = item.createdAt?.dateToDateMillis()
         val date = time?.toFormattedString("dd/MM/yyyy")
         val startRide = item.mulaiNarik?.substringAfter(" ")?.substring(0, 5)
-        val endRide = item.selesaiNarik?.substringAfter(" ")?.substring(0, 5)
+        val endRide = item.selesaiNarik?.substringAfter(" ")?.substring(0, 5) ?: ""
         val earnings = item.jumlahPendapatan?.toLong()?.toFormatRupiah()
 
         holder.setText(R.id.tvDate, date)
