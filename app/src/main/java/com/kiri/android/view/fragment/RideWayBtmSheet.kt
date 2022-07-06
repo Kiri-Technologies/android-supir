@@ -15,7 +15,7 @@ import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.ApiResponse
 import com.kiri.common.utils.shortToast
 import com.kiri.trip.data.models.RoutesData
-import com.kiri.trip.data.models.setWayBody
+import com.kiri.trip.data.models.SetWayBody
 import com.kiri.trip.presentation.viewmodel.AngkotResource
 import com.kiri.trip.presentation.viewmodel.AngkotViewModel
 import com.kiri.ui.gone
@@ -31,7 +31,7 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
     private lateinit var viewModel: AngkotViewModel
     private val pref by inject<PrefUseCase>()
     private var angkotId: String? = null
-    private lateinit var body: setWayBody
+    private lateinit var body: SetWayBody
     private var routeId: Int? = null
 
     companion object {
@@ -58,6 +58,7 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
     }
 
     private fun initUI() = with(binding) {
+        this@RideWayBtmSheet.isCancelable = false
         btnCancel.setOnClickListener {
             this@RideWayBtmSheet.dismiss()
         }
@@ -90,6 +91,7 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
     private fun goToNarik() {
         this.dismiss()
         pref.angkotId = angkotId
+        pref.routeId = routeId.toString()
         startActivity(
             Intent(
                 requireContext(),
@@ -99,7 +101,7 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
     }
 
     private fun setBody(arah: String) {
-        body = setWayBody(
+        body = SetWayBody(
             angkotId ?: "",
             arah,
             IS_BEROPERASI,
@@ -129,18 +131,21 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
     override fun onReadyRideLoading() {
         super.onReadyRideLoading()
         binding.btnChoose.setLoading(true)
+        binding.btnCancel.isEnabled = false
     }
 
     override fun onReadyRideSuccess(data: ApiResponse<Nothing>?) {
         super.onReadyRideSuccess(data)
         binding.btnChoose.setLoading(false)
         goToNarik()
+        binding.btnCancel.isEnabled = true
     }
 
     override fun onReadyRideFailed(error: String?) {
         super.onReadyRideFailed(error)
         binding.btnChoose.setLoading(false)
         shortToast(requireContext(), getString(R.string.error_message))
+        binding.btnCancel.isEnabled = true
     }
 
     private fun unloadingView() {

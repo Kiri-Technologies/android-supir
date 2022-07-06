@@ -11,7 +11,7 @@ import com.kiri.trip.data.models.ToggleFullBody
 import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
-import com.kiri.trip.data.models.setWayBody
+import com.kiri.trip.data.models.SetWayBody
 import retrofit2.Response
 
 class RemoteDataSource(private val endpoint: AngkotEndpoint) : AngkotEndpoint {
@@ -109,7 +109,7 @@ class RemoteDataSource(private val endpoint: AngkotEndpoint) : AngkotEndpoint {
         return endpoint.createHistory(supirId, angkotId, rideTime)
     }
 
-    override suspend fun setWayMaps(url: String, body: setWayBody): Response<ApiResponse<Nothing>> {
+    override suspend fun setWayMaps(url: String, body: SetWayBody): Response<ApiResponse<Nothing>> {
         return endpoint.setWayMaps(url, body)
     }
 

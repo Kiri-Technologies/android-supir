@@ -13,7 +13,7 @@ import com.kiri.trip.data.models.ToggleFullBody
 import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
-import com.kiri.trip.data.models.setWayBody
+import com.kiri.trip.data.models.SetWayBody
 import kotlinx.coroutines.flow.Flow
 
 interface AngkotRepository {
@@ -84,7 +84,7 @@ interface AngkotRepository {
         rideTime: String
     ): Flow<Resource<Nothing>>
 
-    suspend fun setWayMaps(body: setWayBody): Flow<Resource<Nothing>>
+    suspend fun setWayMaps(body: SetWayBody): Flow<Resource<Nothing>>
 
     suspend fun setLocation(
         body: LocationBody

@@ -14,7 +14,7 @@ import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.ToggleFullBody
 import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TripHistoryData
-import com.kiri.trip.data.models.setWayBody
+import com.kiri.trip.data.models.SetWayBody
 import com.kiri.trip.domain.usecase.AngkotUseCase
 import com.kiri.trip.domain.usecase.models.TotalEarningsDomain
 import kotlinx.coroutines.flow.collect
@@ -228,7 +228,7 @@ class AngkotViewModel(private val useCase: AngkotUseCase) : ViewModel() {
         is_Beroperasi: String,
         supirId: String,
         rideTime: String,
-        body: setWayBody
+        body: SetWayBody
     ) {
         viewModelScope.launch {
             _sendToRideAngkot.value = Resource.loading()

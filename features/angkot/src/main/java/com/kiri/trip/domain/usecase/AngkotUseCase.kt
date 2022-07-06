@@ -12,7 +12,7 @@ import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.ToggleFullBody
 import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TripHistoryData
-import com.kiri.trip.data.models.setWayBody
+import com.kiri.trip.data.models.SetWayBody
 import com.kiri.trip.domain.usecase.models.TotalEarningsDomain
 import kotlinx.coroutines.flow.Flow
 
@@ -85,14 +85,14 @@ interface AngkotUseCase {
         rideTime: String
     ): Flow<Resource<Nothing>>
 
-    suspend fun setWayMaps(body: setWayBody): Flow<Resource<Nothing>>
+    suspend fun setWayMaps(body: SetWayBody): Flow<Resource<Nothing>>
 
     suspend fun send3API(
         angkotId: String,
         is_Beroperasi: String,
         supirId: String,
         rideTime: String,
-        body: setWayBody
+        body: SetWayBody
     ): Flow<Resource<Nothing>>
 
     suspend fun setLocation(

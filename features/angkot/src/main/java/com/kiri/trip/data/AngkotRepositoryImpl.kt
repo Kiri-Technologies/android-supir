@@ -22,7 +22,7 @@ import com.kiri.trip.data.models.ToggleFullBody
 import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
-import com.kiri.trip.data.models.setWayBody
+import com.kiri.trip.data.models.SetWayBody
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -194,7 +194,7 @@ class AngkotRepositoryImpl(
         }
     }
 
-    override suspend fun setWayMaps(body: setWayBody): Flow<Resource<Nothing>> {
+    override suspend fun setWayMaps(body: SetWayBody): Flow<Resource<Nothing>> {
         return flow {
             emit(
                 safeApiCall {
@@ -212,7 +212,7 @@ class AngkotRepositoryImpl(
             emit(
                 safeApiCall {
                     remoteDataSource.setLocation(
-                        "${BuildConfig.BASE_URL_MAPS}setLocation",
+                        "${BuildConfig.BASE_URL_MAPS}setlocation",
                         body
                     )
                 }

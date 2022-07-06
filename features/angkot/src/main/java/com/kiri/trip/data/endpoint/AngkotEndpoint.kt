@@ -11,7 +11,7 @@ import com.kiri.trip.data.models.ToggleFullBody
 import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
-import com.kiri.trip.data.models.setWayBody
+import com.kiri.trip.data.models.SetWayBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field
@@ -121,7 +121,7 @@ interface AngkotEndpoint {
     ): Response<ApiResponse<Nothing>>
 
     @POST
-    suspend fun setWayMaps(@Url url: String, @Body body: setWayBody): Response<ApiResponse<Nothing>>
+    suspend fun setWayMaps(@Url url: String, @Body body: SetWayBody): Response<ApiResponse<Nothing>>
 
     @POST
     suspend fun setLocation(

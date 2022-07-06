@@ -33,6 +33,13 @@ class PrefRepositoryImpl(private val sharedPref: SharedPref) : PrefRepository {
                 putString(PrefKey.ANGKOT_ID, value)
             }
         }
+    override var routeId: String?
+        get() = sharedPref.preferences.getString(PrefKey.ROUTE_ID, null)
+        set(value) {
+            sharedPref.preferences.edit {
+                putString(PrefKey.ROUTE_ID, value)
+            }
+        }
 
     override fun removeByKey(key: String) {
         sharedPref.preferences.edit {

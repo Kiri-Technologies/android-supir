@@ -2,7 +2,7 @@ package com.kiri.trip.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class setWayBody(
+data class SetWayBody(
     @field:SerializedName("angkot_id")
     val angkotId: String,
 

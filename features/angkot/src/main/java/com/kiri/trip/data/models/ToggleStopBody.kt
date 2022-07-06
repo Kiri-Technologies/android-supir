@@ -6,6 +6,9 @@ data class ToggleStopBody(
     @field:SerializedName("angkot_id")
     val angkotId: String? = null,
 
+    @field:SerializedName("route_id")
+    val routeId: String? = null,
+
     @field:SerializedName("lat")
     val lat: String? = null,
 
@@ -13,5 +16,5 @@ data class ToggleStopBody(
     val long: String? = null,
 
     @field:SerializedName("is_waiting_for_passengers")
-    val waitingPassenger: String? = null
+    val waitingPassenger: Boolean? = null
 )

@@ -163,6 +163,7 @@ class RideAngkotFragment :
 
     private fun finishRide() {
         pref.removeByKey(PrefKey.ANGKOT_ID)
+        pref.removeByKey(PrefKey.ROUTE_ID)
         activity?.finish()
         locationNotNeeded()
     }
@@ -171,11 +172,13 @@ class RideAngkotFragment :
         binding.swNgetem.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) viewModel.toggleNgetem(
                 ToggleStopBody(
-                    pref.angkotId, lat, long, "1"
+                    pref.angkotId, pref.routeId, lat, long, true
                 )
             ) else {
-                ToggleStopBody(
-                    pref.angkotId, lat, long, "0"
+                viewModel.toggleNgetem(
+                    ToggleStopBody(
+                        pref.angkotId, pref.routeId, lat, long, false
+                    )
                 )
             }
         }

@@ -14,7 +14,7 @@ import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.ToggleFullBody
 import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TripHistoryData
-import com.kiri.trip.data.models.setWayBody
+import com.kiri.trip.data.models.SetWayBody
 import com.kiri.trip.domain.usecase.models.TotalEarningsDomain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapConcat
@@ -122,7 +122,7 @@ class AngkotUseCaseImpl(private val angkotRepositoryImpl: AngkotRepositoryImpl) 
         return angkotRepositoryImpl.createHistory(supirId, angkotId, rideTime)
     }
 
-    override suspend fun setWayMaps(body: setWayBody): Flow<Resource<Nothing>> {
+    override suspend fun setWayMaps(body: SetWayBody): Flow<Resource<Nothing>> {
         return angkotRepositoryImpl.setWayMaps(body)
     }
 
@@ -131,7 +131,7 @@ class AngkotUseCaseImpl(private val angkotRepositoryImpl: AngkotRepositoryImpl) 
         is_Beroperasi: String,
         supirId: String,
         rideTime: String,
-        body: setWayBody
+        body: SetWayBody
     ): Flow<Resource<Nothing>> {
         return angkotRepositoryImpl.statusAngkot(angkotId, is_Beroperasi, supirId).flatMapConcat {
             angkotRepositoryImpl.createHistory(supirId, angkotId, rideTime)

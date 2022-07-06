@@ -29,6 +29,7 @@ class RideHistoryFragment : Fragment(R.layout.board_history_fragment) {
     }
 
     private fun initData() {
+        adapter.data.clear()
         args.riwayatNarikData?.map {
             adapter.addData(it)
         }
