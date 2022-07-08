@@ -6,6 +6,9 @@ data class ToggleFullBody(
     @field:SerializedName("angkot_id")
     val angkotId: String? = null,
 
+    @field:SerializedName("route_id")
+    val routeId: String? = null,
+
     @field:SerializedName("is_full")
-    val isFull: String? = null
+    val isFull: Boolean? = null
 )

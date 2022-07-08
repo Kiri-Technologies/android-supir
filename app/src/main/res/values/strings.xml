@@ -43,4 +43,9 @@
     <string name="label_finish_ride_message">Apakah anda yakin untuk menyelesaikan narik angkot hari ini?</string>
     <string name="tittle_user_ride">Calon Penumpang</string>
     <string name="tittle_drop_user">Penumpang Turun</string>
+    <string name="label_current_loc">Lokasi saat ini</string>
+    <string name="label_ngetem">Ngetem</string>
+    <string name="label_angkot_penuh">Angkot Penuh</string>
+    <string name="label_finish_narik">Selesai Narik</string>
+    <string name="label_distance_angkot">Jarak angkot didepan</string>
 </resources>

@@ -1,34 +1,34 @@
 package com.kiri.trip.data
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.BaseApiResponse
 import com.kiri.common.utils.Resource
+import com.kiri.common.utils.ResourceFb
 import com.kiri.trip.BuildConfig
 import com.kiri.trip.data.endpoint.RemoteDataSource
 import com.kiri.trip.data.models.AngkotConfirmData
-import com.kiri.trip.data.models.AngkotData
+import com.kiri.trip.data.models.AngkotDistanceData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.LocationBody
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
+import com.kiri.trip.data.models.SetWayBody
 import com.kiri.trip.data.models.ToggleFullBody
 import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
-import com.kiri.trip.data.models.SetWayBody
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class AngkotRepositoryImpl(
-    private val remoteDataSource: RemoteDataSource,
-    private val pref: PrefUseCase
+    private val remoteDataSource: RemoteDataSource
 ) : AngkotRepository,
     BaseApiResponse() {
 
@@ -144,22 +144,21 @@ class AngkotRepositoryImpl(
         }
     }
 
-    override suspend fun getAngkotDistance(): MutableLiveData<Resource<AngkotData>> {
-        val angkotDistanceData: DatabaseReference =
-            rootRef.child("jarak_antar_angkot").child("angkot_${pref.angkotId}")
+    override fun getAngkotDistance(angkotId: String): MutableLiveData<ResourceFb<AngkotDistanceData>> {
+        val angkotDistanceData = rootRef.child("jarak_antar_angkot").child("angkot_$angkotId")
 
-        val mLiveData = MutableLiveData<Resource<AngkotData>>()
-        mLiveData.postValue(Resource.loading(null))
+        val mLiveData = MutableLiveData<ResourceFb<AngkotDistanceData>>()
+        mLiveData.value = ResourceFb.loading()
         angkotDistanceData.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val data = snapshot.value as AngkotData
-                    mLiveData.postValue(Resource.success(null))
+                    val data = snapshot.getValue(AngkotDistanceData::class.java)
+                    mLiveData.value = ResourceFb.success(data!!)
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                mLiveData.postValue(Resource.error(error.message))
+                mLiveData.value = ResourceFb.error(error.message)
             }
         })
 

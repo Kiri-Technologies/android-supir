@@ -2,8 +2,10 @@ package com.kiri.trip.domain.usecase
 
 import androidx.lifecycle.MutableLiveData
 import com.kiri.common.utils.Resource
+import com.kiri.common.utils.ResourceFb
 import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.AngkotData
+import com.kiri.trip.data.models.AngkotDistanceData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.LocationBody
@@ -71,7 +73,7 @@ interface AngkotUseCase {
 
     suspend fun getRoutesById(angkotId: String): Flow<Resource<RoutesData>>
 
-    suspend fun getAngkotDistance(): MutableLiveData<Resource<AngkotData>>
+    fun getAngkotDistance(angkotId: String): MutableLiveData<ResourceFb<AngkotDistanceData>>
 
     suspend fun statusAngkot(
         angkotId: String,

@@ -5,16 +5,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kiri.common.utils.Resource
+import com.kiri.common.utils.ResourceFb
 import com.kiri.trip.data.models.AngkotConfirmData
+import com.kiri.trip.data.models.AngkotDistanceData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.LocationBody
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
+import com.kiri.trip.data.models.SetWayBody
 import com.kiri.trip.data.models.ToggleFullBody
 import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TripHistoryData
-import com.kiri.trip.data.models.SetWayBody
 import com.kiri.trip.domain.usecase.AngkotUseCase
 import com.kiri.trip.domain.usecase.models.TotalEarningsDomain
 import kotlinx.coroutines.flow.collect
@@ -273,4 +275,7 @@ class AngkotViewModel(private val useCase: AngkotUseCase) : ViewModel() {
             }
         }
     }
+
+    fun angkotDistance(angkotId: String): LiveData<ResourceFb<AngkotDistanceData>> =
+        useCase.getAngkotDistance(angkotId)
 }

@@ -3,9 +3,11 @@ package com.kiri.trip.domain.usecase
 import androidx.lifecycle.MutableLiveData
 import com.kiri.common.utils.ApiResponse
 import com.kiri.common.utils.Resource
+import com.kiri.common.utils.ResourceFb
 import com.kiri.trip.data.AngkotRepositoryImpl
 import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.AngkotData
+import com.kiri.trip.data.models.AngkotDistanceData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.LocationBody
@@ -102,8 +104,8 @@ class AngkotUseCaseImpl(private val angkotRepositoryImpl: AngkotRepositoryImpl) 
         return angkotRepositoryImpl.getRoutesById(angkotId)
     }
 
-    override suspend fun getAngkotDistance(): MutableLiveData<Resource<AngkotData>> {
-        return angkotRepositoryImpl.getAngkotDistance()
+    override fun getAngkotDistance(angkotId: String): MutableLiveData<ResourceFb<AngkotDistanceData>> {
+        return angkotRepositoryImpl.getAngkotDistance(angkotId)
     }
 
     override suspend fun statusAngkot(

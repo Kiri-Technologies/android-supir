@@ -114,4 +114,5 @@ dependencies {
     //Google
     implementation platform(google.firebase)
     implementation google.firebaseAnalytics
+    implementation google.firebaseDatabase
 }

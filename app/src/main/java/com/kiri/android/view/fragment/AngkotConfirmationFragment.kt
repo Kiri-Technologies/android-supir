@@ -38,6 +38,11 @@ class AngkotConfirmationFragment : Fragment(R.layout.angkot_confirmation_fragmen
         initAction()
     }
 
+    override fun onResume() {
+        super.onResume()
+        initData()
+    }
+
     private fun initData() {
         val profile = Gson().fromJson(pref.accountData, ProfileData::class.java)
         profile.id?.let { viewModel.getAngkot(it) }
