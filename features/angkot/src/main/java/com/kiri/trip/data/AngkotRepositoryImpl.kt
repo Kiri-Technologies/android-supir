@@ -1,6 +1,5 @@
 package com.kiri.trip.data
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -24,6 +23,7 @@ import com.kiri.trip.data.models.ToggleFullBody
 import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
+import com.kiri.trip.data.models.UserAngkot
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -243,5 +243,71 @@ class AngkotRepositoryImpl(
                 }
             )
         }
+    }
+
+    override fun getUserAngkotRide(angkotId: String): MutableLiveData<ResourceFb<MutableList<UserAngkot>>> {
+        val angkotDistanceData =
+            rootRef.child("penumpang_naik_turun")
+                .child("angkot_$angkotId")
+                .child("naik")
+
+        val titikNaik: MutableList<UserAngkot> = mutableListOf()
+        val idNaik: MutableList<Int> = mutableListOf()
+        val mLiveData = MutableLiveData<ResourceFb<MutableList<UserAngkot>>>()
+        mLiveData.value = ResourceFb.loading()
+        angkotDistanceData.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                titikNaik.clear()
+                for (childData in snapshot.children) {
+                    val data = childData.getValue(UserAngkot::class.java)
+                    if (data != null) {
+                        if (!idNaik.contains(data.id_titik_naik)) {
+                            idNaik.add(data.id_titik_naik)
+                            titikNaik.add(data)
+                        }
+                    }
+                }
+                mLiveData.value = ResourceFb.success(titikNaik)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                mLiveData.value = ResourceFb.error(error.message)
+            }
+        })
+
+        return mLiveData
+    }
+
+    override fun getUserAngkotDrop(angkotId: String): MutableLiveData<ResourceFb<MutableList<UserAngkot>>> {
+        val angkotDistanceData =
+            rootRef.child("penumpang_naik_turun")
+                .child("angkot_$angkotId")
+                .child("turun")
+
+        val titikTurun: MutableList<UserAngkot> = mutableListOf()
+        val idTurun: MutableList<Int> = mutableListOf()
+        val mLiveData = MutableLiveData<ResourceFb<MutableList<UserAngkot>>>()
+        mLiveData.value = ResourceFb.loading()
+        angkotDistanceData.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                titikTurun.clear()
+                for (childData in snapshot.children) {
+                    val data = childData.getValue(UserAngkot::class.java)
+                    if (data != null) {
+                        if (!idTurun.contains(data.id_titik_turun)) {
+                            idTurun.add(data.id_titik_turun)
+                            titikTurun.add(data)
+                        }
+                    }
+                }
+                mLiveData.value = ResourceFb.success(titikTurun)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                mLiveData.value = ResourceFb.error(error.message)
+            }
+        })
+
+        return mLiveData
     }
 }

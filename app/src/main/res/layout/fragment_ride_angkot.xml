@@ -154,9 +154,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvLabelUserRide"
-                tools:itemCount="10"
-                tools:listitem="@layout/rv_string_item" />
+                app:layout_constraintTop_toBottomOf="@+id/tvLabelUserRide" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>

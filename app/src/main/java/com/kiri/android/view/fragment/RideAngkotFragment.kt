@@ -18,8 +18,6 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.Task
 import com.kiri.android.R
-import com.kiri.android.data.calonUser
-import com.kiri.android.data.userNaik
 import com.kiri.android.databinding.FragmentRideAngkotBinding
 import com.kiri.android.view.adapter.DropUserAdapter
 import com.kiri.android.view.adapter.UserRideAdapter
@@ -73,24 +71,12 @@ class RideAngkotFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initData()
         initUI()
         initAction()
         initObserver()
     }
 
-    private fun initData() {
-        dropAdapter.data.clear()
-        dropAdapter.data.addAll(calonUser)
-
-        rideAdapter.data.clear()
-        rideAdapter.data.addAll(userNaik)
-    }
-
     private fun initUI() = with(binding) {
-        rvRideUser.adapter = rideAdapter
-        rvDropUSer.adapter = dropAdapter
-
         locationCallback()
         location()
         locationPermissionCheck()
@@ -114,6 +100,33 @@ class RideAngkotFragment :
 
                     if (distance > 0.0 && distance <= 0.5) {
                         binding.tvLocationName.text = ""
+                    }
+                }
+                Resource.Status.ERROR -> {}
+            }
+        }
+
+        viewModel.getUserAngkotRide(pref.angkotId ?: "").observe(viewLifecycleOwner) {
+            when (it.status) {
+                Resource.Status.LOADING -> {}
+                Resource.Status.SUCCESS -> {
+                    rideAdapter.data.clear()
+                    it.data?.let { list ->
+                        rideAdapter.data.addAll(list)
+                        binding.rvRideUser.adapter = rideAdapter
+                    }
+                }
+                Resource.Status.ERROR -> {}
+            }
+        }
+        viewModel.getUserAngkotDrop(pref.angkotId ?: "").observe(viewLifecycleOwner) {
+            when (it.status) {
+                Resource.Status.LOADING -> {}
+                Resource.Status.SUCCESS -> {
+                    dropAdapter.data.clear()
+                    it.data?.let { list ->
+                        dropAdapter.data.addAll(list)
+                        binding.rvDropUSer.adapter = dropAdapter
                     }
                 }
                 Resource.Status.ERROR -> {}

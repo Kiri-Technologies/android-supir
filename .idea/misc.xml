@@ -121,7 +121,9 @@
         <entry key="..\:/Kiri/features/auth/src/main/res/layout/login_fragment.xml" value="0.264" />
         <entry key="..\:/Kiri/features/auth/src/main/res/layout/register_fragment.xml" value="0.4" />
         <entry key="..\:/Kiri/features/auth/src/main/res/menu/bottom_nav_menu.xml" value="0.38125" />
+        <entry key="..\:/android-supir/app/src/main/res/layout/detail_angkot_fragment.xml" value="0.25416666666666665" />
         <entry key="..\:/android-supir/app/src/main/res/layout/fragment_ride_angkot.xml" value="0.264" />
+        <entry key="..\:/android-supir/app/src/main/res/layout/rv_string_item.xml" value="0.25416666666666665" />
         <entry key="..\:/projek penumpang/Kiri/app/src/main/res/drawable/background_boarding_text.xml" value="0.2703125" />
         <entry key="..\:/projek penumpang/Kiri/app/src/main/res/drawable/indicator_onboarding.xml" value="0.2703125" />
         <entry key="..\:/projek penumpang/Kiri/app/src/main/res/layout/activity_onboarding.xml" value="0.1" />

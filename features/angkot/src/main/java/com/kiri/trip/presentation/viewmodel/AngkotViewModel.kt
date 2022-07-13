@@ -17,6 +17,7 @@ import com.kiri.trip.data.models.SetWayBody
 import com.kiri.trip.data.models.ToggleFullBody
 import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TripHistoryData
+import com.kiri.trip.data.models.UserAngkot
 import com.kiri.trip.domain.usecase.AngkotUseCase
 import com.kiri.trip.domain.usecase.models.TotalEarningsDomain
 import kotlinx.coroutines.flow.collect
@@ -278,4 +279,10 @@ class AngkotViewModel(private val useCase: AngkotUseCase) : ViewModel() {
 
     fun angkotDistance(angkotId: String): LiveData<ResourceFb<AngkotDistanceData>> =
         useCase.getAngkotDistance(angkotId)
+
+    fun getUserAngkotRide(angkotId: String): LiveData<ResourceFb<MutableList<UserAngkot>>> =
+        useCase.getUserAngkotRide(angkotId)
+
+    fun getUserAngkotDrop(angkotId: String): LiveData<ResourceFb<MutableList<UserAngkot>>> =
+        useCase.getUserAngkotDrop(angkotId)
 }

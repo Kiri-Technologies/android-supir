@@ -15,6 +15,7 @@ import com.kiri.trip.data.models.ToggleFullBody
 import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TripHistoryData
 import com.kiri.trip.data.models.SetWayBody
+import com.kiri.trip.data.models.UserAngkot
 import com.kiri.trip.domain.usecase.models.TotalEarningsDomain
 import kotlinx.coroutines.flow.Flow
 
@@ -108,4 +109,7 @@ interface AngkotUseCase {
     suspend fun toggleFull(
         body: ToggleFullBody
     ): Flow<Resource<Nothing>>
+
+    fun getUserAngkotRide(angkotId: String): MutableLiveData<ResourceFb<MutableList<UserAngkot>>>
+    fun getUserAngkotDrop(angkotId: String): MutableLiveData<ResourceFb<MutableList<UserAngkot>>>
 }
