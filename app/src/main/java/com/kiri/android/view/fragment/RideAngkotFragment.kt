@@ -19,6 +19,7 @@ import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.Task
 import com.kiri.android.R
 import com.kiri.android.databinding.FragmentRideAngkotBinding
+import com.kiri.android.utils.currentTime
 import com.kiri.android.view.adapter.DropUserAdapter
 import com.kiri.android.view.adapter.UserRideAdapter
 import com.kiri.common.data.pref.PrefKey
@@ -89,7 +90,7 @@ class RideAngkotFragment :
     }
 
     private fun initObserver() {
-        viewModel.angkotDistance(pref.angkotId ?: "").observe(viewLifecycleOwner) {
+        viewModel.angkotDistance("3").observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {}
                 Resource.Status.SUCCESS -> {
@@ -106,7 +107,7 @@ class RideAngkotFragment :
             }
         }
 
-        viewModel.getUserAngkotRide(pref.angkotId ?: "").observe(viewLifecycleOwner) {
+        viewModel.getUserAngkotRide("3").observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {}
                 Resource.Status.SUCCESS -> {
@@ -119,7 +120,7 @@ class RideAngkotFragment :
                 Resource.Status.ERROR -> {}
             }
         }
-        viewModel.getUserAngkotDrop(pref.angkotId ?: "").observe(viewLifecycleOwner) {
+        viewModel.getUserAngkotDrop("1").observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {}
                 Resource.Status.SUCCESS -> {
@@ -203,6 +204,7 @@ class RideAngkotFragment :
     private fun finishRide() {
         pref.removeByKey(PrefKey.ANGKOT_ID)
         pref.removeByKey(PrefKey.ROUTE_ID)
+        pref.removeByKey(PrefKey.HISTORY_ID)
         activity?.finish()
         locationNotNeeded()
     }
@@ -244,7 +246,13 @@ class RideAngkotFragment :
             binding.btnDoneRide -> {
                 requireContext().showDialog(
                     message = getString(R.string.label_finish_ride_message),
-                    positiveAction = { finishRide() },
+                    positiveAction = {
+                        viewModel.createEarning(
+                            pref.histoyId ?: "",
+                            currentTime(),
+                            null
+                        )
+                    },
                     negativeAction = {}
                 )
             }
@@ -262,6 +270,22 @@ class RideAngkotFragment :
                 )
             }
         }
+    }
+
+    override fun onCreateEarningLoading() {
+        super.onCreateEarningLoading()
+        binding.btnDoneRide.isEnabled = false
+    }
+
+    override fun onCreateEarningSuccess(data: ApiResponse<Nothing>?) {
+        super.onCreateEarningSuccess(data)
+        finishRide()
+    }
+
+    override fun onCreateEarningFailed(error: String?) {
+        super.onCreateEarningFailed(error)
+        binding.btnDoneRide.isEnabled = true
+        shortToast(requireContext(), getString(R.string.error_message))
     }
 
     override fun onGetRoutesSuccess(data: ApiResponse<RoutesData>?) {

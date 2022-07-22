@@ -48,4 +48,5 @@
     <string name="label_angkot_penuh">Angkot Penuh</string>
     <string name="label_finish_narik">Selesai Narik</string>
     <string name="label_distance_angkot">Jarak angkot didepan</string>
+    <string name="dash">-</string>
 </resources>

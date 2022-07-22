@@ -90,7 +90,7 @@ class CreateEarningsFragment : Fragment(R.layout.fragment_earnings_note), Angkot
 
     private fun submit() = with(binding) {
         btnSave.setOnClickListener {
-            viewModel.createEarning(arg.earningId, earning.value.toInt())
+            viewModel.createEarning(arg.earningId, null, earning.value.toInt())
         }
     }
 

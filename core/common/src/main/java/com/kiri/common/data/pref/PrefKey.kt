@@ -7,4 +7,5 @@ object PrefKey {
     const val PROFILE = "profileData"
     const val ANGKOT_ID = "angkot_id"
     const val ROUTE_ID = "route_id"
+    const val HISTORY_ID = "history_id"
 }

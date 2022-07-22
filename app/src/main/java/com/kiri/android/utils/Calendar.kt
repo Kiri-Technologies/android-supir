@@ -1,4 +1,4 @@
-package com.kiri.android.data
+package com.kiri.android.utils
 
 import java.text.SimpleDateFormat
 import java.util.*

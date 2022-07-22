@@ -3,6 +3,7 @@ package com.kiri.trip.presentation.viewmodel
 import com.kiri.common.utils.ApiResponse
 import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.AngkotDistanceData
+import com.kiri.trip.data.models.CreateHistoryData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.RiwayatNarikData
@@ -84,7 +85,7 @@ interface AngkotResource {
 
     // RideAngkot
     fun onReadyRideLoading() {}
-    fun onReadyRideSuccess(data: ApiResponse<Nothing>?) {}
+    fun onReadyRideSuccess(data: ApiResponse<CreateHistoryData>?) {}
     fun onReadyRideFailed(error: String?) {}
 
     // SetLocation

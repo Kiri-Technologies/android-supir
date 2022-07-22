@@ -6,6 +6,7 @@ import com.kiri.common.utils.ResourceFb
 import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.AngkotData
 import com.kiri.trip.data.models.AngkotDistanceData
+import com.kiri.trip.data.models.CreateHistoryData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.LocationBody
@@ -67,8 +68,9 @@ interface AngkotRepository {
     ): Flow<Resource<EarningsByTodayData>>
 
     suspend fun createEarningNote(
-        earningId: String,
-        earnings: Int
+        historyId: String,
+        finishRide: String?,
+        earnings: Int?
     ): Flow<Resource<Nothing>>
 
     suspend fun getRoutesById(angkotId: String): Flow<Resource<RoutesData>>
@@ -85,7 +87,7 @@ interface AngkotRepository {
         supirId: String,
         angkotId: String,
         rideTime: String
-    ): Flow<Resource<Nothing>>
+    ): Flow<Resource<CreateHistoryData>>
 
     suspend fun setWayMaps(body: SetWayBody): Flow<Resource<Nothing>>
 

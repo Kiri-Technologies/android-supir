@@ -2,6 +2,7 @@ package com.kiri.trip.data.endpoint
 
 import com.kiri.common.utils.ApiResponse
 import com.kiri.trip.data.models.AngkotConfirmData
+import com.kiri.trip.data.models.CreateHistoryData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.LocationBody
@@ -13,6 +14,8 @@ import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
 import com.kiri.trip.data.models.SetWayBody
 import retrofit2.Response
+import retrofit2.http.Field
+import retrofit2.http.Path
 
 class RemoteDataSource(private val endpoint: AngkotEndpoint) : AngkotEndpoint {
     override suspend fun getTripHistory(sopirId: String): Response<ApiResponse<List<TripHistoryData>>> {
@@ -83,10 +86,11 @@ class RemoteDataSource(private val endpoint: AngkotEndpoint) : AngkotEndpoint {
     }
 
     override suspend fun createEarningNote(
-        earningId: String,
-        earnings: Int
+        historyId: String,
+        finishRide: String?,
+        earnings: Int?
     ): Response<ApiResponse<Nothing>> {
-        return endpoint.createEarningNote(earningId, earnings)
+        return endpoint.createEarningNote(historyId, finishRide, earnings)
     }
 
     override suspend fun getRoutesById(angkotId: String): Response<ApiResponse<RoutesData>> {
@@ -105,7 +109,7 @@ class RemoteDataSource(private val endpoint: AngkotEndpoint) : AngkotEndpoint {
         supirId: String,
         angkotId: String,
         rideTime: String
-    ): Response<ApiResponse<Nothing>> {
+    ): Response<ApiResponse<CreateHistoryData>> {
         return endpoint.createHistory(supirId, angkotId, rideTime)
     }
 

@@ -2,16 +2,17 @@ package com.kiri.trip.data.endpoint
 
 import com.kiri.common.utils.ApiResponse
 import com.kiri.trip.data.models.AngkotConfirmData
+import com.kiri.trip.data.models.CreateHistoryData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.LocationBody
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
+import com.kiri.trip.data.models.SetWayBody
 import com.kiri.trip.data.models.ToggleFullBody
 import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
-import com.kiri.trip.data.models.SetWayBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field
@@ -93,10 +94,11 @@ interface AngkotEndpoint {
     ): Response<ApiResponse<EarningsByTodayData>>
 
     @FormUrlEncoded
-    @POST("supir/riwayat/{earning_id}/update")
+    @POST("supir/riwayat/{id}/update")
     suspend fun createEarningNote(
-        @Path("earning_id") earningId: String,
-        @Field("jumlah_pendapatan") earnings: Int
+        @Path("id") historyId: String,
+        @Field("selesai_narik") finishRide: String? = null,
+        @Field("jumlah_pendapatan") earnings: Int? = null
     ): Response<ApiResponse<Nothing>>
 
     @GET("routes/{id}")
@@ -118,7 +120,7 @@ interface AngkotEndpoint {
         @Field("user_id") supirId: String,
         @Field("angkot_id") angkotId: String,
         @Field("mulai_narik") rideTime: String
-    ): Response<ApiResponse<Nothing>>
+    ): Response<ApiResponse<CreateHistoryData>>
 
     @POST
     suspend fun setWayMaps(@Url url: String, @Body body: SetWayBody): Response<ApiResponse<Nothing>>

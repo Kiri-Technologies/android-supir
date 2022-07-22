@@ -74,17 +74,17 @@
                 tools:text="RP. 500.000 ,-" />
 
             <TextView
-                android:id="@+id/tvAddEarnings"
+                android:id="@+id/tvNoEarnings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:text="@string/dash"
                 android:textAppearance="@style/textViewBody1"
                 android:textSize="16sp"
                 android:visibility="gone"
-                android:textColor="@color/color_primary"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/labelEarn"
-                android:text="@string/label_add" />
+                app:layout_constraintStart_toStartOf="@+id/labelEarn"
+                app:layout_constraintTop_toBottomOf="@id/labelEarn" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

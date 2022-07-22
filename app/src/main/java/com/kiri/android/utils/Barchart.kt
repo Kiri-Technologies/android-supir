@@ -1,4 +1,4 @@
-package com.kiri.android.widget
+package com.kiri.android.utils
 
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis

@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,18 +19,18 @@ import com.google.gson.Gson
 import com.kiri.account.data.models.ProfileData
 import com.kiri.android.R
 import com.kiri.android.data.chartData
-import com.kiri.android.data.day1
-import com.kiri.android.data.day2
-import com.kiri.android.data.day3
-import com.kiri.android.data.day4
-import com.kiri.android.data.day5
-import com.kiri.android.data.day6
-import com.kiri.android.data.now
+import com.kiri.android.utils.day1
+import com.kiri.android.utils.day2
+import com.kiri.android.utils.day3
+import com.kiri.android.utils.day4
+import com.kiri.android.utils.day5
+import com.kiri.android.utils.day6
+import com.kiri.android.utils.now
 import com.kiri.android.databinding.DetailAngkotFragmentBinding
 import com.kiri.android.view.adapter.FeedbackAdapter
 import com.kiri.android.view.adapter.RideHistoryAdapter
 import com.kiri.android.view.adapter.TripAngkotAdapter
-import com.kiri.android.widget.initBarChart
+import com.kiri.android.utils.initBarChart
 import com.kiri.common.data.model.Earning
 import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.ApiResponse
@@ -128,6 +129,7 @@ class DetailAngkotFragment :
         rideHistoryAdapter.setEmptyView(R.layout.empty_view_item)
         tripAngkotAdapter.setEmptyView(R.layout.empty_view_item)
         feedbackAdapter.setEmptyView(R.layout.empty_view_item)
+        Log.d("PREF", pref.histoyId ?: "")
     }
 
     private fun initAction() = with(binding) {

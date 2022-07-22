@@ -6,6 +6,7 @@ interface PrefRepository {
     var accountData: String?
     var angkotId: String?
     var routeId: String?
+    var histoyId: String?
 
     fun removeByKey(key: String)
 }

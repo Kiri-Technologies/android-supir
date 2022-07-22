@@ -1,7 +1,6 @@
 package com.kiri.android.view.adapter
 
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.kiri.android.R
@@ -27,12 +26,7 @@ class RideHistoryDetailAdapter :
 
         if (earnings.isNullOrEmpty()) {
             holder.getView<TextView>(R.id.tvEarnings).gone()
-            holder.getView<TextView>(R.id.tvAddEarnings).visible()
+            holder.getView<TextView>(R.id.tvNoEarnings).visible()
         }
-    }
-
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
-        this.addChildClickViewIds(R.id.tvAddEarnings)
     }
 }

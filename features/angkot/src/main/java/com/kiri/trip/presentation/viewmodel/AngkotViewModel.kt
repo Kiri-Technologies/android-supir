@@ -8,6 +8,7 @@ import com.kiri.common.utils.Resource
 import com.kiri.common.utils.ResourceFb
 import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.AngkotDistanceData
+import com.kiri.trip.data.models.CreateHistoryData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.LocationBody
@@ -198,12 +199,13 @@ class AngkotViewModel(private val useCase: AngkotUseCase) : ViewModel() {
     val createEarning: LiveData<Resource<Nothing>> = _createEarning
 
     fun createEarning(
-        earningId: String,
-        earning: Int
+        historyId: String,
+        finishRide: String?,
+        earnings: Int?
     ) {
         viewModelScope.launch {
             _createEarning.value = Resource.loading()
-            useCase.createEarningNote(earningId, earning).collect {
+            useCase.createEarningNote(historyId, finishRide, earnings).collect {
                 _createEarning.value = it
             }
         }
@@ -223,8 +225,8 @@ class AngkotViewModel(private val useCase: AngkotUseCase) : ViewModel() {
         }
     }
 
-    private val _sendToRideAngkot: MutableLiveData<Resource<Nothing>> = MutableLiveData()
-    val rideAngkot: LiveData<Resource<Nothing>> = _sendToRideAngkot
+    private val _sendToRideAngkot: MutableLiveData<Resource<CreateHistoryData>> = MutableLiveData()
+    val rideAngkot: LiveData<Resource<CreateHistoryData>> = _sendToRideAngkot
 
     fun rideAngkot(
         angkotId: String,

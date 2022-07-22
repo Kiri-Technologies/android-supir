@@ -7,6 +7,7 @@ import com.kiri.common.utils.ResourceFb
 import com.kiri.trip.data.AngkotRepositoryImpl
 import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.AngkotDistanceData
+import com.kiri.trip.data.models.CreateHistoryData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.LocationBody
@@ -19,7 +20,7 @@ import com.kiri.trip.data.models.TripHistoryData
 import com.kiri.trip.data.models.UserAngkot
 import com.kiri.trip.domain.usecase.models.TotalEarningsDomain
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.map
 
 class AngkotUseCaseImpl(private val angkotRepositoryImpl: AngkotRepositoryImpl) : AngkotUseCase {
@@ -93,11 +94,12 @@ class AngkotUseCaseImpl(private val angkotRepositoryImpl: AngkotRepositoryImpl) 
         return angkotRepositoryImpl.getEarningsByToday(angkotId, supirId)
     }
 
-    override suspend fun createEarningNote(
-        earningId: String,
-        earnings: Int
+    override suspend fun  createEarningNote(
+        historyId: String,
+        finishRide: String?,
+        earnings: Int?
     ): Flow<Resource<Nothing>> {
-        return angkotRepositoryImpl.createEarningNote(earningId, earnings)
+        return angkotRepositoryImpl.createEarningNote(historyId, finishRide, earnings)
     }
 
     override suspend fun getRoutesById(angkotId: String): Flow<Resource<RoutesData>> {
@@ -120,7 +122,7 @@ class AngkotUseCaseImpl(private val angkotRepositoryImpl: AngkotRepositoryImpl) 
         supirId: String,
         angkotId: String,
         rideTime: String
-    ): Flow<Resource<Nothing>> {
+    ): Flow<Resource<CreateHistoryData>> {
         return angkotRepositoryImpl.createHistory(supirId, angkotId, rideTime)
     }
 
@@ -134,12 +136,14 @@ class AngkotUseCaseImpl(private val angkotRepositoryImpl: AngkotRepositoryImpl) 
         supirId: String,
         rideTime: String,
         body: SetWayBody
-    ): Flow<Resource<Nothing>> {
-        return angkotRepositoryImpl.statusAngkot(angkotId, is_Beroperasi, supirId).flatMapConcat {
-            angkotRepositoryImpl.createHistory(supirId, angkotId, rideTime)
-        }.flatMapConcat {
-            angkotRepositoryImpl.setWayMaps(body)
-        }
+    ): Flow<Resource<CreateHistoryData>> {
+        return angkotRepositoryImpl.statusAngkot(angkotId, is_Beroperasi, supirId)
+            .flatMapMerge {
+                angkotRepositoryImpl.setWayMaps(body)
+            }.flatMapMerge { angkotRepositoryImpl.createHistory(supirId, angkotId, rideTime) }
+            .map {
+                Resource(it.status, it.data, it.error)
+            }
     }
 
     override suspend fun setLocation(body: LocationBody): Flow<Resource<Nothing>> {

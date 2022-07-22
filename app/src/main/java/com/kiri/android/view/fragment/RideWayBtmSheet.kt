@@ -2,6 +2,7 @@ package com.kiri.android.view.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +11,12 @@ import com.google.gson.Gson
 import com.kiri.account.data.models.ProfileData
 import com.kiri.android.R
 import com.kiri.android.databinding.DialogRadioBinding
+import com.kiri.android.utils.currentTime
 import com.kiri.android.view.activity.RideAngkotActivity
 import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.ApiResponse
 import com.kiri.common.utils.shortToast
+import com.kiri.trip.data.models.CreateHistoryData
 import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.SetWayBody
 import com.kiri.trip.presentation.viewmodel.AngkotResource
@@ -82,16 +85,11 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
         }
     }
 
-    private fun currentTime(): String {
-        val calendar = Calendar.getInstance()
-        val outFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        return outFormat.format(calendar.time)
-    }
-
-    private fun goToNarik() {
+    private fun goToNarik(data: ApiResponse<CreateHistoryData>?) {
         this.dismiss()
         pref.angkotId = angkotId
         pref.routeId = routeId.toString()
+        pref.histoyId = data?.dataData?.id.toString()
         startActivity(
             Intent(
                 requireContext(),
@@ -126,6 +124,7 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
     override fun onGetRoutesFailed(error: String?) {
         super.onGetRoutesFailed(error)
         shortToast(requireContext(), getString(R.string.error_message))
+        this.dismiss()
     }
 
     override fun onReadyRideLoading() {
@@ -134,10 +133,10 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
         binding.btnCancel.isEnabled = false
     }
 
-    override fun onReadyRideSuccess(data: ApiResponse<Nothing>?) {
+    override fun onReadyRideSuccess(data: ApiResponse<CreateHistoryData>?) {
         super.onReadyRideSuccess(data)
         binding.btnChoose.setLoading(false)
-        goToNarik()
+        goToNarik(data)
         binding.btnCancel.isEnabled = true
     }
 

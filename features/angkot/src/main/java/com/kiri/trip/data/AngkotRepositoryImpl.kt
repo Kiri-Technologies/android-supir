@@ -13,6 +13,7 @@ import com.kiri.trip.BuildConfig
 import com.kiri.trip.data.endpoint.RemoteDataSource
 import com.kiri.trip.data.models.AngkotConfirmData
 import com.kiri.trip.data.models.AngkotDistanceData
+import com.kiri.trip.data.models.CreateHistoryData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.LocationBody
@@ -123,15 +124,15 @@ class AngkotRepositoryImpl(
     }
 
     override suspend fun createEarningNote(
-        earningId: String,
-        earnings: Int
+        historyId: String,
+        finishRide: String?,
+        earnings: Int?
     ): Flow<Resource<Nothing>> {
         return flow {
             emit(
                 safeApiCall {
                     remoteDataSource.createEarningNote(
-                        earningId,
-                        earnings
+                        historyId, finishRide, earnings
                     )
                 }
             )
@@ -187,7 +188,7 @@ class AngkotRepositoryImpl(
         supirId: String,
         angkotId: String,
         rideTime: String
-    ): Flow<Resource<Nothing>> {
+    ): Flow<Resource<CreateHistoryData>> {
         return flow {
             emit(safeApiCall { remoteDataSource.createHistory(supirId, angkotId, rideTime) })
         }

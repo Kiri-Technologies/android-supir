@@ -457,6 +457,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
+            android:layout_marginBottom="12dp"
             app:text="Download QR" />
 
         <com.google.android.material.card.MaterialCardView
@@ -465,6 +466,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
+            android:visibility="gone"
             android:backgroundTint="@color/blue_color"
             android:foreground="?attr/selectableItemBackground"
             app:cardCornerRadius="14dp">
