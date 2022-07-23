@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import com.kiri.common.utils.Resource
 import com.kiri.common.utils.ResourceFb
 import com.kiri.trip.data.models.AngkotConfirmData
-import com.kiri.trip.data.models.AngkotData
 import com.kiri.trip.data.models.AngkotDistanceData
 import com.kiri.trip.data.models.CreateHistoryData
 import com.kiri.trip.data.models.EarningsByTodayData
@@ -12,10 +11,10 @@ import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.LocationBody
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
+import com.kiri.trip.data.models.SetWayBody
 import com.kiri.trip.data.models.ToggleFullBody
 import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TripHistoryData
-import com.kiri.trip.data.models.SetWayBody
 import com.kiri.trip.data.models.UserAngkot
 import com.kiri.trip.domain.usecase.models.TotalEarningsDomain
 import kotlinx.coroutines.flow.Flow
@@ -114,4 +113,13 @@ interface AngkotUseCase {
 
     fun getUserAngkotRide(angkotId: String): MutableLiveData<ResourceFb<MutableList<UserAngkot>>>
     fun getUserAngkotDrop(angkotId: String): MutableLiveData<ResourceFb<MutableList<UserAngkot>>>
+
+    suspend fun finishRide(
+        angkotId: String,
+        is_Beroperasi: String,
+        supirId: String,
+        historyId: String,
+        finishRide: String?,
+        earnings: Int?
+    ): Flow<Resource<Nothing>>
 }

@@ -144,5 +144,12 @@ class AngkotObserver(
                 Resource.Status.ERROR -> resource.onToggleFullFailed(it.error)
             }
         }
+        vm.finishRide.observe(owner) {
+            when (it.status) {
+                Resource.Status.LOADING -> resource.onFinishRideLoading()
+                Resource.Status.SUCCESS -> resource.onFinishRideSuccess(it.data)
+                Resource.Status.ERROR -> resource.onFinishRideFailed(it.error)
+            }
+        }
     }
 }

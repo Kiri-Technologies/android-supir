@@ -110,4 +110,8 @@ interface AngkotResource {
 
     // GetAngkotDistance
     fun onGetDistance() {}
+
+    fun onFinishRideLoading() {}
+    fun onFinishRideSuccess(data: ApiResponse<Nothing>?) {}
+    fun onFinishRideFailed(error: String?) {}
 }

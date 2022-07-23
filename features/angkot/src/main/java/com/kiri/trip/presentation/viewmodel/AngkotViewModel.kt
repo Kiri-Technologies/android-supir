@@ -287,4 +287,24 @@ class AngkotViewModel(private val useCase: AngkotUseCase) : ViewModel() {
 
     fun getUserAngkotDrop(angkotId: String): LiveData<ResourceFb<MutableList<UserAngkot>>> =
         useCase.getUserAngkotDrop(angkotId)
+
+    private val _finishRide: MutableLiveData<Resource<Nothing>> = MutableLiveData()
+    val finishRide: LiveData<Resource<Nothing>> = _finishRide
+
+    fun finishRide(
+        angkotId: String,
+        is_Beroperasi: String,
+        supirId: String,
+        historyId: String,
+        finishRide: String?,
+        earnings: Int?
+    ) {
+        viewModelScope.launch {
+            _finishRide.value = Resource.loading()
+            useCase.finishRide(angkotId, is_Beroperasi, supirId, historyId, finishRide, earnings)
+                .collect {
+                    _finishRide.value = it
+                }
+        }
+    }
 }

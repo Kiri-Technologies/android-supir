@@ -19,18 +19,18 @@ import com.google.gson.Gson
 import com.kiri.account.data.models.ProfileData
 import com.kiri.android.R
 import com.kiri.android.data.chartData
+import com.kiri.android.databinding.DetailAngkotFragmentBinding
 import com.kiri.android.utils.day1
 import com.kiri.android.utils.day2
 import com.kiri.android.utils.day3
 import com.kiri.android.utils.day4
 import com.kiri.android.utils.day5
 import com.kiri.android.utils.day6
+import com.kiri.android.utils.initBarChart
 import com.kiri.android.utils.now
-import com.kiri.android.databinding.DetailAngkotFragmentBinding
 import com.kiri.android.view.adapter.FeedbackAdapter
 import com.kiri.android.view.adapter.RideHistoryAdapter
 import com.kiri.android.view.adapter.TripAngkotAdapter
-import com.kiri.android.utils.initBarChart
 import com.kiri.common.data.model.Earning
 import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.ApiResponse
@@ -72,6 +72,7 @@ class DetailAngkotFragment :
     private var earningList = ArrayList<Earning>()
     private var angkotId: String = ""
     private var supirId: String = ""
+    private var routeId: Int? = null
 
     private val permissionResult =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
@@ -102,6 +103,7 @@ class DetailAngkotFragment :
 
     private fun initData() {
         angkotId = args.angkotConfirmData.angkotId.toString()
+        routeId = args.angkotConfirmData.vehicle?.route?.id
         val supir = Gson().fromJson(pref.accountData, ProfileData::class.java)
         supir.id?.let {
             viewModel.getRideHistory(
@@ -157,8 +159,8 @@ class DetailAngkotFragment :
         data?.dataData?.let {
             tripAngkotAdapter.data.clear()
             feedbackAdapter.data.clear()
-            tripAngkotAdapter.addData(it.take(10))
-            if (it.firstOrNull()?.feedback != null) feedbackAdapter.addData(it.take(10))
+            tripAngkotAdapter.addData(it)
+            if (it.firstOrNull()?.feedback != null) feedbackAdapter.addData(it)
             if (it.isNotEmpty()) {
                 binding.tvTripHistoryMore.visible()
                 binding.tvFeedbackMore.visible()
@@ -190,7 +192,7 @@ class DetailAngkotFragment :
         binding.pbRideHistory.gone()
         data?.dataData?.let {
             rideHistoryAdapter.data.clear()
-            rideHistoryAdapter.addData(it.take(10))
+            rideHistoryAdapter.addData(it)
             if (it.isNotEmpty()) binding.tvRideMore.visible()
         }
     }
@@ -281,11 +283,15 @@ class DetailAngkotFragment :
                     )
                 )
                 btnNarik -> {
-                    requireContext().permission(
-                        permissionResult,
-                        Manifest.permission.ACCESS_FINE_LOCATION
-                    ) {
-                        btmSheetShow()
+                    if (args.angkotConfirmData.vehicle?.isBeroperasi == 1) {
+                        shortToast(requireContext(), "Maaf angkot sedang ditarik supir lain")
+                    } else {
+                        requireContext().permission(
+                            permissionResult,
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        ) {
+                            btmSheetShow()
+                        }
                     }
                 }
                 else -> {}
@@ -296,6 +302,7 @@ class DetailAngkotFragment :
     private fun btmSheetShow() {
         val bundle = Bundle()
         bundle.putString(RideWayBtmSheet.ANGKOTID, angkotId)
+        bundle.putInt(RideWayBtmSheet.ROUTEID, routeId ?: 0)
         btmSheet.arguments = bundle
         btmSheet.show(childFragmentManager, RideWayBtmSheet.TAG)
     }

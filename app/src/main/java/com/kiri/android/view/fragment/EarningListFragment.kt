@@ -1,7 +1,10 @@
 package com.kiri.android.view.fragment
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -26,6 +29,17 @@ class EarningListFragment : Fragment(R.layout.board_history_fragment), AngkotRes
     private var earningId: String = ""
     private val adapter by lazy {
         EarningListAdapter()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        (activity as AppCompatActivity).apply {
+            supportActionBar?.setHomeAsUpIndicator(R.drawable.back_toolbar)
+            return super.onCreateView(inflater, container, savedInstanceState)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

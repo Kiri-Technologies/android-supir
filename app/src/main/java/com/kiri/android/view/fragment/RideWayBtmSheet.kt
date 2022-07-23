@@ -2,7 +2,6 @@ package com.kiri.android.view.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,8 +25,6 @@ import com.kiri.ui.visible
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
-import java.text.SimpleDateFormat
-import java.util.*
 
 class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
     private lateinit var binding: DialogRadioBinding
@@ -40,6 +37,7 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
     companion object {
         const val TAG = "Pilih Rute"
         const val ANGKOTID = "angkotId"
+        const val ROUTEID = "routeId"
         const val IS_BEROPERASI = "1"
     }
 
@@ -57,7 +55,8 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
     private fun initData() {
         viewModel = getViewModel { parametersOf(lifecycle, this) }
         angkotId = arguments?.getString(ANGKOTID)
-        viewModel.getRoutes(angkotId ?: "0")
+        routeId = arguments?.getInt(ROUTEID)
+        viewModel.getRoutes(routeId.toString())
     }
 
     private fun initUI() = with(binding) {
@@ -113,7 +112,6 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
 
         binding.rbAwal.text = data?.dataData?.titikAwal
         binding.rbAkhir.text = data?.dataData?.titikAkhir
-        routeId = data?.dataData?.id
     }
 
     override fun onGetRoutesLoading() {

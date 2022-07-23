@@ -101,7 +101,7 @@ class ListAngkotFragment :
         angkotList.clear()
         data?.dataData?.let {
             for (item in it) {
-                if (item.isConfirmed == 1) {
+                if (item.isConfirmed == 1 && item.vehicle != null) {
                     angkotList.add(item)
                 }
             }

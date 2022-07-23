@@ -17,6 +17,8 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.Task
+import com.google.gson.Gson
+import com.kiri.account.data.models.ProfileData
 import com.kiri.android.R
 import com.kiri.android.databinding.FragmentRideAngkotBinding
 import com.kiri.android.utils.currentTime
@@ -55,6 +57,7 @@ class RideAngkotFragment :
     private val rideAdapter by lazy {
         UserRideAdapter()
     }
+    private var supirId: String? = null
 
     // FusedLocationProviderClient - Main class for receiving location updates.
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -72,9 +75,15 @@ class RideAngkotFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initData()
         initUI()
         initAction()
         initObserver()
+    }
+
+    private fun initData() {
+        val profile = Gson().fromJson(pref.accountData, ProfileData::class.java)
+        supirId = profile.id
     }
 
     private fun initUI() = with(binding) {
@@ -90,7 +99,7 @@ class RideAngkotFragment :
     }
 
     private fun initObserver() {
-        viewModel.angkotDistance("3").observe(viewLifecycleOwner) {
+        viewModel.angkotDistance(pref.angkotId ?: "").observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {}
                 Resource.Status.SUCCESS -> {
@@ -107,7 +116,7 @@ class RideAngkotFragment :
             }
         }
 
-        viewModel.getUserAngkotRide("3").observe(viewLifecycleOwner) {
+        viewModel.getUserAngkotRide(pref.angkotId ?: "").observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {}
                 Resource.Status.SUCCESS -> {
@@ -120,7 +129,7 @@ class RideAngkotFragment :
                 Resource.Status.ERROR -> {}
             }
         }
-        viewModel.getUserAngkotDrop("1").observe(viewLifecycleOwner) {
+        viewModel.getUserAngkotDrop(pref.angkotId ?: "").observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.LOADING -> {}
                 Resource.Status.SUCCESS -> {
@@ -247,7 +256,10 @@ class RideAngkotFragment :
                 requireContext().showDialog(
                     message = getString(R.string.label_finish_ride_message),
                     positiveAction = {
-                        viewModel.createEarning(
+                        viewModel.finishRide(
+                            pref.angkotId ?: "",
+                            "0",
+                            supirId ?: "",
                             pref.histoyId ?: "",
                             currentTime(),
                             null
@@ -270,22 +282,6 @@ class RideAngkotFragment :
                 )
             }
         }
-    }
-
-    override fun onCreateEarningLoading() {
-        super.onCreateEarningLoading()
-        binding.btnDoneRide.isEnabled = false
-    }
-
-    override fun onCreateEarningSuccess(data: ApiResponse<Nothing>?) {
-        super.onCreateEarningSuccess(data)
-        finishRide()
-    }
-
-    override fun onCreateEarningFailed(error: String?) {
-        super.onCreateEarningFailed(error)
-        binding.btnDoneRide.isEnabled = true
-        shortToast(requireContext(), getString(R.string.error_message))
     }
 
     override fun onGetRoutesSuccess(data: ApiResponse<RoutesData>?) {
@@ -324,6 +320,22 @@ class RideAngkotFragment :
         } else {
             locationGone()
         }
+    }
+
+    override fun onFinishRideLoading() {
+        super.onFinishRideLoading()
+        binding.btnDoneRide.isEnabled = false
+    }
+
+    override fun onFinishRideSuccess(data: ApiResponse<Nothing>?) {
+        super.onFinishRideSuccess(data)
+        finishRide()
+    }
+
+    override fun onFinishRideFailed(error: String?) {
+        super.onFinishRideFailed(error)
+        binding.btnDoneRide.isEnabled = true
+        shortToast(requireContext(), getString(R.string.error_message))
     }
 
     private fun locationGone() {

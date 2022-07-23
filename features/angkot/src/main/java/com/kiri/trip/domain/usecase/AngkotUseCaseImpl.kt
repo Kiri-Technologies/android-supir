@@ -94,7 +94,7 @@ class AngkotUseCaseImpl(private val angkotRepositoryImpl: AngkotRepositoryImpl) 
         return angkotRepositoryImpl.getEarningsByToday(angkotId, supirId)
     }
 
-    override suspend fun  createEarningNote(
+    override suspend fun createEarningNote(
         historyId: String,
         finishRide: String?,
         earnings: Int?
@@ -164,5 +164,18 @@ class AngkotUseCaseImpl(private val angkotRepositoryImpl: AngkotRepositoryImpl) 
 
     override fun getUserAngkotDrop(angkotId: String): MutableLiveData<ResourceFb<MutableList<UserAngkot>>> {
         return angkotRepositoryImpl.getUserAngkotDrop(angkotId)
+    }
+
+    override suspend fun finishRide(
+        angkotId: String,
+        is_Beroperasi: String,
+        supirId: String,
+        historyId: String,
+        finishRide: String?,
+        earnings: Int?
+    ): Flow<Resource<Nothing>> {
+        return angkotRepositoryImpl.statusAngkot(angkotId, is_Beroperasi, supirId).flatMapMerge {
+            angkotRepositoryImpl.createEarningNote(historyId, finishRide, earnings)
+        }
     }
 }
