@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvAngkot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/color_primary"
@@ -19,6 +20,31 @@
             android:paddingHorizontal="32dp"
             android:paddingVertical="24dp">
 
+            <ImageView
+                android:id="@+id/ivSpeedo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/speedometer"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tvWarning"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="4dp"
+                android:text="Jarak anda dan angkot yang di depan terlalu dekat "
+                android:textAppearance="@style/textViewTitle"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/ivSpeedo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivSpeedo"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/tvLabelRange"
                 android:layout_width="match_parent"
@@ -27,7 +53,7 @@
                 android:textAppearance="@style/textViewTitle"
                 android:textColor="@color/white"
                 android:textSize="24sp"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/tvWarning" />
 
             <LinearLayout
                 android:id="@+id/llAngkot"
@@ -154,7 +180,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvLabelUserRide" />
+                app:layout_constraintTop_toBottomOf="@+id/tvLabelUserRide"
+                tools:itemCount="10"
+                tools:listitem="@layout/rv_string_item" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>

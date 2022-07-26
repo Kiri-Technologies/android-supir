@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Looper
 import android.view.View
 import androidx.core.app.ActivityCompat
+import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -72,6 +73,7 @@ class RideAngkotFragment :
 
     // This will store current location info
     private var currentLocation: Location? = null
+    private var checked: Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -109,7 +111,23 @@ class RideAngkotFragment :
                     binding.tvTime.text = String.format("$time Menit")
 
                     if (distance > 0.0 && distance <= 0.5) {
-                        binding.tvLocationName.text = ""
+                        binding.ivSpeedo.visible()
+                        binding.tvWarning.visible()
+                        binding.cvAngkot.setBackgroundColor(
+                            resources.getColor(
+                                R.color.red_color,
+                                requireContext().theme
+                            )
+                        )
+                    } else {
+                        binding.ivSpeedo.gone()
+                        binding.tvWarning.gone()
+                        binding.cvAngkot.setBackgroundColor(
+                            resources.getColor(
+                                R.color.color_primary,
+                                requireContext().theme
+                            )
+                        )
                     }
                 }
                 Resource.Status.ERROR -> {}
@@ -200,7 +218,7 @@ class RideAngkotFragment :
                     )
                     toggleNgetem(it.latitude.toString(), it.longitude.toString())
                     toggleFullAngkot()
-                    viewModel.getRoutes(pref.angkotId ?: "")
+                    viewModel.getRoutes(pref.routeId ?: "")
                 } ?: shortToast(requireContext(), getString(R.string.error_message))
             }
         }
@@ -320,6 +338,17 @@ class RideAngkotFragment :
         } else {
             locationGone()
         }
+    }
+
+    override fun onToggleNgetemSuccess(data: ApiResponse<Nothing>?) {
+        super.onToggleNgetemSuccess(data)
+        checked = binding.swNgetem.isChecked
+    }
+
+    override fun onToggleNgetemFailed(error: String?) {
+        super.onToggleNgetemFailed(error)
+        binding.swNgetem.isChecked = checked
+        shortToast(requireContext(), error.toString().substringBefore("at"))
     }
 
     override fun onFinishRideLoading() {
