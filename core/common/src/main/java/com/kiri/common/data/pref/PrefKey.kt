@@ -8,4 +8,5 @@ object PrefKey {
     const val ANGKOT_ID = "angkot_id"
     const val ROUTE_ID = "route_id"
     const val HISTORY_ID = "history_id"
+    const val WAY = "arah"
 }

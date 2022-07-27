@@ -33,6 +33,7 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
     private var angkotId: String? = null
     private lateinit var body: SetWayBody
     private var routeId: Int? = null
+    private var way: String? = null
 
     companion object {
         const val TAG = "Pilih Rute"
@@ -69,10 +70,12 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
                 R.id.rbAwal -> {
                     btnChoose.isEnabled = true
                     setBody(rbAwal.text.toString())
+                    way = rbAwal.text.toString()
                 }
                 R.id.rbAkhir -> {
                     btnChoose.isEnabled = true
                     setBody(rbAkhir.text.toString())
+                    way = rbAkhir.text.toString()
                 }
             }
         }
@@ -81,6 +84,7 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
             viewModel.rideAngkot(
                 angkotId ?: "", IS_BEROPERASI, supir.id ?: "", currentTime(), body
             )
+//            shortToast(requireContext(), way ?: "")
         }
     }
 
@@ -89,6 +93,7 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
         pref.angkotId = angkotId
         pref.routeId = routeId.toString()
         pref.histoyId = data?.dataData?.id.toString()
+        pref.way = way
         startActivity(
             Intent(
                 requireContext(),
@@ -101,7 +106,7 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
         body = SetWayBody(
             angkotId ?: "",
             arah,
-            IS_BEROPERASI,
+            true,
             routeId.toString()
         )
     }
@@ -161,5 +166,10 @@ class RideWayBtmSheet : BottomSheetDialogFragment(), AngkotResource {
             rbAkhir.visibility = View.INVISIBLE
             containerButton.visibility = View.INVISIBLE
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        binding.rGroup.clearCheck()
     }
 }

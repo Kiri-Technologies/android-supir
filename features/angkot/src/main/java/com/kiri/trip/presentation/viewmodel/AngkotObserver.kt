@@ -151,5 +151,12 @@ class AngkotObserver(
                 Resource.Status.ERROR -> resource.onFinishRideFailed(it.error)
             }
         }
+        vm.premium.observe(owner) {
+            when (it.status) {
+                Resource.Status.LOADING -> resource.onPremiumLoading()
+                Resource.Status.SUCCESS -> resource.onPremiumSuccess(it.data)
+                Resource.Status.ERROR -> resource.onPremiumFailed(it.error)
+            }
+        }
     }
 }

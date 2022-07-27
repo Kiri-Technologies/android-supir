@@ -34,6 +34,11 @@ class PrefUseCaseImpl(private val repositoryImpl: PrefRepositoryImpl) : PrefUseC
         set(value) {
             repositoryImpl.histoyId = value
         }
+    override var way: String?
+        get() = repositoryImpl.way
+        set(value) {
+            repositoryImpl.way = value
+        }
 
     override fun removeByKey(key: String) {
         repositoryImpl.removeByKey(key)

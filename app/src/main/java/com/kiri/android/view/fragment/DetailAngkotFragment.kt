@@ -38,6 +38,7 @@ import com.kiri.common.utils.permission
 import com.kiri.common.utils.shortToast
 import com.kiri.common.utils.toFormatRupiah
 import com.kiri.trip.data.models.EarningsByTodayData
+import com.kiri.trip.data.models.PremiumData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.TripHistoryData
 import com.kiri.trip.domain.usecase.models.TotalEarningsDomain
@@ -114,6 +115,7 @@ class DetailAngkotFragment :
             viewModel.getTotalEarnings(angkotId, it)
             viewModel.getTodayEarnings(angkotId, it)
             viewModel.getEarningsToday(angkotId, it)
+            viewModel.premium(it)
             supirId = it
         }
     }
@@ -256,6 +258,42 @@ class DetailAngkotFragment :
                 initBarChart(earningList)
                 chartData(earningList)
             }
+        }
+    }
+
+    private fun btnNarikDisable() {
+        binding.btnNarik.isEnabled = false
+        binding.btnNarik.setCardBackgroundColor(
+            resources.getColor(
+                R.color.button_grey,
+                requireContext().theme
+            )
+        )
+    }
+
+    private fun btnNarikEnable() {
+        binding.btnNarik.isEnabled = true
+        binding.btnNarik.setCardBackgroundColor(
+            resources.getColor(
+                R.color.color_primary,
+                requireContext().theme
+            )
+        )
+    }
+
+    override fun onPremiumLoading() {
+        super.onPremiumLoading()
+        btnNarikDisable()
+    }
+
+    override fun onPremiumSuccess(data: ApiResponse<PremiumData>?) {
+        super.onPremiumSuccess(data)
+        if (data?.dataData?.isPremium == true) {
+            btnNarikEnable()
+            binding.tvLabelPremium.gone()
+        } else {
+            btnNarikDisable()
+            binding.tvLabelPremium.visible()
         }
     }
 

@@ -17,6 +17,7 @@ import com.kiri.trip.data.models.CreateHistoryData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.LocationBody
+import com.kiri.trip.data.models.PremiumData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.SetWayBody
@@ -169,7 +170,7 @@ class AngkotRepositoryImpl(
     override suspend fun statusAngkot(
         angkotId: String,
         is_Beroperasi: String,
-        supirId: String
+        supirId: String?
     ): Flow<Resource<Nothing>> {
         return flow {
             emit(
@@ -310,5 +311,9 @@ class AngkotRepositoryImpl(
         })
 
         return mLiveData
+    }
+
+    override suspend fun premium(supirId: String): Flow<Resource<PremiumData>> {
+        return flow { emit(safeApiCall { remoteDataSource.premium(supirId) }) }
     }
 }

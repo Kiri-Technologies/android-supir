@@ -10,6 +10,7 @@ import com.kiri.trip.data.models.CreateHistoryData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.LocationBody
+import com.kiri.trip.data.models.PremiumData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.ToggleFullBody
@@ -80,7 +81,7 @@ interface AngkotRepository {
     suspend fun statusAngkot(
         angkotId: String,
         is_Beroperasi: String,
-        supirId: String
+        supirId: String?
     ): Flow<Resource<Nothing>>
 
     suspend fun createHistory(
@@ -105,4 +106,6 @@ interface AngkotRepository {
 
     fun getUserAngkotRide(angkotId: String): MutableLiveData<ResourceFb<MutableList<UserAngkot>>>
     fun getUserAngkotDrop(angkotId: String): MutableLiveData<ResourceFb<MutableList<UserAngkot>>>
+
+    suspend fun premium(supirId: String): Flow<Resource<PremiumData>>
 }

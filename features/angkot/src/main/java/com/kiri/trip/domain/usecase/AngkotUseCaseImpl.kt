@@ -11,6 +11,7 @@ import com.kiri.trip.data.models.CreateHistoryData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.LocationBody
+import com.kiri.trip.data.models.PremiumData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.SetWayBody
@@ -169,13 +170,20 @@ class AngkotUseCaseImpl(private val angkotRepositoryImpl: AngkotRepositoryImpl) 
     override suspend fun finishRide(
         angkotId: String,
         is_Beroperasi: String,
-        supirId: String,
+        supirId: String?,
         historyId: String,
         finishRide: String?,
-        earnings: Int?
+        earnings: Int?,
+        body: SetWayBody
     ): Flow<Resource<Nothing>> {
-        return angkotRepositoryImpl.statusAngkot(angkotId, is_Beroperasi, supirId).flatMapMerge {
+        return angkotRepositoryImpl.statusAngkot(angkotId, is_Beroperasi, null).flatMapMerge {
             angkotRepositoryImpl.createEarningNote(historyId, finishRide, earnings)
+        }.flatMapMerge {
+            angkotRepositoryImpl.setWayMaps(body)
         }
+    }
+
+    override suspend fun premium(supirId: String): Flow<Resource<PremiumData>> {
+        return angkotRepositoryImpl.premium(supirId)
     }
 }

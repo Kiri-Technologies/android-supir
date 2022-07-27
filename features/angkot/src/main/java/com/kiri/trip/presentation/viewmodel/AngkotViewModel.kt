@@ -12,6 +12,7 @@ import com.kiri.trip.data.models.CreateHistoryData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.LocationBody
+import com.kiri.trip.data.models.PremiumData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.SetWayBody
@@ -294,17 +295,38 @@ class AngkotViewModel(private val useCase: AngkotUseCase) : ViewModel() {
     fun finishRide(
         angkotId: String,
         is_Beroperasi: String,
-        supirId: String,
+        supirId: String?,
         historyId: String,
         finishRide: String?,
-        earnings: Int?
+        earnings: Int?,
+        body: SetWayBody
     ) {
         viewModelScope.launch {
             _finishRide.value = Resource.loading()
-            useCase.finishRide(angkotId, is_Beroperasi, supirId, historyId, finishRide, earnings)
+            useCase.finishRide(
+                angkotId,
+                is_Beroperasi,
+                supirId,
+                historyId,
+                finishRide,
+                earnings,
+                body
+            )
                 .collect {
                     _finishRide.value = it
                 }
+        }
+    }
+
+    private val _premium: MutableLiveData<Resource<PremiumData>> = MutableLiveData()
+    val premium: LiveData<Resource<PremiumData>> = _premium
+
+    fun premium(supirId: String) {
+        viewModelScope.launch {
+            _premium.value = Resource.loading()
+            useCase.premium(supirId).collect {
+                _premium.value = it
+            }
         }
     }
 }

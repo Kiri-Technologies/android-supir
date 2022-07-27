@@ -6,6 +6,7 @@ import com.kiri.trip.data.models.CreateHistoryData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.LocationBody
+import com.kiri.trip.data.models.PremiumData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.SetWayBody
@@ -111,7 +112,7 @@ interface AngkotEndpoint {
     suspend fun statusAngkot(
         @Path("id") angkotId: String,
         @Field("is_beroperasi") is_Beroperasi: String,
-        @Field("supir_yg_beroperasi") supirId: String
+        @Field("supir_yg_beroperasi") supirId: String? = null
     ): Response<ApiResponse<Nothing>>
 
     @FormUrlEncoded
@@ -142,4 +143,10 @@ interface AngkotEndpoint {
         @Url url: String,
         @Body body: ToggleFullBody
     ): Response<ApiResponse<Nothing>>
+
+    @FormUrlEncoded
+    @POST("supir/premiumuser/check")
+    suspend fun premium(
+        @Field("user_id") supirId: String,
+    ): Response<ApiResponse<PremiumData>>
 }

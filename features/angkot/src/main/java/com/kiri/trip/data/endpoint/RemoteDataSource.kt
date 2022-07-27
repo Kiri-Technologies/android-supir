@@ -6,16 +6,15 @@ import com.kiri.trip.data.models.CreateHistoryData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
 import com.kiri.trip.data.models.LocationBody
+import com.kiri.trip.data.models.PremiumData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
+import com.kiri.trip.data.models.SetWayBody
 import com.kiri.trip.data.models.ToggleFullBody
 import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.data.models.TotalEarningsData
 import com.kiri.trip.data.models.TripHistoryData
-import com.kiri.trip.data.models.SetWayBody
 import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.Path
 
 class RemoteDataSource(private val endpoint: AngkotEndpoint) : AngkotEndpoint {
     override suspend fun getTripHistory(sopirId: String): Response<ApiResponse<List<TripHistoryData>>> {
@@ -100,7 +99,7 @@ class RemoteDataSource(private val endpoint: AngkotEndpoint) : AngkotEndpoint {
     override suspend fun statusAngkot(
         angkotId: String,
         is_Beroperasi: String,
-        supirId: String
+        supirId: String?
     ): Response<ApiResponse<Nothing>> {
         return endpoint.statusAngkot(angkotId, is_Beroperasi, supirId)
     }
@@ -136,5 +135,9 @@ class RemoteDataSource(private val endpoint: AngkotEndpoint) : AngkotEndpoint {
         body: ToggleFullBody
     ): Response<ApiResponse<Nothing>> {
         return endpoint.toggleFull(url, body)
+    }
+
+    override suspend fun premium(supirId: String): Response<ApiResponse<PremiumData>> {
+        return endpoint.premium(supirId)
     }
 }

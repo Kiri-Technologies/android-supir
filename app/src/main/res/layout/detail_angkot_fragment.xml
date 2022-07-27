@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@color/color_primary"
+            app:cardBackgroundColor="@color/color_primary"
             android:foreground="?attr/selectableItemBackground"
             app:cardCornerRadius="14dp">
 
@@ -96,6 +96,18 @@
                 android:textSize="18sp"
                 app:drawableEndCompat="@drawable/ic_right_arrow" />
         </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tvLabelPremium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="Maaf anda bukan pengguna berlangganan"
+            android:textAppearance="@style/textViewTitle"
+            android:textColor="@color/red_color"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tvLabelEarnings"
@@ -466,9 +478,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
-            android:visibility="gone"
             android:backgroundTint="@color/blue_color"
             android:foreground="?attr/selectableItemBackground"
+            android:visibility="gone"
             app:cardCornerRadius="14dp">
 
             <TextView

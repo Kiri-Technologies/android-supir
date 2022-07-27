@@ -6,6 +6,7 @@ import com.kiri.trip.data.models.AngkotDistanceData
 import com.kiri.trip.data.models.CreateHistoryData
 import com.kiri.trip.data.models.EarningsByTodayData
 import com.kiri.trip.data.models.FeedbackData
+import com.kiri.trip.data.models.PremiumData
 import com.kiri.trip.data.models.RiwayatNarikData
 import com.kiri.trip.data.models.RoutesData
 import com.kiri.trip.data.models.TripHistoryData
@@ -114,4 +115,8 @@ interface AngkotResource {
     fun onFinishRideLoading() {}
     fun onFinishRideSuccess(data: ApiResponse<Nothing>?) {}
     fun onFinishRideFailed(error: String?) {}
+
+    fun onPremiumLoading() {}
+    fun onPremiumSuccess(data: ApiResponse<PremiumData>?) {}
+    fun onPremiumFailed(error: String?) {}
 }

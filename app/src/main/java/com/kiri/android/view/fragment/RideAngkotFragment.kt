@@ -6,9 +6,9 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
-import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -25,6 +25,7 @@ import com.kiri.android.databinding.FragmentRideAngkotBinding
 import com.kiri.android.utils.currentTime
 import com.kiri.android.view.adapter.DropUserAdapter
 import com.kiri.android.view.adapter.UserRideAdapter
+import com.kiri.android.view.viewmodel.WidgetViewModel
 import com.kiri.common.data.pref.PrefKey
 import com.kiri.common.domain.PrefUseCase
 import com.kiri.common.utils.ApiResponse
@@ -32,6 +33,7 @@ import com.kiri.common.utils.Resource
 import com.kiri.common.utils.shortToast
 import com.kiri.trip.data.models.LocationBody
 import com.kiri.trip.data.models.RoutesData
+import com.kiri.trip.data.models.SetWayBody
 import com.kiri.trip.data.models.ToggleFullBody
 import com.kiri.trip.data.models.ToggleStopBody
 import com.kiri.trip.presentation.viewmodel.AngkotResource
@@ -52,6 +54,7 @@ class RideAngkotFragment :
     private val binding by viewBinding<FragmentRideAngkotBinding>()
     private val pref by inject<PrefUseCase>()
     private val viewModel by viewModel<AngkotViewModel> { parametersOf(lifecycle, this) }
+    private val widgetVM by viewModel<WidgetViewModel>()
     private val dropAdapter by lazy {
         DropUserAdapter()
     }
@@ -160,6 +163,13 @@ class RideAngkotFragment :
                 Resource.Status.ERROR -> {}
             }
         }
+        widgetVM.getCurrentLocation().observe(viewLifecycleOwner) {
+            currentLocation = it
+            viewModel.getRoutes(pref.routeId ?: "")
+            toggleNgetem(currentLocation?.latitude.toString(), currentLocation?.longitude.toString())
+            toggleFullAngkot()
+            Log.d("ANUWOY", currentLocation.toString())
+        }
     }
 
     @SuppressLint("InlinedApi")
@@ -208,17 +218,14 @@ class RideAngkotFragment :
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 locationResult.lastLocation?.let {
-                    currentLocation = it
+                    widgetVM.setCurrentLocation(it)
                     viewModel.setLocation(
                         LocationBody(
                             pref.angkotId,
-                            it.latitude.toString(),
-                            it.longitude.toString()
+                            currentLocation?.latitude.toString(),
+                            currentLocation?.longitude.toString()
                         )
                     )
-                    toggleNgetem(it.latitude.toString(), it.longitude.toString())
-                    toggleFullAngkot()
-                    viewModel.getRoutes(pref.routeId ?: "")
                 } ?: shortToast(requireContext(), getString(R.string.error_message))
             }
         }
@@ -233,7 +240,6 @@ class RideAngkotFragment :
         pref.removeByKey(PrefKey.ROUTE_ID)
         pref.removeByKey(PrefKey.HISTORY_ID)
         activity?.finish()
-        locationNotNeeded()
     }
 
     private fun toggleNgetem(lat: String, long: String) {
@@ -277,11 +283,13 @@ class RideAngkotFragment :
                         viewModel.finishRide(
                             pref.angkotId ?: "",
                             "0",
-                            supirId ?: "",
+                            null,
                             pref.histoyId ?: "",
                             currentTime(),
-                            null
+                            null,
+                            setBody()
                         )
+                        locationNotNeeded()
                     },
                     negativeAction = {}
                 )
@@ -375,5 +383,14 @@ class RideAngkotFragment :
     private fun locationVisible() {
         binding.tvLabelLoc.visible()
         binding.tvLocationName.visible()
+    }
+
+    private fun setBody(): SetWayBody {
+        return SetWayBody(
+            pref.angkotId ?: "",
+            pref.way ?: "",
+            false,
+            pref.routeId ?: ""
+        )
     }
 }

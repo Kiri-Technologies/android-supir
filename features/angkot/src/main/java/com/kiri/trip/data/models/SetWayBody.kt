@@ -10,7 +10,7 @@ data class SetWayBody(
     val arah: String,
 
     @field:SerializedName("is_beroperasi")
-    val isBeroperasi: String,
+    val isBeroperasi: Boolean,
 
     @field:SerializedName("route_id")
     val routeId: String
