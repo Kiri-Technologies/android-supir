@@ -134,6 +134,7 @@ class DetailAngkotFragment :
         tripAngkotAdapter.setEmptyView(R.layout.empty_view_item)
         feedbackAdapter.setEmptyView(R.layout.empty_view_item)
         Log.d("PREF", pref.histoyId ?: "")
+        qrCodeToBrowser(args.angkotConfirmData.vehicle?.qrCode ?: "")
     }
 
     private fun initAction() = with(binding) {
@@ -168,8 +169,6 @@ class DetailAngkotFragment :
                 binding.tvFeedbackMore.visible()
             }
         }
-        val qr = data?.dataData?.firstOrNull()?.vehicle?.qrCode.toString()
-        qrCodeToBrowser(qr)
     }
 
     private fun qrCodeToBrowser(qr: String) {
